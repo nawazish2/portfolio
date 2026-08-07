@@ -1,89 +1,81 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono , Bebas_Neue, Space_Grotesk } from "next/font/google";
-import "./globals.css";
+import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { JsonLd } from "@/components/json-ld";
+import { siteConfig } from "@/content/site";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
-
-const bebasNeue = Bebas_Neue({
-  variable: "--font-bebas-neue",
-  subsets: ["latin"],
-  weight: "400",
-});
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Nawazish Khan - Portfolio",
-
-  description:
-    "Nawazish Khan - Full Stack Developer building scalable web applications, API-driven systems & modern digital experiences.",
-
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s · ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
   keywords: [
     "Nawazish Khan",
-    "Full Stack Developer",
-    "Next.js Developer",
-    "React Developer",
-    "Web Developer Portfolio",
+    "Software Engineer",
+    "Swift",
+    "TypeScript",
+    "Delhi",
+    "Portfolio",
+    "Cuprim",
+    "AlgoViz",
   ],
-
-    icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-      { url: "/favicon.ico", sizes: "192x192", type: "image/x-icon" },
-      { url: "/favicon.ico", sizes: "512x512", type: "image/x-icon" },
-    ],
-
-    apple: [
-      { url: "/favicon.ico", sizes: "180x180", type: "image/x-icon" },
-    ],
-
-    shortcut: ["/favicon.ico"],
+  alternates: {
+    canonical: siteConfig.url,
   },
-
-
   openGraph: {
-    title: "Nawazish Khan - Portfolio",
-
-    description:
-      "Full-Stack Developer building scalable web applications, API-driven systems & modern digital experiences.",
-
-    url: "https://www.nawazishkhan.dev",
-
-    siteName: "Nawazish Khan",
-
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "https://www.nawazishkhan.dev/og-image.png",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Nawazish Khan Portfolio",
+        alt: `${siteConfig.name} portfolio`,
       },
     ],
-
-    locale: "en_US",
-    type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
-
-    title: "Nawazish Khan - Portfolio",
-
-    description:
-      "Full-Stack Developer building scalable web applications, API-driven systems & modern digital experiences.",
-
-    images: ["https://www.nawazishkhan.dev/og-image.png"],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
   },
 };
 
@@ -96,11 +88,21 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} h-full antialiased`}
+      className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} h-full`}
     >
-      <body className="min-h-full font-sans">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <head>
+        {/* Prevent theme flash; mirrors samworks persistence pattern */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('nawaz-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})();`,
+          }}
+        />
+      </head>
+      <body className="flex min-h-full flex-col overflow-x-hidden bg-background font-sans text-foreground antialiased">
+        <ThemeProvider>
+          <JsonLd />
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

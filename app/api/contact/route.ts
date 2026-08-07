@@ -13,7 +13,7 @@ type ContactPayload = {
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const toEmail = process.env.CONTACT_TO_EMAIL ?? "mr.samarthchawla@gmail.com";
+const toEmail = process.env.CONTACT_TO_EMAIL ?? "knawazish153@gmail.com";
 const fromEmail =
   process.env.RESEND_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>";
 
