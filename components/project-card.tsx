@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { Project } from "@/content/projects";
 import { Github, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -109,53 +110,84 @@ export function ProjectCard({
 }
 
 function PreviewPanel({ project }: { project: Project }) {
+  const hasImage = Boolean(project.image);
+
   return (
     <div
       className={cn(
-        "group relative h-52 w-full cursor-pointer overflow-hidden rounded-md bg-linear-to-br shadow-sm ring-1 ring-black/5 transition-colors duration-700 dark:ring-white/10",
-        project.accent,
+        "group relative h-52 w-full cursor-pointer overflow-hidden rounded-md shadow-sm ring-1 ring-black/5 transition-all duration-500 dark:ring-white/10 sm:h-56",
+        hasImage
+          ? cn("bg-linear-to-br p-2.5 sm:p-3", project.accent)
+          : cn("bg-linear-to-br", project.accent),
       )}
     >
       {project.badge ? (
-        <div className="pointer-events-none absolute -top-10 -left-10 z-10 flex flex-col items-start gap-0.5 opacity-0 transition-all duration-700 ease-out group-hover:top-[35%] group-hover:left-[45%] group-hover:opacity-100">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            className="rotate-[-15deg] text-white drop-shadow-md"
-          >
-            <path
-              d="M3.5 2V12L6.7 8.8H11.5L3.5 2Z"
-              fill="currentColor"
-              stroke="white"
-              strokeWidth="1.2"
-            />
-          </svg>
-          <span className="translate-x-2 select-none rounded-sm bg-white/90 px-1 py-0.5 font-mono text-[8px] font-bold tracking-wide text-black shadow-md">
-            {project.badge}
-          </span>
+        <div className="pointer-events-none absolute top-3 right-0 z-20">
+          <div className="translate-x-2 rotate-12">
+            <span className="inline-flex items-center gap-1 rounded-sm bg-amber-300/95 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wide text-black shadow-md sm:text-[10px]">
+              <span className="size-1.5 rounded-full bg-black/70" />
+              {project.badge}
+            </span>
+          </div>
         </div>
       ) : null}
 
-      <div className="absolute -right-13 -bottom-10 rounded-xl border-5 border-white/20 transition-all duration-200 group-hover:-right-10 group-hover:-bottom-7">
-        <div className="flex h-[200px] w-[180px] flex-col gap-2 rounded-lg bg-black/40 p-3 backdrop-blur-sm sm:w-[200px]">
-          <div className="h-2 w-16 rounded-full bg-white/30" />
-          <div className="h-2 w-24 rounded-full bg-white/20" />
-          <div className="mt-2 flex-1 rounded-md bg-white/10" />
-          <div className="flex gap-1.5">
-            <div className="h-6 flex-1 rounded bg-white/15" />
-            <div className="h-6 w-6 rounded bg-white/25" />
-          </div>
+      {hasImage ? (
+        <div className="relative h-full w-full overflow-hidden rounded-sm bg-black/20 shadow-lg ring-1 ring-black/10 dark:ring-white/10">
+          <Image
+            src={project.image!}
+            alt={`${project.title} preview`}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            priority={false}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/25 via-transparent to-transparent opacity-60" />
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="pointer-events-none absolute -top-10 -left-10 z-10 flex flex-col items-start gap-0.5 opacity-0 transition-all duration-700 ease-out group-hover:top-[35%] group-hover:left-[45%] group-hover:opacity-100">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              className="rotate-[-15deg] text-white drop-shadow-md"
+            >
+              <path
+                d="M3.5 2V12L6.7 8.8H11.5L3.5 2Z"
+                fill="currentColor"
+                stroke="white"
+                strokeWidth="1.2"
+              />
+            </svg>
+            <span className="translate-x-2 select-none rounded-sm bg-white/90 px-1 py-0.5 font-mono text-[8px] font-bold tracking-wide text-black shadow-md">
+              {project.badge ?? project.year}
+            </span>
+          </div>
 
-      <div className="absolute top-3 left-3">
-        <p className="font-mono text-[10px] font-bold tracking-widest text-white/50 uppercase">
-          {project.year}
-        </p>
-        <p className="mt-1 text-lg font-semibold text-white/90">{project.title}</p>
-      </div>
+          <div className="absolute -right-13 -bottom-10 rounded-xl border-5 border-white/20 transition-all duration-200 group-hover:-right-10 group-hover:-bottom-7">
+            <div className="flex h-[200px] w-[180px] flex-col gap-2 rounded-lg bg-black/40 p-3 backdrop-blur-sm sm:w-[200px]">
+              <div className="h-2 w-16 rounded-full bg-white/30" />
+              <div className="h-2 w-24 rounded-full bg-white/20" />
+              <div className="mt-2 flex-1 rounded-md bg-white/10" />
+              <div className="flex gap-1.5">
+                <div className="h-6 flex-1 rounded bg-white/15" />
+                <div className="h-6 w-6 rounded bg-white/25" />
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute top-3 left-3">
+            <p className="font-mono text-[10px] font-bold tracking-widest text-white/50 uppercase">
+              {project.year}
+            </p>
+            <p className="mt-1 text-lg font-semibold text-white/90">
+              {project.title}
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }

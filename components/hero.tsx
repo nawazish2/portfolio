@@ -44,7 +44,7 @@ export function Hero() {
     <section className="w-full pb-6">
       {/* Banner — flush to vertical rails like Sam (no side padding) */}
       <Reveal>
-        <div className="relative h-36 w-full overflow-hidden sm:h-40 md:h-[11.5rem]">
+        <div className="relative h-40 w-full overflow-hidden sm:h-44 md:h-52">
           <BannerArt />
         </div>
       </Reveal>

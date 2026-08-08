@@ -33,7 +33,7 @@ export const siteConfig = {
     "https://drive.google.com/file/d/18oBtva6I1yADfVEruERkpnRMAfEbv5l6/view?usp=drive_link",
   ogImage: "/og-image.jpg",
   profileImage: "/profile.jpg",
-  bannerImage: "/banner.svg",
+  bannerImage: "/banner.gif",
   githubUsername: "nawazish2",
   links: {
     github: "https://github.com/nawazish2",
