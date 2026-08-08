@@ -11,7 +11,7 @@ export type AboutLine = {
 export const siteConfig = {
   name: "Nawazish Khan",
   shortName: "Nawazish",
-  title: "Nawazish Khan — Software Engineer",
+  title: "Nawazish Khan — Portfolio",
   description:
     "Software engineer in Delhi building useful tools with Swift and TypeScript. Selected work includes Cuprim, AlgoViz, ChaiTailwind, and ParkIt.",
   url: "https://nawazish.site",
