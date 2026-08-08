@@ -21,7 +21,7 @@ export function CtaSection() {
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] sm:mt-7"
+            className="mt-6 inline-flex h-12 w-full max-w-sm items-center justify-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] sm:mt-7 sm:h-11 sm:w-auto sm:max-w-none"
           >
             {siteConfig.cta.button}
             <ArrowRight size={15} strokeWidth={2.25} />

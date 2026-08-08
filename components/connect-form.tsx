@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 type FormState = "idle" | "loading" | "success" | "error";
 
 const fieldClass =
-  "w-full border-0 border-b border-neutral-200 bg-transparent px-0 py-3.5 text-[17px] text-foreground outline-none transition placeholder:text-muted-soft focus:border-foreground dark:border-neutral-700 dark:focus:border-neutral-300 sm:text-lg";
+  "w-full border-0 border-b border-neutral-200 bg-transparent px-0 py-3 text-base text-foreground outline-none transition placeholder:text-muted-soft focus:border-foreground dark:border-neutral-700 dark:focus:border-neutral-300 sm:py-3.5 sm:text-lg";
 
 const labelClass =
   "text-[11px] font-medium tracking-[0.2em] text-muted-soft uppercase";
@@ -56,13 +56,16 @@ export function ConnectForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex max-w-3xl flex-col gap-11 sm:gap-12">
+    <form
+      onSubmit={onSubmit}
+      className="flex w-full max-w-3xl flex-col gap-6 sm:gap-10"
+    >
       <label className="hidden">
         Website
         <input name="website" type="text" tabIndex={-1} autoComplete="off" />
       </label>
 
-      <label className="grid gap-3">
+      <label className="grid gap-2 sm:gap-3">
         <span className={labelClass}>Name</span>
         <input
           name="name"
@@ -73,7 +76,7 @@ export function ConnectForm() {
         />
       </label>
 
-      <label className="grid gap-3">
+      <label className="grid gap-2 sm:gap-3">
         <span className={labelClass}>Email</span>
         <input
           name="email"
@@ -85,22 +88,23 @@ export function ConnectForm() {
         />
       </label>
 
-      <label className="grid gap-3">
+      <label className="grid gap-2 sm:gap-3">
         <span className={labelClass}>Message</span>
         <textarea
           name="message"
           required
-          rows={3}
+          rows={2}
           placeholder="Tell me about your project..."
-          className={`${fieldClass} min-h-[100px] resize-none pb-8`}
+          className={`${fieldClass} min-h-[72px] resize-none pb-5 sm:min-h-[100px] sm:pb-8`}
         />
       </label>
 
-      <div className="flex flex-col items-start gap-4 pt-4">
+      <div className="flex flex-col gap-3 pt-2 sm:pt-4">
+        {/* Sam-style full-width pill CTA on mobile */}
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-full bg-foreground px-8 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] disabled:opacity-60 sm:h-[3.25rem] sm:px-9 sm:text-[15px]"
+          className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-foreground text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] disabled:opacity-60 sm:h-[3.25rem] sm:w-auto sm:justify-start sm:px-9 sm:text-[15px]"
         >
           {state === "loading" ? "Sending..." : "Send Message"}
           <ArrowRight size={16} strokeWidth={2.25} />

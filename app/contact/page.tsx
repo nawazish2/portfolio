@@ -15,41 +15,47 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Sam-style contact page: home + availability, title, form, full-width CTA.
+ * Tight mobile spacing so Send Message stays reachable without endless scroll.
+ */
 export default function ContactPage() {
   return (
     <SiteFrame>
       <Header />
 
       <FrameColumn className="mt-12">
-        <FramePad className="flex items-center justify-between gap-4 pt-8 sm:pt-10">
+        {/* Top meta row — Sam: ← HOME + availability pill */}
+        <FramePad className="flex items-center justify-between gap-3 pt-5 sm:gap-4 sm:pt-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] text-muted uppercase transition hover:text-foreground"
+            className="inline-flex min-h-9 items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] text-muted uppercase transition hover:text-foreground"
           >
             <ArrowLeft size={14} strokeWidth={2} />
             Home
           </Link>
-          <span className="shrink-0 rounded-full border border-dotted border-border px-3 py-1.5 text-[11px] text-muted">
+          <span className="max-w-[58%] truncate rounded-full border border-border px-2.5 py-1.5 text-[10px] leading-none text-muted sm:max-w-none sm:px-3 sm:text-[11px]">
             {siteConfig.availabilityShort}
           </span>
         </FramePad>
 
-        <FramePad className="mt-10 sm:mt-12">
-          <h1 className="font-serif-display text-4xl leading-none tracking-tight text-foreground sm:text-5xl md:text-[3.5rem]">
+        {/* Title block — closer to form like Sam */}
+        <FramePad className="mt-6 sm:mt-10">
+          <h1 className="font-serif-display text-[2rem] leading-none tracking-tight text-foreground sm:text-5xl md:text-[3.5rem]">
             Let&apos;s Connect
           </h1>
-          <p className="mt-4 text-base text-muted sm:text-lg">
+          <p className="mt-2.5 text-[15px] text-muted sm:mt-4 sm:text-lg">
             Let&apos;s talk about your next project
           </p>
         </FramePad>
       </FrameColumn>
 
-      <div className="mt-12 sm:mt-16">
+      <div className="mt-7 sm:mt-12">
         <HRule />
       </div>
 
-      <FrameColumn className="pb-16">
-        <FramePad className="pt-10 sm:pt-12">
+      <FrameColumn className="pb-10 sm:pb-16">
+        <FramePad className="pt-6 sm:pt-12">
           <ConnectForm />
         </FramePad>
       </FrameColumn>
