@@ -122,9 +122,16 @@
 
   .section-title {
     font-family: var(--font-instrument), ui-serif, Georgia, serif;
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+    font-size: 1.625rem; /* ~26px — Sam-like on mobile */
+    line-height: 2rem;
     color: var(--foreground);
+  }
+
+  @media (min-width: 640px) {
+    .section-title {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
   }
 
   .surface {
@@ -148,14 +155,21 @@
 
   .icon-btn {
     display: flex;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
     cursor: pointer;
     align-items: center;
     justify-content: center;
     border-radius: 0.375rem;
     color: var(--muted);
     transition: all 100ms;
+  }
+
+  @media (min-width: 640px) {
+    .icon-btn {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
   }
 
   .icon-btn:hover {
@@ -207,18 +221,27 @@
 
   .stack-chip {
     display: flex;
-    height: 1.75rem;
+    height: 1.875rem;
     width: auto;
     cursor: pointer;
     align-items: center;
     gap: 0.375rem;
-    border-radius: 0.125rem;
-    border: 1px dotted var(--border);
+    border-radius: 0.375rem;
+    border: 1px solid var(--border);
     background: var(--surface);
-    padding-right: 0.75rem;
+    padding-right: 0.625rem;
     padding-left: 0.5rem;
     color: var(--muted);
     transition: all 100ms;
+  }
+
+  @media (min-width: 640px) {
+    .stack-chip {
+      height: 1.75rem;
+      border-radius: 0.125rem;
+      border-style: dotted;
+      padding-right: 0.75rem;
+    }
   }
 
   .stack-chip:hover {

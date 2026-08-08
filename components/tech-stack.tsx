@@ -28,7 +28,7 @@ export function TechStack() {
 
   return (
     <Reveal>
-      <FramePad className="pt-8 pb-8 sm:pt-9 sm:pb-10">
+      <FramePad className="pt-6 pb-6 sm:pt-9 sm:pb-10">
         {/* Title row + filters (same band) */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-row items-baseline gap-2">
@@ -39,14 +39,15 @@ export function TechStack() {
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-1">
+          {/* Filters: horizontal scroll on mobile so they never wrap awkwardly */}
+          <div className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
             {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setActive(cat)}
                 className={cn(
-                  "filter-btn",
+                  "filter-btn shrink-0",
                   active === cat && "filter-btn-active",
                 )}
               >
@@ -57,7 +58,7 @@ export function TechStack() {
         </div>
 
         {/* Chips under title — still same band, no HRule between */}
-        <div className="mt-5 flex min-h-28 w-full flex-wrap items-start gap-2">
+        <div className="mt-4 flex min-h-20 w-full flex-wrap items-start gap-1.5 sm:mt-5 sm:min-h-28 sm:gap-2">
           <AnimatePresence mode="popLayout">
             {items.map((item) => (
               <motion.a

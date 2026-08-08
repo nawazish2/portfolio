@@ -19,7 +19,7 @@ export const siteConfig = {
   location: "Delhi, IND",
   role: "Software Engineer",
   /** Rotating hero titles */
-  roles: ["Software Engineer", "Full Stack Designer"] as const,
+  roles: ["Software Engineer", "Full Stack Developer"] as const,
   /** Sam-style meta under role: age/city/country */
   heroMeta: "22, Delhi, IND",
   tagline: "I build useful software and learn systems by taking them apart.",
@@ -185,6 +185,36 @@ export const siteConfig = {
       category: "Tools",
       href: "https://vercel.com",
       color: "#000000",
+    },
+    {
+      name: "Cursor",
+      category: "Tools",
+      href: "https://cursor.com",
+      color: "#000000",
+    },
+    {
+      name: "Claude Code",
+      category: "Tools",
+      href: "https://docs.anthropic.com/en/docs/claude-code",
+      color: "#D97757",
+    },
+    {
+      name: "Codex",
+      category: "Tools",
+      href: "https://openai.com/codex",
+      color: "#10A37F",
+    },
+    {
+      name: "Grok",
+      category: "Tools",
+      href: "https://x.ai",
+      color: "#000000",
+    },
+    {
+      name: "VS Code",
+      category: "Tools",
+      href: "https://code.visualstudio.com",
+      color: "#007ACC",
     },
     {
       name: "Figma",

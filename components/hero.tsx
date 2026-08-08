@@ -41,23 +41,25 @@ export function Hero() {
   const role = siteConfig.roles[roleIndex];
 
   return (
-    <section className="w-full pb-6">
-      {/* Banner — flush to vertical rails like Sam (no side padding) */}
+    <section className="w-full pb-5 sm:pb-6">
+      {/* Banner — Sam mobile: inset + rounded; desktop: flush to rails */}
       <Reveal>
-        <div className="relative h-40 w-full overflow-hidden sm:h-44 md:h-52">
-          <BannerArt />
+        <div className="px-3 sm:px-0">
+          <div className="relative h-36 w-full overflow-hidden rounded-lg sm:h-44 sm:rounded-none md:h-52">
+            <BannerArt />
+          </div>
         </div>
       </Reveal>
 
       {/* Profile row */}
-      <FramePad className="mt-5 sm:mt-6">
-        <div className="flex items-start justify-between gap-4">
+      <FramePad className="mt-4 sm:mt-6">
+        <div className="flex items-start justify-between gap-3 sm:gap-4">
           <div className="flex min-w-0 items-end gap-3 sm:gap-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.45, ease: "easeOut" }}
-              className="relative size-[6.75rem] shrink-0 overflow-hidden rounded-[12px] border border-border bg-card shadow-sm sm:size-[7.5rem]"
+              className="relative size-[5.5rem] shrink-0 overflow-hidden rounded-[14px] border border-border bg-card shadow-sm sm:size-[7.5rem] sm:rounded-[12px]"
             >
               <Image
                 src={siteConfig.profileImage}
@@ -69,12 +71,12 @@ export function Hero() {
               />
             </motion.div>
 
-            <div className="min-w-0 pb-0.5">
-              <h1 className="font-serif-display truncate text-[23px] leading-none text-foreground sm:text-4xl">
+            <div className="min-w-0 flex-1 pb-0.5">
+              <h1 className="font-serif-display truncate text-[22px] leading-tight text-foreground sm:text-4xl sm:leading-none">
                 {siteConfig.name}
               </h1>
 
-              <div className="relative mt-1.5 h-[1.35em] overflow-hidden sm:mt-2">
+              <div className="relative mt-1 h-[1.3em] overflow-hidden sm:mt-2 sm:h-[1.35em]">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={role}
@@ -82,7 +84,7 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="absolute inset-x-0 truncate font-sans text-[15px] leading-snug font-normal tracking-tight text-neutral-400 sm:text-[17px] dark:text-neutral-400"
+                    className="absolute inset-x-0 truncate font-sans text-[14px] leading-snug font-normal tracking-tight text-neutral-400 sm:text-[17px] dark:text-neutral-400"
                   >
                     {role}
                   </motion.p>
@@ -95,9 +97,9 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-1.5 pt-1 text-muted-soft">
-            <Eye size={14} strokeWidth={1.75} />
-            <span className="font-mono text-xs tabular-nums">
+          <div className="flex shrink-0 items-center gap-1 pt-0.5 text-muted-soft sm:gap-1.5 sm:pt-1">
+            <Eye size={13} strokeWidth={1.75} className="sm:size-[14px]" />
+            <span className="font-mono text-[11px] tabular-nums sm:text-xs">
               {views === null ? "—" : views.toLocaleString()}
             </span>
           </div>

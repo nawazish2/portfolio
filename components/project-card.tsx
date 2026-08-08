@@ -5,6 +5,10 @@ import type { Project } from "@/content/projects";
 import { Github, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Sam-style project card — same structure on mobile + desktop:
+ * framed preview → title/status → one-liner → description → tags + links
+ */
 export function ProjectCard({
   project,
   index,
@@ -22,12 +26,9 @@ export function ProjectCard({
   return (
     <article
       className={cn(
-        "flex h-full min-h-[22rem] flex-col justify-start border-dashed border-border p-3 md:min-h-[26rem]",
-        // Desktop: vertical split between the two columns
+        "flex h-full min-w-0 flex-col overflow-hidden border-dashed border-border p-3 sm:p-4",
         isLeftCol && "md:border-r",
-        // Mobile: divider under every card except the last
         !isLast && "border-b",
-        // Desktop: kill mobile bottom border on last row; add bottom border only between rows
         isLastRow ? "md:border-b-0" : "md:border-b",
       )}
     >
@@ -36,7 +37,7 @@ export function ProjectCard({
           href={primaryHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="block"
+          className="block min-w-0"
         >
           <PreviewPanel project={project} />
         </a>
@@ -44,18 +45,21 @@ export function ProjectCard({
         <PreviewPanel project={project} />
       )}
 
-      <div className="mt-3 flex w-full flex-1 flex-col">
-        <div className="flex justify-between gap-2">
-          <div className="min-w-0">
-            <p className="truncate text-xl font-semibold text-foreground">
+      <div className="mt-3 flex min-w-0 flex-1 flex-col sm:mt-3.5">
+        {/* Title + status */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <h3 className="truncate text-[17px] font-semibold tracking-tight text-foreground sm:text-xl">
               {project.title}
+            </h3>
+            <p className="mt-0.5 truncate text-xs text-muted sm:text-[13px]">
+              {project.oneLiner}
             </p>
-            <p className="text-xs text-muted">{project.oneLiner}</p>
           </div>
-          <p className="flex shrink-0 items-center gap-1 text-sm font-semibold text-muted-soft">
+          <p className="flex shrink-0 items-center gap-1 pt-0.5 text-xs font-semibold text-muted-soft sm:text-sm">
             <span
               className={cn(
-                "text-xl leading-none",
+                "text-base leading-none sm:text-lg",
                 project.status === "Live" || project.status === "Shipped"
                   ? "text-green"
                   : "text-amber-500",
@@ -67,19 +71,21 @@ export function ProjectCard({
           </p>
         </div>
 
-        <p className="mt-3 mb-2 text-xs text-muted sm:text-sm">
+        {/* Description — clamp on all sizes for consistent card height feel */}
+        <p className="mt-2.5 line-clamp-3 text-[13px] leading-relaxed text-muted sm:mt-3 sm:text-sm">
           {project.description}
         </p>
 
-        <div className="mt-auto grid min-h-13 w-full grid-cols-[1fr_auto] items-center py-2">
-          <div className="flex flex-wrap items-center gap-1.5 py-1">
-            {project.stack.slice(0, 4).map((tech) => (
+        {/* Tags + links */}
+        <div className="mt-auto flex min-w-0 items-center justify-between gap-2 pt-3">
+          <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+            {project.stack.slice(0, 3).map((tech) => (
               <span key={tech} className="tag-pill">
                 {tech}
               </span>
             ))}
           </div>
-          <div className="flex items-center justify-end gap-1">
+          <div className="flex shrink-0 items-center gap-0.5">
             {project.live ? (
               <a
                 href={project.live}
@@ -88,7 +94,7 @@ export function ProjectCard({
                 className="icon-btn"
                 aria-label={`${project.title} live site`}
               >
-                <Globe size={20} strokeWidth={1.75} />
+                <Globe size={18} strokeWidth={1.75} />
               </a>
             ) : null}
             {project.github ? (
@@ -99,7 +105,7 @@ export function ProjectCard({
                 className="icon-btn"
                 aria-label={`${project.title} GitHub`}
               >
-                <Github size={20} strokeWidth={1.75} />
+                <Github size={18} strokeWidth={1.75} />
               </a>
             ) : null}
           </div>
@@ -115,17 +121,19 @@ function PreviewPanel({ project }: { project: Project }) {
   return (
     <div
       className={cn(
-        "group relative h-52 w-full cursor-pointer overflow-hidden rounded-md shadow-sm ring-1 ring-black/5 transition-all duration-500 dark:ring-white/10 sm:h-56",
+        // Consistent 16:10 frame like Sam — works mobile + desktop
+        "group relative aspect-[16/10] w-full min-w-0 cursor-pointer overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10",
         hasImage
-          ? cn("bg-linear-to-br p-2.5 sm:p-3", project.accent)
+          ? cn("bg-linear-to-br p-2 sm:p-2.5", project.accent)
           : cn("bg-linear-to-br", project.accent),
       )}
     >
+      {/* Badge ribbon — fully inside frame, never clipped */}
       {project.badge ? (
-        <div className="pointer-events-none absolute top-3 right-0 z-20">
-          <div className="translate-x-2 rotate-12">
-            <span className="inline-flex items-center gap-1 rounded-sm bg-amber-300/95 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wide text-black shadow-md sm:text-[10px]">
-              <span className="size-1.5 rounded-full bg-black/70" />
+        <div className="pointer-events-none absolute top-3 right-3 z-20 sm:top-3.5 sm:right-3.5">
+          <div className="rotate-12">
+            <span className="inline-flex max-w-[7rem] items-center gap-1 truncate rounded-sm bg-amber-300/95 px-2 py-0.5 font-mono text-[9px] font-bold tracking-wide text-black shadow-md sm:max-w-none sm:text-[10px]">
+              <span className="size-1.5 shrink-0 rounded-full bg-black/70" />
               {project.badge}
             </span>
           </div>
@@ -133,7 +141,7 @@ function PreviewPanel({ project }: { project: Project }) {
       ) : null}
 
       {hasImage ? (
-        <div className="relative h-full w-full overflow-hidden rounded-sm bg-black/20 shadow-lg ring-1 ring-black/10 dark:ring-white/10">
+        <div className="relative h-full w-full overflow-hidden rounded-md bg-black/20 shadow-md ring-1 ring-black/10 dark:ring-white/10">
           <Image
             src={project.image!}
             alt={`${project.title} preview`}
@@ -142,50 +150,19 @@ function PreviewPanel({ project }: { project: Project }) {
             className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             priority={false}
           />
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/25 via-transparent to-transparent opacity-60" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
         </div>
       ) : (
         <>
-          <div className="pointer-events-none absolute -top-10 -left-10 z-10 flex flex-col items-start gap-0.5 opacity-0 transition-all duration-700 ease-out group-hover:top-[35%] group-hover:left-[45%] group-hover:opacity-100">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              className="rotate-[-15deg] text-white drop-shadow-md"
-            >
-              <path
-                d="M3.5 2V12L6.7 8.8H11.5L3.5 2Z"
-                fill="currentColor"
-                stroke="white"
-                strokeWidth="1.2"
-              />
-            </svg>
-            <span className="translate-x-2 select-none rounded-sm bg-white/90 px-1 py-0.5 font-mono text-[8px] font-bold tracking-wide text-black shadow-md">
-              {project.badge ?? project.year}
-            </span>
-          </div>
-
-          <div className="absolute -right-13 -bottom-10 rounded-xl border-5 border-white/20 transition-all duration-200 group-hover:-right-10 group-hover:-bottom-7">
-            <div className="flex h-[200px] w-[180px] flex-col gap-2 rounded-lg bg-black/40 p-3 backdrop-blur-sm sm:w-[200px]">
-              <div className="h-2 w-16 rounded-full bg-white/30" />
-              <div className="h-2 w-24 rounded-full bg-white/20" />
-              <div className="mt-2 flex-1 rounded-md bg-white/10" />
-              <div className="flex gap-1.5">
-                <div className="h-6 flex-1 rounded bg-white/15" />
-                <div className="h-6 w-6 rounded bg-white/25" />
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-3 left-3 z-10">
             <p className="font-mono text-[10px] font-bold tracking-widest text-white/50 uppercase">
               {project.year}
             </p>
-            <p className="mt-1 text-lg font-semibold text-white/90">
+            <p className="mt-1 text-base font-semibold text-white/90 sm:text-lg">
               {project.title}
             </p>
           </div>
+          <div className="absolute right-0 bottom-0 h-[70%] w-[55%] translate-x-[12%] translate-y-[18%] rounded-tl-xl border-4 border-white/20 bg-black/35 backdrop-blur-sm" />
         </>
       )}
     </div>

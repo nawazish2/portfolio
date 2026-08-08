@@ -11,17 +11,17 @@ export function CtaSection() {
   return (
     <section className="w-full">
       <Reveal>
-        <FramePad className="pt-6 sm:pt-7">
+        <FramePad className="pt-5 sm:pt-7">
           <h2 className="section-title">{siteConfig.cta.title}</h2>
         </FramePad>
 
-        <div className="flex flex-col items-center px-3 pt-12 pb-16 text-center sm:pt-14 sm:pb-20">
+        <div className="flex flex-col items-center px-4 pt-10 pb-14 text-center sm:px-3 sm:pt-14 sm:pb-20">
           <p className="max-w-lg text-[15px] leading-relaxed text-muted sm:text-base">
             {siteConfig.cta.description}
           </p>
           <Link
             href="/contact"
-            className="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98]"
+            className="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] sm:mt-7"
           >
             {siteConfig.cta.button}
             <ArrowRight size={15} strokeWidth={2.25} />

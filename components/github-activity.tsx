@@ -120,35 +120,81 @@ export function GitHubActivity() {
     weeks.push(days.slice(i, i + 7));
   }
 
+  // Mobile: last ~20 weeks so the grid fits without awkward empty space
+  const mobileWeeks = weeks.slice(-20);
+  const desktopWeeks = weeks;
+
+  const mobileMonthLabels = (() => {
+    const labels: string[] = [];
+    const seen = new Set<string>();
+    for (const week of mobileWeeks) {
+      const d = week[0]?.date;
+      if (!d) continue;
+      const m = months[new Date(d + "T12:00:00").getMonth()];
+      if (!seen.has(m)) {
+        seen.add(m);
+        labels.push(m);
+      }
+    }
+    return labels;
+  })();
+
   return (
     <Reveal>
-      <FramePad className="pt-8 pb-8 sm:pt-9 sm:pb-10">
+      <FramePad className="pt-6 pb-6 sm:pt-9 sm:pb-10">
         <h2 className="section-title">GitHub Activity</h2>
 
-        <div className="mt-5 flex items-center gap-1 overflow-hidden font-mono text-[10px] text-muted-soft">
-          {months.map((m) => (
-            <span key={m} className="flex-1 text-center">
-              {m}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-2 overflow-x-auto pb-2">
-          <div className="flex min-w-max gap-[3px]">
-            {weeks.map((week, wi) => (
-              <div key={wi} className="flex flex-col gap-[3px]">
+        {/* Mobile heatmap — fits width, no horizontal scroll */}
+        <div className="mt-4 sm:hidden">
+          <div className="mb-2 flex items-center justify-between font-mono text-[10px] text-muted-soft">
+            {mobileMonthLabels.map((m) => (
+              <span key={m}>{m}</span>
+            ))}
+          </div>
+          <div className="flex w-full justify-between gap-[2px]">
+            {mobileWeeks.map((week, wi) => (
+              <div key={wi} className="flex flex-1 flex-col gap-[2px]">
                 {week.map((day) => (
                   <div
                     key={day.date}
                     title={`${day.date}: ${day.count} contributions`}
                     className={cn(
-                      "size-[10px] rounded-[2px] sm:size-[11px]",
+                      "aspect-square w-full rounded-[2px]",
                       levelClass[day.level],
                     )}
                   />
                 ))}
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Desktop heatmap — full year */}
+        <div className="mt-5 hidden sm:block">
+          <div className="flex items-center gap-1 overflow-hidden font-mono text-[10px] text-muted-soft">
+            {months.map((m) => (
+              <span key={m} className="flex-1 text-center">
+                {m}
+              </span>
+            ))}
+          </div>
+          <div className="mt-2 overflow-x-auto pb-2">
+            <div className="flex min-w-max gap-[3px]">
+              {desktopWeeks.map((week, wi) => (
+                <div key={wi} className="flex flex-col gap-[3px]">
+                  {week.map((day) => (
+                    <div
+                      key={day.date}
+                      title={`${day.date}: ${day.count} contributions`}
+                      className={cn(
+                        "size-[11px] rounded-[2px]",
+                        levelClass[day.level],
+                      )}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

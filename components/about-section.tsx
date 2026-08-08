@@ -1,16 +1,16 @@
 import { siteConfig } from "@/content/site";
 import { Reveal } from "@/components/reveal";
 import { FramePad } from "@/components/grid";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Paperclip,
-  ArrowUpRight,
-} from "lucide-react";
+import { Github, Linkedin, Mail, Paperclip } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const XIcon = ({ size = 18 }: { size?: number }) => (
+const XIcon = ({
+  size = 18,
+  strokeWidth: _strokeWidth,
+}: {
+  size?: number;
+  strokeWidth?: number;
+}) => (
   <svg
     width={size}
     height={size}
@@ -60,13 +60,13 @@ export function AboutSection() {
   return (
     <section id="about" className="scroll-mt-16">
       <Reveal>
-        <FramePad className="pt-8 pb-8 sm:pt-9 sm:pb-10">
+        <FramePad className="pt-6 pb-6 sm:pt-9 sm:pb-10">
           <h2 className="section-title">About</h2>
-          <div className="mt-5 space-y-3.5">
+          <div className="mt-4 space-y-3.5 sm:mt-5">
             {siteConfig.about.map((line, i) => (
               <p
                 key={i}
-                className="flex gap-2.5 text-[15px] leading-relaxed text-foreground/90 sm:text-base"
+                className="flex gap-2.5 text-[14px] leading-relaxed text-foreground/90 sm:text-base"
               >
                 <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
                 <span>
@@ -92,16 +92,19 @@ export function AboutSection() {
   );
 }
 
-/** Contact title + cells in ONE band (Sam pattern) */
+/**
+ * Contact — Sam-style icon strip (same on mobile + desktop).
+ * 5 equal dashed cells; compact rounded icon buttons centered (never giant tiles).
+ */
 export function ContactSection() {
   return (
     <section className="scroll-mt-16">
       <Reveal>
-        <FramePad className="pt-8 pb-4">
+        <FramePad className="pt-6 pb-3 sm:pt-8 sm:pb-4">
           <h2 className="section-title">Contact</h2>
         </FramePad>
 
-        <div className="grid grid-cols-2 border-t border-dashed border-border sm:grid-cols-5">
+        <div className="grid grid-cols-5 border-t border-dashed border-border">
           {contacts.map((item, index) => {
             const Icon = item.icon;
             const isLast = index === contacts.length - 1;
@@ -112,26 +115,25 @@ export function ContactSection() {
                 href={item.href}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
+                aria-label={item.label}
                 className={cn(
-                  "group flex items-center gap-2.5 px-3 py-3.5 text-foreground transition-colors duration-150",
-                  "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
+                  "group flex items-center justify-center px-1.5 py-4 sm:py-5",
+                  "transition-colors duration-150 hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
                   "border-dashed border-border",
-                  !isLast && "sm:border-r",
-                  index % 2 === 0 && index < 4 && "border-r",
-                  index < 4 && "border-b sm:border-b-0",
-                  index === 4 && "col-span-2 sm:col-span-1",
+                  !isLast && "border-r",
                 )}
               >
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] border border-neutral-300 bg-white text-neutral-900 transition-colors group-hover:border-neutral-400 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100 dark:group-hover:border-neutral-500">
-                  <Icon size={17} strokeWidth={1.75} />
-                </span>
-                <span className="flex min-w-0 items-center gap-1 text-[13px] font-medium tracking-tight sm:text-sm">
-                  {item.label}
-                  <ArrowUpRight
-                    size={14}
-                    strokeWidth={2}
-                    className="shrink-0 text-neutral-800 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 dark:text-neutral-200"
-                  />
+                <span
+                  className={cn(
+                    "flex size-10 items-center justify-center rounded-xl border sm:size-11",
+                    "border-neutral-300 bg-white text-neutral-900",
+                    "transition-colors group-hover:border-neutral-400",
+                    "dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100",
+                    "dark:group-hover:border-neutral-500",
+                    "active:scale-[0.97]",
+                  )}
+                >
+                  <Icon size={18} strokeWidth={1.6} />
                 </span>
               </a>
             );

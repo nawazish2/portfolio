@@ -27,13 +27,6 @@ export function Header() {
   // Dot follows hover; when idle, falls back to active (defaults to home)
   const indicator = hovered ?? active;
 
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
   // Resolve active section from route + hash + scroll
   useEffect(() => {
     const resolve = () => {
@@ -215,70 +208,86 @@ export function Header() {
             <ThemeToggle />
           </nav>
 
-          <div className="relative flex items-center gap-1.5 md:hidden">
+          <div className="relative flex items-center gap-0.5 md:hidden">
             <ThemeToggle />
-            <div className="mx-1 h-5 w-px bg-border-strong" />
+            <div className="mx-1 h-4 w-px bg-border-strong" />
             <button
               type="button"
-              className="cursor-pointer rounded-md p-1 text-foreground focus:outline-none hover:bg-hover"
+              className={cn(
+                "flex size-9 cursor-pointer items-center justify-center rounded-md text-foreground focus:outline-none hover:bg-hover active:scale-[0.97]",
+                open && "bg-hover",
+              )}
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((v) => !v)}
             >
               {open ? (
-                <X className="text-2xl" size={22} />
+                <X size={20} strokeWidth={1.75} />
               ) : (
-                <Menu className="text-2xl" size={22} />
+                <Menu size={20} strokeWidth={1.75} />
               )}
             </button>
+
+            {/* Sam-style floating dropdown (not full-width sheet) */}
+            {open ? (
+              <>
+                <button
+                  type="button"
+                  aria-label="Close menu backdrop"
+                  className="fixed inset-0 z-40 cursor-default bg-transparent"
+                  onClick={() => setOpen(false)}
+                />
+                <div
+                  role="menu"
+                  className="absolute top-[calc(100%+0.5rem)] right-0 z-50 min-w-[10.5rem] overflow-hidden rounded-xl border border-border bg-background py-1.5 shadow-lg ring-1 ring-black/5 dark:bg-neutral-950 dark:ring-white/10"
+                >
+                  {navItems.map((item) => (
+                    <a
+                      key={item.key}
+                      role="menuitem"
+                      href={item.href}
+                      className="block px-4 py-2.5 text-[15px] text-muted transition-colors hover:bg-hover hover:text-foreground"
+                      onClick={() => {
+                        setActive(item.key);
+                        setOpen(false);
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                  {moreLinks.map((link) =>
+                    link.external ? (
+                      <a
+                        key={link.label}
+                        role="menuitem"
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2.5 text-[15px] text-muted transition-colors hover:bg-hover hover:text-foreground"
+                        onClick={() => setOpen(false)}
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <a
+                        key={link.label}
+                        role="menuitem"
+                        href={link.href}
+                        className="block px-4 py-2.5 text-[15px] text-muted transition-colors hover:bg-hover hover:text-foreground"
+                        onClick={() => {
+                          setActive("more");
+                          setOpen(false);
+                        }}
+                      >
+                        {link.label}
+                      </a>
+                    ),
+                  )}
+                </div>
+              </>
+            ) : null}
           </div>
         </div>
       </header>
-
-      {open ? (
-        <div className="fixed inset-x-0 top-12 z-40 border-b border-dashed border-border bg-background px-4 py-4 md:hidden">
-          <div className={cn("mx-auto flex w-full flex-col gap-1", FRAME_MAX)}>
-            {navItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="rounded-md px-3 py-3 text-sm text-foreground transition hover:bg-hover"
-                onClick={() => {
-                  setActive(item.key);
-                  setOpen(false);
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-            {moreLinks.map((link) =>
-              link.external ? (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-md px-3 py-3 text-sm text-foreground transition hover:bg-hover"
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="rounded-md px-3 py-3 text-sm text-foreground transition hover:bg-hover"
-                  onClick={() => {
-                    setActive("more");
-                    setOpen(false);
-                  }}
-                >
-                  {link.label}
-                </a>
-              ),
-            )}
-          </div>
-        </div>
-      ) : null}
     </>
   );
 }

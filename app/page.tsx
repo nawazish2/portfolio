@@ -44,7 +44,7 @@ export default function Home() {
       <FrameColumn>
         <section id="projects" className="scroll-mt-16">
           <Reveal>
-            <FramePad className="flex items-end justify-between gap-3 pt-8 pb-4">
+            <FramePad className="flex items-end justify-between gap-3 pt-6 pb-3 sm:pt-8 sm:pb-4">
               <h2 className="section-title">Projects</h2>
               <a
                 href="#projects"
