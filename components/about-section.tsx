@@ -1,7 +1,7 @@
 import { siteConfig } from "@/content/site";
 import { Reveal } from "@/components/reveal";
 import { FramePad } from "@/components/grid";
-import { Github, Linkedin, Mail, Paperclip } from "lucide-react";
+import { Github, Linkedin, Mail, Paperclip, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const XIcon = ({
@@ -93,8 +93,9 @@ export function AboutSection() {
 }
 
 /**
- * Contact — Sam-style icon strip (same on mobile + desktop).
- * 5 equal dashed cells; compact rounded icon buttons centered (never giant tiles).
+ * Contact:
+ * - Mobile (< md): Sam-style — 5 equal cells, icon-only buttons
+ * - Desktop (md+): labeled strip with name + ↗
  */
 export function ContactSection() {
   return (
@@ -104,11 +105,11 @@ export function ContactSection() {
           <h2 className="section-title">Contact</h2>
         </FramePad>
 
-        <div className="grid grid-cols-5 border-t border-dashed border-border">
+        {/* Mobile — Sam: equal dashed cells, compact centered icons only */}
+        <div className="grid grid-cols-5 border-t border-dashed border-border md:hidden">
           {contacts.map((item, index) => {
             const Icon = item.icon;
             const isLast = index === contacts.length - 1;
-
             return (
               <a
                 key={item.label}
@@ -117,23 +118,48 @@ export function ContactSection() {
                 rel={item.external ? "noopener noreferrer" : undefined}
                 aria-label={item.label}
                 className={cn(
-                  "group flex items-center justify-center px-1.5 py-4 sm:py-5",
-                  "transition-colors duration-150 hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
+                  "group flex items-center justify-center py-4",
+                  "transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
                   "border-dashed border-border",
                   !isLast && "border-r",
                 )}
               >
-                <span
-                  className={cn(
-                    "flex size-10 items-center justify-center rounded-xl border sm:size-11",
-                    "border-neutral-300 bg-white text-neutral-900",
-                    "transition-colors group-hover:border-neutral-400",
-                    "dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100",
-                    "dark:group-hover:border-neutral-500",
-                    "active:scale-[0.97]",
-                  )}
-                >
-                  <Icon size={18} strokeWidth={1.6} />
+                <span className="flex size-11 items-center justify-center rounded-xl border border-neutral-300 bg-white text-neutral-900 transition-colors group-hover:border-neutral-400 active:scale-[0.97] dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100 dark:group-hover:border-neutral-500">
+                  <Icon size={20} strokeWidth={1.6} />
+                </span>
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Desktop — labeled cells */}
+        <div className="hidden border-t border-dashed border-border md:grid md:grid-cols-5">
+          {contacts.map((item, index) => {
+            const Icon = item.icon;
+            const isLast = index === contacts.length - 1;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
+                className={cn(
+                  "group flex min-w-0 items-center gap-2.5 px-3 py-3.5 text-foreground transition-colors duration-150",
+                  "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
+                  "border-dashed border-border",
+                  !isLast && "border-r",
+                )}
+              >
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] border border-neutral-300 bg-white text-neutral-900 transition-colors group-hover:border-neutral-400 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100 dark:group-hover:border-neutral-500">
+                  <Icon size={17} strokeWidth={1.75} />
+                </span>
+                <span className="flex min-w-0 items-center gap-1 text-sm font-medium tracking-tight">
+                  {item.label}
+                  <ArrowUpRight
+                    size={14}
+                    strokeWidth={2}
+                    className="shrink-0 text-neutral-800 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 dark:text-neutral-200"
+                  />
                 </span>
               </a>
             );
