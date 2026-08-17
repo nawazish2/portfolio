@@ -1,62 +1,19 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/content/site";
 import { Reveal } from "@/components/reveal";
 import { FramePad } from "@/components/grid";
 import { cn } from "@/lib/utils";
+import {
+  applyMonthLabels,
+  getGitHubActivity,
+  toWeekColumns,
+  type ContributionDay,
+  type ContributionLevel,
+  type GitHubActivityData,
+  type WeekColumn,
+} from "@/lib/github";
 
-type Day = {
-  date: string;
-  count: number;
-  level: 0 | 1 | 2 | 3 | 4;
-};
-
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-function levelFromCount(count: number): 0 | 1 | 2 | 3 | 4 {
-  if (count === 0) return 0;
-  if (count <= 2) return 1;
-  if (count <= 5) return 2;
-  if (count <= 10) return 3;
-  return 4;
-}
-
-function buildPlaceholderDays(): Day[] {
-  const days: Day[] = [];
-  const today = new Date();
-  for (let i = 364; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    const seed =
-      d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
-    const noise = (Math.sin(seed * 12.9898) * 43758.5453) % 1;
-    const abs = Math.abs(noise);
-    const count =
-      abs > 0.72 ? Math.floor(abs * 12) : abs > 0.55 ? Math.floor(abs * 4) : 0;
-    days.push({
-      date: d.toISOString().slice(0, 10),
-      count,
-      level: levelFromCount(count),
-    });
-  }
-  return days;
-}
-
-const levelClass: Record<0 | 1 | 2 | 3 | 4, string> = {
+const levelClass: Record<ContributionLevel, string> = {
   0: "bg-neutral-100 dark:bg-neutral-800/80",
   1: "bg-emerald-200 dark:bg-emerald-900",
   2: "bg-emerald-300 dark:bg-emerald-700",
@@ -64,157 +21,197 @@ const levelClass: Record<0 | 1 | 2 | 3 | 4, string> = {
   4: "bg-emerald-600 dark:bg-emerald-300",
 };
 
-/**
- * Sam pattern: title + calendar in ONE band (no HRule between them).
- */
-export function GitHubActivity() {
-  const [days, setDays] = useState<Day[]>(() => buildPlaceholderDays());
-  const [total, setTotal] = useState(0);
-  const [loaded, setLoaded] = useState(false);
+const weekdayLabels = ["", "Mon", "", "Wed", "", "Fri", ""] as const;
 
-  useEffect(() => {
-    let cancelled = false;
+function dayTitle(day: ContributionDay): string {
+  const when = new Date(`${day.date}T12:00:00Z`).toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 
-    async function load() {
-      try {
-        const res = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/${siteConfig.githubUsername}?y=last`,
-        );
-        if (!res.ok) throw new Error("failed");
-        const data = (await res.json()) as {
-          contributions: { date: string; count: number; level: number }[];
-          total: Record<string, number>;
-        };
-        if (cancelled) return;
-        const mapped: Day[] = data.contributions.map((c) => ({
-          date: c.date,
-          count: c.count,
-          level: Math.min(4, Math.max(0, c.level)) as 0 | 1 | 2 | 3 | 4,
-        }));
-        const recent = mapped.slice(-365);
-        setDays(recent.length ? recent : buildPlaceholderDays());
-        const yearTotals = Object.values(data.total ?? {});
-        setTotal(
-          yearTotals.length
-            ? yearTotals.reduce((a, b) => a + b, 0)
-            : recent.reduce((a, b) => a + b.count, 0),
-        );
-        setLoaded(true);
-      } catch {
-        if (cancelled) return;
-        const placeholder = buildPlaceholderDays();
-        setDays(placeholder);
-        setTotal(placeholder.reduce((a, b) => a + b.count, 0));
-        setLoaded(true);
-      }
-    }
-
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const weeks: Day[][] = [];
-  for (let i = 0; i < days.length; i += 7) {
-    weeks.push(days.slice(i, i + 7));
+  if (day.count === 0) {
+    return `No contributions on ${when}`;
   }
 
-  // Mobile: last ~20 weeks so the grid fits without awkward empty space
-  const mobileWeeks = weeks.slice(-20);
-  const desktopWeeks = weeks;
+  const noun = day.count === 1 ? "contribution" : "contributions";
+  return `${day.count.toLocaleString()} ${noun} on ${when}`;
+}
 
-  const mobileMonthLabels = (() => {
-    const labels: string[] = [];
-    const seen = new Set<string>();
-    for (const week of mobileWeeks) {
-      const d = week[0]?.date;
-      if (!d) continue;
-      const m = months[new Date(d + "T12:00:00").getMonth()];
-      if (!seen.has(m)) {
-        seen.add(m);
-        labels.push(m);
-      }
-    }
-    return labels;
-  })();
+function HeatmapCell({
+  day,
+  className,
+}: {
+  day: ContributionDay | null;
+  className: string;
+}) {
+  if (!day) {
+    return <div className={cn(className, "bg-transparent")} />;
+  }
+
+  return (
+    <div
+      title={dayTitle(day)}
+      aria-label={dayTitle(day)}
+      className={cn(className, levelClass[day.level])}
+    />
+  );
+}
+
+function Heatmap({
+  weeks,
+  compact,
+}: {
+  weeks: WeekColumn[];
+  compact?: boolean;
+}) {
+  return (
+    <div className={cn("flex", compact ? "w-full gap-[2px]" : "min-w-max gap-[3px]")}>
+      {weeks.map((week) => (
+        <div
+          key={week.key}
+          className={cn(
+            "flex flex-col",
+            compact ? "min-w-0 flex-1 gap-[2px]" : "w-[11px] gap-[3px]",
+          )}
+        >
+          <div className="relative h-4">
+            {week.monthLabel ? (
+              <span className="absolute top-0 left-0 font-mono text-[10px] whitespace-nowrap text-muted-soft">
+                {week.monthLabel}
+              </span>
+            ) : null}
+          </div>
+          {week.days.map((day, index) => (
+            <HeatmapCell
+              key={day?.date ?? `${week.key}-${String(index)}`}
+              day={day}
+              className={cn(
+                "rounded-[2px]",
+                compact ? "aspect-square w-full" : "size-[11px]",
+              )}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Stats({ activity }: { activity: GitHubActivityData }) {
+  const items = [
+    `${activity.activeDays} active days`,
+    activity.currentStreak > 0
+      ? `${activity.currentStreak}-day streak`
+      : `Longest streak ${activity.longestStreak} ${activity.longestStreak === 1 ? "day" : "days"}`,
+    activity.publicRepos > 0 ? `${activity.publicRepos} public repos` : null,
+    activity.followers > 0 ? `${activity.followers} followers` : null,
+  ].filter((item): item is string => item !== null);
+
+  return (
+    <p className="mt-2 text-[10px] text-muted-soft sm:text-xs">{items.join(" · ")}</p>
+  );
+}
+
+export async function GitHubActivity() {
+  const activity = await getGitHubActivity(siteConfig.githubUsername);
+  const weeks = activity ? toWeekColumns(activity.days) : [];
+  const mobileWeeks = applyMonthLabels(weeks.slice(-20));
 
   return (
     <Reveal>
       <FramePad className="pt-6 pb-6 sm:pt-9 sm:pb-10">
-        <h2 className="section-title">GitHub Activity</h2>
-
-        {/* Mobile heatmap — fits width, no horizontal scroll */}
-        <div className="mt-4 sm:hidden">
-          <div className="mb-2 flex items-center justify-between font-mono text-[10px] text-muted-soft">
-            {mobileMonthLabels.map((m) => (
-              <span key={m}>{m}</span>
-            ))}
-          </div>
-          <div className="flex w-full justify-between gap-[2px]">
-            {mobileWeeks.map((week, wi) => (
-              <div key={wi} className="flex flex-1 flex-col gap-[2px]">
-                {week.map((day) => (
-                  <div
-                    key={day.date}
-                    title={`${day.date}: ${day.count} contributions`}
-                    className={cn(
-                      "aspect-square w-full rounded-[2px]",
-                      levelClass[day.level],
-                    )}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
+        <div className="flex items-end justify-between gap-3">
+          <h2 className="section-title">GitHub Activity</h2>
+          <a
+            href={activity?.profileUrl ?? siteConfig.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-0.5 inline-flex items-center gap-1 text-xs text-muted transition hover:text-foreground sm:text-sm"
+          >
+            @{siteConfig.githubUsername}
+            <ArrowUpRight size={14} />
+          </a>
         </div>
 
-        {/* Desktop heatmap — full year */}
-        <div className="mt-5 hidden sm:block">
-          <div className="flex items-center gap-1 overflow-hidden font-mono text-[10px] text-muted-soft">
-            {months.map((m) => (
-              <span key={m} className="flex-1 text-center">
-                {m}
-              </span>
-            ))}
-          </div>
-          <div className="mt-2 overflow-x-auto pb-2">
-            <div className="flex min-w-max gap-[3px]">
-              {desktopWeeks.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-[3px]">
-                  {week.map((day) => (
-                    <div
-                      key={day.date}
-                      title={`${day.date}: ${day.count} contributions`}
-                      className={cn(
-                        "size-[11px] rounded-[2px]",
-                        levelClass[day.level],
-                      )}
-                    />
+        {!activity || weeks.length === 0 ? (
+          <p className="mt-4 text-sm text-muted">
+            Live contribution data could not be loaded.{" "}
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-foreground/30 underline-offset-2 hover:text-foreground"
+            >
+              View GitHub profile
+            </a>
+          </p>
+        ) : (
+          <>
+            <div className="mt-4 sm:hidden">
+              <Heatmap weeks={mobileWeeks} compact />
+            </div>
+
+            <div className="mt-5 hidden sm:block">
+              <div className="flex gap-2">
+                <div className="flex w-7 shrink-0 flex-col gap-[3px]">
+                  <div className="h-4" />
+                  {weekdayLabels.map((label, index) => (
+                    <span
+                      key={`wd-${String(index)}`}
+                      className="h-[11px] font-mono text-[10px] leading-[11px] text-muted-soft"
+                    >
+                      {label}
+                    </span>
                   ))}
                 </div>
-              ))}
+                <div className="min-w-0 flex-1 overflow-x-auto pb-1">
+                  <Heatmap weeks={weeks} />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] text-muted-soft sm:text-xs">
-          <span>
-            {loaded && total > 0
-              ? `${total.toLocaleString()} contributions in the last year`
-              : "Loading…"}
-          </span>
-          <div className="flex items-center gap-1.5">
-            <span>Less</span>
-            {([0, 1, 2, 3, 4] as const).map((l) => (
-              <span
-                key={l}
-                className={cn("size-2.5 rounded-[2px]", levelClass[l])}
-              />
-            ))}
-            <span>More</span>
-          </div>
-        </div>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] text-muted-soft sm:text-xs">
+              <span>
+                {activity.total.toLocaleString()} contributions in the last year
+              </span>
+              <div className="flex items-center gap-1.5">
+                <span>Less</span>
+                {([0, 1, 2, 3, 4] as const).map((level) => (
+                  <span
+                    key={level}
+                    className={cn("size-2.5 rounded-[2px]", levelClass[level])}
+                  />
+                ))}
+                <span>More</span>
+              </div>
+            </div>
+
+            <Stats activity={activity} />
+
+            {activity.recent.length > 0 ? (
+              <ul className="mt-4 space-y-1.5 border-t border-dashed border-border pt-4">
+                {activity.recent.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-baseline justify-between gap-3 text-[12px] text-muted transition hover:text-foreground sm:text-[13px]"
+                    >
+                      <span className="min-w-0 truncate">{item.label}</span>
+                      <span className="shrink-0 font-mono text-[10px] text-muted-soft">
+                        {item.ago}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </>
+        )}
       </FramePad>
     </Reveal>
   );
