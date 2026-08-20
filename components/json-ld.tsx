@@ -41,7 +41,7 @@ export function JsonLd() {
       "@type": "ListItem",
       position: index + 1,
       name: project.title,
-      url: project.live ?? project.github,
+      url: `${siteConfig.url}/projects/${project.slug}`,
       description: project.oneLiner,
     })),
   };

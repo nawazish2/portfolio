@@ -1,7 +1,3 @@
-/**
- * Sam-style banner: one animated GIF (multi-frame waterfall).
- * Keep it simple — no CSS hacks; the motion lives in the GIF.
- */
 export function BannerArt() {
   return (
     <div className="banner-art absolute inset-0 overflow-hidden bg-[#1a2420]" aria-hidden>

@@ -216,5 +216,3 @@ export async function GitHubActivity() {
     </Reveal>
   );
 }
-
-export const GitHubBody = GitHubActivity;

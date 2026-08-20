@@ -2,7 +2,7 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Light mode — matches samworks light (their dark: styles) */
+/* Light */
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;
@@ -23,7 +23,7 @@
   color-scheme: light;
 }
 
-/* Dark mode — matches samworks default */
+/* Dark */
 .dark {
   --background: #0f0e0e;
   --foreground: #fafafa;
@@ -122,7 +122,7 @@
 
   .section-title {
     font-family: var(--font-instrument), ui-serif, Georgia, serif;
-    font-size: 1.625rem; /* ~26px — Sam-like on mobile */
+    font-size: 1.625rem;
     line-height: 2rem;
     color: var(--foreground);
   }
@@ -251,7 +251,7 @@
   }
 }
 
-/* Banner is a multi-frame GIF (Sam-style) — no CSS motion hacks */
+/* Banner GIF */
 .banner-art {
   background: #1a2420;
 }

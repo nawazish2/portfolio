@@ -89,7 +89,7 @@ export default function RootLayout({
       className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} h-full`}
     >
       <head>
-        {/* Prevent theme flash; mirrors samworks persistence pattern */}
+        {/* Apply stored theme before paint to avoid a flash */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('nawaz-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})();`,
