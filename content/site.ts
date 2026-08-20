@@ -1,36 +1,22 @@
-export type AboutPart = {
-  text: string;
-  highlight?: boolean;
-  href?: string;
-};
-
-export type AboutLine = {
-  parts: AboutPart[];
-};
-
 export const siteConfig = {
   name: "Nawazish Khan",
   shortName: "Nawazish",
   title: "Nawazish Khan — Portfolio",
   description:
-    "Software engineer in Delhi building useful tools with Swift and TypeScript. Selected work includes Cuprim, AlgoViz, ChaiTailwind, and ParkIt.",
+    "Software engineer in Delhi. I build tools in Swift and TypeScript — Cuprim, AlgoViz, ChaiTailwind, and ParkIt.",
   url: "https://nawazish.site",
   locale: "en_IN",
-  location: "Delhi, IND",
+  location: "Delhi, India",
   role: "Software Engineer",
-  /** Rotating hero titles */
-  roles: ["Software Engineer", "Full Stack Developer"] as const,
-  /** Sam-style meta under role: age/city/country */
-  heroMeta: "22, Delhi, IND",
+  heroMeta: "Delhi · CS, IKGPTU",
   tagline: "I build useful software and learn systems by taking them apart.",
   summary:
-    "Software engineer based in Delhi. I work mostly with Swift and TypeScript, and I like small tools, clear interfaces, and backends that do not surprise you.",
+    "Software engineer in Delhi. I work mostly in Swift and TypeScript on small tools, clear interfaces, and backends that behave.",
   availability: "Open to SDE roles and interesting product work",
   availabilityShort: "Open to roles & remote",
   education: "Computer Science student at IKGPTU",
   email: "knawazish153@gmail.com",
-  resumeUrl:
-    "https://drive.google.com/file/d/18oBtva6I1yADfVEruERkpnRMAfEbv5l6/view?usp=drive_link",
+  resumeUrl: "/nawazishResume.pdf",
   ogImage: "/og-image.jpg",
   profileImage: "/profile.jpg",
   bannerImage: "/banner.gif",
@@ -44,51 +30,20 @@ export const siteConfig = {
   },
   nav: [
     { href: "/", label: "Home" },
-    { href: "#projects", label: "Projects" },
+    { href: "/#projects", label: "Projects" },
+    { href: "/contact", label: "Contact" },
   ],
   about: [
-    {
-      parts: [
-        { text: "I'm a " },
-        { text: "Software Engineer", highlight: true },
-        {
-          text: " passionate about building useful tools where clean code meets clear interfaces.",
-        },
-      ],
-    },
-    {
-      parts: [
-        { text: "I design and develop products with " },
-        { text: "Swift", highlight: true },
-        { text: ", " },
-        { text: "TypeScript", highlight: true },
-        { text: ", and " },
-        { text: "React", highlight: true },
-        {
-          text: " — focusing on usability, performance, and maintainable architecture.",
-        },
-      ],
-    },
-    {
-      parts: [
-        {
-          text: "Currently a Computer Science student at IKGPTU, I enjoy turning ideas into polished software, exploring systems, and writing down what I learn.",
-        },
-      ],
-    },
-  ] satisfies AboutLine[],
+    "I build small tools in Swift and TypeScript, usually by taking a system apart until I can see the moving pieces.",
+    "Lately that is a macOS menu bar app for AI quotas, a browser visualizer for ML algorithms, a tiny CSS engine, and a parking product with live booking.",
+    "I am a CS student in Delhi, looking for SDE roles and product work.",
+  ],
   stack: [
     {
       name: "TypeScript",
       category: "Frontend",
       href: "https://www.typescriptlang.org",
       color: "#3178C6",
-    },
-    {
-      name: "JavaScript",
-      category: "Frontend",
-      href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-      color: "#F7DF1E",
     },
     {
       name: "React",
@@ -109,20 +64,14 @@ export const siteConfig = {
       color: "#06B6D4",
     },
     {
-      name: "Framer Motion",
-      category: "Frontend",
-      href: "https://motion.dev",
-      color: "#FF0055",
-    },
-    {
       name: "Swift",
-      category: "Frontend",
+      category: "Native",
       href: "https://www.swift.org",
       color: "#F05138",
     },
     {
       name: "SwiftUI",
-      category: "Frontend",
+      category: "Native",
       href: "https://developer.apple.com/xcode/swiftui/",
       color: "#0A84FF",
     },
@@ -157,22 +106,10 @@ export const siteConfig = {
       color: "#DC382D",
     },
     {
-      name: "JWT",
-      category: "Backend",
-      href: "https://jwt.io",
-      color: "#000000",
-    },
-    {
       name: "Git",
       category: "Tools",
       href: "https://git-scm.com",
       color: "#F05032",
-    },
-    {
-      name: "GitHub",
-      category: "Tools",
-      href: "https://github.com",
-      color: "#181717",
     },
     {
       name: "Docker",
@@ -187,36 +124,6 @@ export const siteConfig = {
       color: "#000000",
     },
     {
-      name: "Cursor",
-      category: "Tools",
-      href: "https://cursor.com",
-      color: "#000000",
-    },
-    {
-      name: "Claude Code",
-      category: "Tools",
-      href: "https://docs.anthropic.com/en/docs/claude-code",
-      color: "#D97757",
-    },
-    {
-      name: "Codex",
-      category: "Tools",
-      href: "https://openai.com/codex",
-      color: "#10A37F",
-    },
-    {
-      name: "Grok",
-      category: "Tools",
-      href: "https://x.ai",
-      color: "#000000",
-    },
-    {
-      name: "VS Code",
-      category: "Tools",
-      href: "https://code.visualstudio.com",
-      color: "#007ACC",
-    },
-    {
       name: "Figma",
       category: "Design",
       href: "https://figma.com",
@@ -226,19 +133,15 @@ export const siteConfig = {
   writing: {
     title: "Notes",
     description:
-      "Sometimes I write the lesson down before I forget it — mostly JavaScript, backend engineering, and notes from whatever I am building.",
+      "Notes on JavaScript, backend engineering, and whatever I am building.",
     href: "https://nawazish.hashnode.dev",
     cta: "Read my writing",
   },
-  quote: {
-    text: "The only way to do great work is to love what you do.",
-    author: "Steve Jobs",
-  },
   cta: {
-    title: "Scrolled Too Far",
+    title: "Want to work together?",
     description:
-      "If you've read this far, you might be interested in what I do.",
-    button: "Let's Talk",
+      "I am looking for SDE roles and product work. If something here is useful, write to me.",
+    button: "Get in touch",
   },
 } as const;
 

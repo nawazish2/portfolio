@@ -1,14 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { Project } from "@/content/projects";
-import { Github, Globe } from "lucide-react";
+import { ArrowUpRight, Github, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/**
- * Sam-style project card — same structure on mobile + desktop:
- * framed preview → title/status → one-liner → description → tags + links
- */
 export function ProjectCard({
   project,
   index,
@@ -18,7 +15,7 @@ export function ProjectCard({
   index: number;
   total: number;
 }) {
-  const primaryHref = project.live ?? project.github;
+  const caseHref = `/projects/${project.slug}`;
   const isLeftCol = index % 2 === 0;
   const isLast = index === total - 1;
   const isLastRow = Math.floor(index / 2) === Math.floor((total - 1) / 2);
@@ -32,25 +29,17 @@ export function ProjectCard({
         isLastRow ? "md:border-b-0" : "md:border-b",
       )}
     >
-      {primaryHref ? (
-        <a
-          href={primaryHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block min-w-0"
-        >
-          <PreviewPanel project={project} />
-        </a>
-      ) : (
+      <Link href={caseHref} className="block min-w-0">
         <PreviewPanel project={project} />
-      )}
+      </Link>
 
       <div className="mt-3 flex min-w-0 flex-1 flex-col sm:mt-3.5">
-        {/* Title + status */}
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <h3 className="truncate text-[17px] font-semibold tracking-tight text-foreground sm:text-xl">
-              {project.title}
+              <Link href={caseHref} className="hover:underline">
+                {project.title}
+              </Link>
             </h3>
             <p className="mt-0.5 truncate text-xs text-muted sm:text-[13px]">
               {project.oneLiner}
@@ -71,12 +60,10 @@ export function ProjectCard({
           </p>
         </div>
 
-        {/* Description — clamp on all sizes for consistent card height feel */}
-        <p className="mt-2.5 line-clamp-3 text-[13px] leading-relaxed text-muted sm:mt-3 sm:text-sm">
-          {project.description}
+        <p className="mt-2.5 line-clamp-2 text-[13px] leading-relaxed text-muted sm:mt-3 sm:text-sm">
+          {project.problem}
         </p>
 
-        {/* Tags + links */}
         <div className="mt-auto flex min-w-0 items-center justify-between gap-2 pt-3">
           <div className="flex min-w-0 flex-wrap items-center gap-1.5">
             {project.stack.slice(0, 3).map((tech) => (
@@ -86,6 +73,13 @@ export function ProjectCard({
             ))}
           </div>
           <div className="flex shrink-0 items-center gap-0.5">
+            <Link
+              href={caseHref}
+              className="icon-btn"
+              aria-label={`${project.title} case study`}
+            >
+              <ArrowUpRight size={18} strokeWidth={1.75} />
+            </Link>
             {project.live ? (
               <a
                 href={project.live}
@@ -121,14 +115,12 @@ function PreviewPanel({ project }: { project: Project }) {
   return (
     <div
       className={cn(
-        // Consistent 16:10 frame like Sam — works mobile + desktop
-        "group relative aspect-[16/10] w-full min-w-0 cursor-pointer overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10",
+        "group relative aspect-[16/10] w-full min-w-0 overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 dark:ring-white/10",
         hasImage
           ? cn("bg-linear-to-br p-2 sm:p-2.5", project.accent)
           : cn("bg-linear-to-br", project.accent),
       )}
     >
-      {/* Badge ribbon — fully inside frame, never clipped */}
       {project.badge ? (
         <div className="pointer-events-none absolute top-3 right-3 z-20 sm:top-3.5 sm:right-3.5">
           <div className="rotate-12">
@@ -148,7 +140,6 @@ function PreviewPanel({ project }: { project: Project }) {
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            priority={false}
           />
           <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent" />
         </div>

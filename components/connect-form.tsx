@@ -30,7 +30,7 @@ export function ConnectForm() {
         body: JSON.stringify({
           name: data.get("name"),
           email: data.get("email"),
-          subject: "Let's Connect",
+          subject: "Get in touch",
           message: data.get("message"),
           website: data.get("website"),
         }),
@@ -94,13 +94,12 @@ export function ConnectForm() {
           name="message"
           required
           rows={2}
-          placeholder="Tell me about your project..."
+          placeholder="What are you working on, or which role should I look at?"
           className={`${fieldClass} min-h-[72px] resize-none pb-5 sm:min-h-[100px] sm:pb-8`}
         />
       </label>
 
       <div className="flex flex-col gap-3 pt-2 sm:pt-4">
-        {/* Sam-style full-width pill CTA on mobile */}
         <button
           type="submit"
           disabled={state === "loading"}

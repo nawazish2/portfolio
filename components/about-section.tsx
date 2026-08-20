@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 const XIcon = ({
   size = 18,
-  strokeWidth: _strokeWidth,
 }: {
   size?: number;
   strokeWidth?: number;
@@ -55,7 +54,6 @@ const contacts = [
   },
 ] as const;
 
-/** About title + body in ONE band (Sam pattern) */
 export function AboutSection() {
   return (
     <section id="about" className="scroll-mt-16">
@@ -63,26 +61,13 @@ export function AboutSection() {
         <FramePad className="pt-6 pb-6 sm:pt-9 sm:pb-10">
           <h2 className="section-title">About</h2>
           <div className="mt-4 space-y-3.5 sm:mt-5">
-            {siteConfig.about.map((line, i) => (
+            {siteConfig.about.map((line) => (
               <p
-                key={i}
+                key={line}
                 className="flex gap-2.5 text-[14px] leading-relaxed text-foreground/90 sm:text-base"
               >
                 <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
-                <span>
-                  {line.parts.map((part, j) =>
-                    part.highlight ? (
-                      <span
-                        key={j}
-                        className="font-semibold underline decoration-foreground/40 underline-offset-[3px]"
-                      >
-                        {part.text}
-                      </span>
-                    ) : (
-                      <span key={j}>{part.text}</span>
-                    ),
-                  )}
-                </span>
+                <span>{line}</span>
               </p>
             ))}
           </div>
@@ -92,11 +77,6 @@ export function AboutSection() {
   );
 }
 
-/**
- * Contact:
- * - Mobile (< md): Sam-style — 5 equal cells, icon-only buttons
- * - Desktop (md+): labeled strip with name + ↗
- */
 export function ContactSection() {
   return (
     <section className="scroll-mt-16">
@@ -105,7 +85,6 @@ export function ContactSection() {
           <h2 className="section-title">Contact</h2>
         </FramePad>
 
-        {/* Mobile — Sam: equal dashed cells, compact centered icons only */}
         <div className="grid grid-cols-5 border-t border-dashed border-border md:hidden">
           {contacts.map((item, index) => {
             const Icon = item.icon;
@@ -132,7 +111,6 @@ export function ContactSection() {
           })}
         </div>
 
-        {/* Desktop — labeled cells */}
         <div className="hidden border-t border-dashed border-border md:grid md:grid-cols-5">
           {contacts.map((item, index) => {
             const Icon = item.icon;
@@ -169,9 +147,3 @@ export function ContactSection() {
     </section>
   );
 }
-
-// Back-compat aliases
-export const AboutBody = AboutSection;
-export const AboutBlock = AboutSection;
-export const ContactCells = ContactSection;
-export const ContactStrip = ContactSection;
