@@ -9,12 +9,14 @@ import { TechStack } from "@/components/tech-stack";
 import { GitHubActivity } from "@/components/github-activity";
 import { CtaSection } from "@/components/cta-section";
 import { Reveal } from "@/components/reveal";
+import { HomeJsonLd } from "@/components/json-ld";
 import { projects } from "@/content/projects";
 
 export default function Home() {
   return (
     <SiteFrame>
       <Header />
+      <HomeJsonLd />
 
       <FrameColumn className="mt-12">
         <Hero />

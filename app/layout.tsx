@@ -66,6 +66,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    creator: "@nawazish_khan1",
+    site: "@nawazish_khan1",
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],

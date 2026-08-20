@@ -7,6 +7,7 @@ import { Header } from "@/components/header";
 import { SiteFrame } from "@/components/site-frame";
 import { FrameColumn, FramePad, HRule } from "@/components/grid";
 import { CreditsBand } from "@/components/footer";
+import { ProjectJsonLd } from "@/components/json-ld";
 import { getProject, projects } from "@/content/projects";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -57,6 +58,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <SiteFrame>
       <Header />
+      <ProjectJsonLd project={project} />
 
       <FrameColumn className="mt-12">
         <FramePad className="flex items-center justify-between gap-3 pt-5 sm:pt-8">
