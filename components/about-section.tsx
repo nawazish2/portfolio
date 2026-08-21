@@ -61,13 +61,26 @@ export function AboutSection() {
         <FramePad className="pt-6 pb-6 sm:pt-9 sm:pb-10">
           <h2 className="section-title">About</h2>
           <div className="mt-4 space-y-3.5 sm:mt-5">
-            {siteConfig.about.map((line) => (
+            {siteConfig.about.map((line, i) => (
               <p
-                key={line}
-                className="flex gap-2.5 text-[14px] leading-relaxed text-foreground/90 sm:text-base"
+                key={i}
+                className="flex gap-2.5 font-sans text-[15px] leading-relaxed text-foreground sm:text-[17px]"
               >
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
-                <span>{line}</span>
+                <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
+                <span>
+                  {line.parts.map((part, j) =>
+                    part.highlight ? (
+                      <span
+                        key={j}
+                        className="font-semibold underline decoration-foreground/40 underline-offset-[3px]"
+                      >
+                        {part.text}
+                      </span>
+                    ) : (
+                      <span key={j}>{part.text}</span>
+                    ),
+                  )}
+                </span>
               </p>
             ))}
           </div>
@@ -122,7 +135,7 @@ export function ContactSection() {
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 className={cn(
-                  "group flex min-w-0 items-center gap-2.5 px-3 py-3.5 text-foreground transition-colors duration-150",
+                  "group flex min-w-0 items-center gap-2.5 px-4 py-4 text-foreground transition-colors duration-150",
                   "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
                   "border-dashed border-border",
                   !isLast && "border-r",
@@ -131,7 +144,7 @@ export function ContactSection() {
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] border border-neutral-300 bg-white text-neutral-900 transition-colors group-hover:border-neutral-400 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100 dark:group-hover:border-neutral-500">
                   <Icon size={17} strokeWidth={1.75} />
                 </span>
-                <span className="flex min-w-0 items-center gap-1 text-sm font-medium tracking-tight">
+                <span className="flex min-w-0 items-center gap-1 font-sans text-sm font-medium tracking-tight">
                   {item.label}
                   <ArrowUpRight
                     size={14}

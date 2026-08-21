@@ -1,3 +1,12 @@
+export type AboutPart = {
+  text: string;
+  highlight?: boolean;
+};
+
+export type AboutLine = {
+  parts: AboutPart[];
+};
+
 export const siteConfig = {
   name: "Nawazish Khan",
   shortName: "Nawazish",
@@ -34,10 +43,30 @@ export const siteConfig = {
     { href: "/contact", label: "Contact" },
   ],
   about: [
-    "I build small tools in Swift and TypeScript, usually by taking a system apart until I can see the moving pieces.",
-    "Lately that is a macOS menu bar app for AI quotas, a browser visualizer for ML algorithms, a tiny CSS engine, and a parking product with live booking.",
-    "I am a CS student in Delhi, looking for SDE roles and product work.",
-  ],
+    {
+      parts: [
+        { text: "I build small tools in " },
+        { text: "Swift", highlight: true },
+        { text: " and " },
+        { text: "TypeScript", highlight: true },
+        { text: ", usually by taking a system apart until I can see the moving pieces." },
+      ],
+    },
+    {
+      parts: [
+        {
+          text: "Lately that is a macOS menu bar app for AI quotas, a browser visualizer for ML algorithms, a tiny CSS engine, and a parking product with live booking.",
+        },
+      ],
+    },
+    {
+      parts: [
+        { text: "I am a CS student in Delhi, looking for " },
+        { text: "SDE roles", highlight: true },
+        { text: " and product work." },
+      ],
+    },
+  ] satisfies AboutLine[],
   stack: [
     {
       name: "TypeScript",
@@ -136,6 +165,10 @@ export const siteConfig = {
       "Notes on JavaScript, backend engineering, and whatever I am building.",
     href: "https://nawazish.hashnode.dev",
     cta: "Read my writing",
+  },
+  quote: {
+    text: "The only way to do great work is to love what you do.",
+    author: "Steve Jobs",
   },
   cta: {
     title: "Want to work together?",
