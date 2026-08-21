@@ -30,7 +30,7 @@ export function ConnectForm() {
         body: JSON.stringify({
           name: data.get("name"),
           email: data.get("email"),
-          subject: "Get in touch",
+          subject: "Let's Connect",
           message: data.get("message"),
           website: data.get("website"),
         }),
@@ -94,16 +94,17 @@ export function ConnectForm() {
           name="message"
           required
           rows={2}
-          placeholder="What are you working on, or which role should I look at?"
+          placeholder="Tell me about your project..."
           className={`${fieldClass} min-h-[72px] resize-none pb-5 sm:min-h-[100px] sm:pb-8`}
         />
       </label>
 
       <div className="flex flex-col gap-3 pt-2 sm:pt-4">
+        {/* Sam-style full-width pill CTA on mobile */}
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-foreground px-7 text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] disabled:opacity-60 sm:h-11 sm:w-fit sm:px-8 sm:text-[15px]"
+          className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-foreground text-sm font-semibold text-background shadow-sm transition hover:opacity-90 active:scale-[0.98] disabled:opacity-60 sm:h-[3.25rem] sm:w-auto sm:justify-start sm:px-9 sm:text-[15px]"
         >
           {state === "loading" ? "Sending..." : "Send Message"}
           <ArrowRight size={16} strokeWidth={2.25} />

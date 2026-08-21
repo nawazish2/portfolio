@@ -4,6 +4,9 @@ import { Reveal } from "@/components/reveal";
 import { FramePad } from "@/components/grid";
 import { ArrowRight } from "lucide-react";
 
+/**
+ * Sam pattern: title at top of band, body centered below — ONE band between HRules.
+ */
 export function CtaSection() {
   return (
     <section className="w-full">
@@ -12,8 +15,8 @@ export function CtaSection() {
           <h2 className="section-title">{siteConfig.cta.title}</h2>
         </FramePad>
 
-        <div className="flex flex-col items-center px-4 pt-8 pb-12 text-center sm:px-3 sm:pt-10 sm:pb-14">
-          <p className="max-w-lg font-sans text-[15px] leading-relaxed text-muted sm:text-base">
+        <div className="flex flex-col items-center px-4 pt-10 pb-14 text-center sm:px-3 sm:pt-14 sm:pb-20">
+          <p className="max-w-lg text-[15px] leading-relaxed text-muted sm:text-base">
             {siteConfig.cta.description}
           </p>
           <Link
@@ -28,3 +31,5 @@ export function CtaSection() {
     </section>
   );
 }
+
+export const CtaBody = CtaSection;
