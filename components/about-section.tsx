@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 const XIcon = ({
   size = 18,
+  strokeWidth: _strokeWidth,
 }: {
   size?: number;
   strokeWidth?: number;
@@ -54,6 +55,7 @@ const contacts = [
   },
 ] as const;
 
+/** About title + body in ONE band (Sam pattern) */
 export function AboutSection() {
   return (
     <section id="about" className="scroll-mt-16">
@@ -64,9 +66,9 @@ export function AboutSection() {
             {siteConfig.about.map((line, i) => (
               <p
                 key={i}
-                className="flex gap-2.5 font-sans text-[15px] leading-relaxed text-foreground sm:text-[17px]"
+                className="flex gap-2.5 text-[14px] leading-relaxed text-foreground/90 sm:text-base"
               >
-                <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
+                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
                 <span>
                   {line.parts.map((part, j) =>
                     part.highlight ? (
@@ -90,6 +92,11 @@ export function AboutSection() {
   );
 }
 
+/**
+ * Contact:
+ * - Mobile (< md): Sam-style — 5 equal cells, icon-only buttons
+ * - Desktop (md+): labeled strip with name + ↗
+ */
 export function ContactSection() {
   return (
     <section className="scroll-mt-16">
@@ -98,6 +105,7 @@ export function ContactSection() {
           <h2 className="section-title">Contact</h2>
         </FramePad>
 
+        {/* Mobile — Sam: equal dashed cells, compact centered icons only */}
         <div className="grid grid-cols-5 border-t border-dashed border-border md:hidden">
           {contacts.map((item, index) => {
             const Icon = item.icon;
@@ -124,6 +132,7 @@ export function ContactSection() {
           })}
         </div>
 
+        {/* Desktop — labeled cells */}
         <div className="hidden border-t border-dashed border-border md:grid md:grid-cols-5">
           {contacts.map((item, index) => {
             const Icon = item.icon;
@@ -135,7 +144,7 @@ export function ContactSection() {
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 className={cn(
-                  "group flex min-w-0 items-center gap-2.5 px-4 py-4 text-foreground transition-colors duration-150",
+                  "group flex min-w-0 items-center gap-2.5 px-3 py-3.5 text-foreground transition-colors duration-150",
                   "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
                   "border-dashed border-border",
                   !isLast && "border-r",
@@ -144,7 +153,7 @@ export function ContactSection() {
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] border border-neutral-300 bg-white text-neutral-900 transition-colors group-hover:border-neutral-400 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-100 dark:group-hover:border-neutral-500">
                   <Icon size={17} strokeWidth={1.75} />
                 </span>
-                <span className="flex min-w-0 items-center gap-1 font-sans text-sm font-medium tracking-tight">
+                <span className="flex min-w-0 items-center gap-1 text-sm font-medium tracking-tight">
                   {item.label}
                   <ArrowUpRight
                     size={14}
@@ -160,3 +169,9 @@ export function ContactSection() {
     </section>
   );
 }
+
+// Back-compat aliases
+export const AboutBody = AboutSection;
+export const AboutBlock = AboutSection;
+export const ContactCells = ContactSection;
+export const ContactStrip = ContactSection;

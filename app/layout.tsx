@@ -16,7 +16,6 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
   subsets: ["latin"],
   weight: "400",
-  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -67,8 +66,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@nawazish_khan1",
-    site: "@nawazish_khan1",
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
@@ -92,7 +89,7 @@ export default function RootLayout({
       className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} h-full`}
     >
       <head>
-        {/* Apply stored theme before paint to avoid a flash */}
+        {/* Prevent theme flash; mirrors samworks persistence pattern */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('nawaz-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})();`,

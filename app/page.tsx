@@ -9,14 +9,19 @@ import { TechStack } from "@/components/tech-stack";
 import { GitHubActivity } from "@/components/github-activity";
 import { CtaSection } from "@/components/cta-section";
 import { Reveal } from "@/components/reveal";
-import { HomeJsonLd } from "@/components/json-ld";
 import { projects } from "@/content/projects";
+import { ArrowUpRight } from "lucide-react";
 
+/**
+ * Sam line pattern:
+ * - Thin single HRule between every section (full viewport, past vertical rails)
+ * - Section title + body stay in ONE band
+ * - Vertical rails = FrameRails only
+ */
 export default function Home() {
   return (
     <SiteFrame>
       <Header />
-      <HomeJsonLd />
 
       <FrameColumn className="mt-12">
         <Hero />
@@ -39,8 +44,15 @@ export default function Home() {
       <FrameColumn>
         <section id="projects" className="scroll-mt-16">
           <Reveal>
-            <FramePad className="pt-6 pb-3 sm:pt-8 sm:pb-4">
+            <FramePad className="flex items-end justify-between gap-3 pt-6 pb-3 sm:pt-8 sm:pb-4">
               <h2 className="section-title">Projects</h2>
+              <a
+                href="#projects"
+                className="mb-0.5 inline-flex items-center gap-1 text-xs text-muted transition hover:text-foreground sm:text-sm"
+              >
+                View all
+                <ArrowUpRight size={14} />
+              </a>
             </FramePad>
           </Reveal>
           <div className="grid grid-cols-1 border-t border-dashed border-border md:grid-cols-2">
