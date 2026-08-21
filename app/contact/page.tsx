@@ -35,10 +35,10 @@ export default function ContactPage() {
         </FramePad>
 
         <FramePad className="mt-6 sm:mt-10">
-          <h1 className="font-serif-display text-[2rem] leading-none tracking-tight text-foreground sm:text-5xl md:text-[3.5rem]">
+          <h1 className="display-title">
             Get in touch
           </h1>
-          <p className="mt-2.5 text-[15px] text-muted sm:mt-4 sm:text-lg">
+          <p className="mt-3 max-w-xl font-sans text-[15px] leading-relaxed text-muted sm:mt-4 sm:text-lg">
             Roles, product work, or a question about something I built.
           </p>
         </FramePad>

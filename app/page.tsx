@@ -1,5 +1,5 @@
 import { Header } from "@/components/header";
-import { CreditsBand } from "@/components/footer";
+import { QuoteBand, CreditsBand } from "@/components/footer";
 import { SiteFrame } from "@/components/site-frame";
 import { FrameColumn, FramePad, HRule } from "@/components/grid";
 import { Hero } from "@/components/hero";
@@ -76,6 +76,12 @@ export default function Home() {
 
       <FrameColumn>
         <CtaSection />
+      </FrameColumn>
+
+      <HRule />
+
+      <FrameColumn>
+        <QuoteBand />
       </FrameColumn>
 
       <HRule />

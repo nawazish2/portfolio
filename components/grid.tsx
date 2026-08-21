@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /** Must match header content + FrameColumn + FrameRails */
-export const FRAME_MAX = "max-w-[50rem]";
+export const FRAME_MAX = "max-w-[50rem] lg:max-w-[56rem] xl:max-w-[64rem]";
 
 /**
  * Full-viewport dashed horizontal rule.
@@ -65,5 +65,5 @@ export function FramePad({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={cn("px-3 sm:px-4", className)}>{children}</div>;
+  return <div className={cn("px-3 sm:px-5 lg:px-6", className)}>{children}</div>;
 }

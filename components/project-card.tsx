@@ -36,7 +36,7 @@ export function ProjectCard({
       <div className="mt-3 flex min-w-0 flex-1 flex-col sm:mt-3.5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <h3 className="truncate text-[17px] font-semibold tracking-tight text-foreground sm:text-xl">
+            <h3 className="truncate font-sans text-[17px] font-semibold tracking-tight text-foreground sm:text-xl">
               <Link href={caseHref} className="hover:underline">
                 {project.title}
               </Link>

@@ -29,6 +29,9 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<NavKey>("home");
+  const [hovered, setHovered] = useState<NavKey | null>(null);
+
+  const indicator = hovered ?? active;
 
   useEffect(() => {
     const resolve = () => {
@@ -61,28 +64,32 @@ export function Header() {
       <header className="fixed top-0 right-0 left-0 z-50 flex w-full items-center justify-center bg-background/90 backdrop-blur-md">
         <div
           className={cn(
-            "relative flex h-12 w-full items-center justify-between border-x border-dashed border-border px-3 pt-1 pb-1",
+            "relative flex h-12 w-full items-center justify-between border-x border-dashed border-border px-3 sm:px-5 lg:px-6",
             FRAME_MAX,
           )}
         >
           <Link
             href="/"
-            className="font-serif-display cursor-pointer text-3xl text-foreground"
+            className="font-serif-display cursor-pointer text-[1.65rem] leading-tight tracking-tight text-foreground"
             onClick={() => setActive("home")}
           >
             {siteConfig.shortName}
           </Link>
 
-          <nav className="hidden items-center gap-5 md:flex">
+          <nav className="hidden items-center gap-6 md:flex">
             <LayoutGroup id="main-nav">
-              <div className="flex items-center gap-5 text-sm">
+              <div
+                className="flex items-center gap-6 font-sans text-sm"
+                onMouseLeave={() => setHovered(null)}
+              >
                 {navItems.map((item) => {
-                  const isActive = active === item.key;
+                  const isActive = indicator === item.key;
                   return (
                     <Link
                       key={item.key}
                       href={item.href}
                       onClick={() => setActive(item.key)}
+                      onMouseEnter={() => setHovered(item.key)}
                       className={cn(
                         "relative cursor-pointer py-1 select-none transition-colors duration-200",
                         isActive
@@ -142,7 +149,7 @@ export function Header() {
                 />
                 <div
                   role="menu"
-                  className="absolute top-[calc(100%+0.5rem)] right-0 z-50 min-w-[10.5rem] overflow-hidden rounded-xl border border-border bg-background py-1.5 shadow-lg ring-1 ring-black/5 dark:bg-neutral-950 dark:ring-white/10"
+                  className="absolute top-[calc(100%+0.5rem)] right-0 z-50 min-w-[10.5rem] overflow-hidden rounded-xl border border-border bg-background py-1.5 font-sans shadow-lg ring-1 ring-black/5 dark:bg-neutral-950 dark:ring-white/10"
                 >
                   {navItems.map((item) => (
                     <Link

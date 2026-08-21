@@ -89,10 +89,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <p className="font-mono text-[11px] tracking-[0.18em] text-muted-soft uppercase">
             {project.badge ?? "Project"}
           </p>
-          <h1 className="mt-2 font-serif-display text-[2rem] leading-none tracking-tight text-foreground sm:text-5xl">
+          <h1 className="display-title mt-2">
             {project.title}
           </h1>
-          <p className="mt-3 max-w-xl text-[15px] text-muted sm:mt-4 sm:text-lg">
+          <p className="mt-3 max-w-xl font-sans text-[15px] leading-relaxed text-muted sm:mt-4 sm:text-lg">
             {project.oneLiner}
           </p>
         </FramePad>
@@ -133,7 +133,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="text-xs font-semibold tracking-[0.18em] text-muted-soft uppercase">
               Why
             </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-foreground/90 sm:text-base">
+            <p className="mt-3 font-sans text-[15px] leading-relaxed text-foreground sm:text-base">
               {project.problem}
             </p>
           </section>
@@ -141,7 +141,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <h2 className="text-xs font-semibold tracking-[0.18em] text-muted-soft uppercase">
               What I built
             </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-foreground/90 sm:text-base">
+            <p className="mt-3 font-sans text-[15px] leading-relaxed text-foreground sm:text-base">
               {project.built}
             </p>
           </section>
@@ -159,13 +159,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.highlights.map((item) => (
               <li
                 key={item}
-                className="flex gap-2.5 text-[15px] leading-relaxed text-foreground/90 sm:text-base"
+                className="flex gap-2.5 font-sans text-[15px] leading-relaxed text-foreground sm:text-base"
               >
                 <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
                 <span>{item}</span>
               </li>
             ))}
-            <li className="flex gap-2.5 text-[15px] leading-relaxed text-foreground/90 sm:text-base">
+            <li className="flex gap-2.5 font-sans text-[15px] leading-relaxed text-foreground sm:text-base">
               <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-soft" />
               <span>
                 <span className="font-medium text-foreground">Next: </span>

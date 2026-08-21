@@ -12,8 +12,8 @@ export function CtaSection() {
           <h2 className="section-title">{siteConfig.cta.title}</h2>
         </FramePad>
 
-        <div className="flex flex-col items-center px-4 pt-10 pb-14 text-center sm:px-3 sm:pt-14 sm:pb-20">
-          <p className="max-w-lg text-[15px] leading-relaxed text-muted sm:text-base">
+        <div className="flex flex-col items-center px-4 pt-8 pb-12 text-center sm:px-3 sm:pt-10 sm:pb-14">
+          <p className="max-w-lg font-sans text-[15px] leading-relaxed text-muted sm:text-base">
             {siteConfig.cta.description}
           </p>
           <Link
