@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-gateway",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-26",
+  "assets": {
+    "directory": "./assets",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "nawazish.site/*", "zone_name": "nawazish.site" },
+    { "pattern": "www.nawazish.site/*", "zone_name": "nawazish.site" }
+  ],
+  "services": [
+    {
+      "binding": "ORIGIN",
+      "service": "portfolio"
+    }
+  ]
+}

@@ -67,7 +67,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  // Icons: app/icon.tsx + app/apple-icon.tsx (minimal N monogram)
 };
 
 export default function RootLayout({
