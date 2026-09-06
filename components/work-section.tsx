@@ -13,7 +13,7 @@ type Entry = {
 
 function TimelineEntry({ entry, last }: { entry: Entry; last: boolean }) {
   return (
-    <li className="relative pb-5 pl-5 last:pb-0">
+    <li className="relative pb-4 pl-5 last:pb-0">
       {!last ? (
         <span
           aria-hidden
@@ -58,19 +58,19 @@ export function WorkSection() {
         <div className="relative">
           <Tape className="-top-3 left-12 z-10" tilt={-6} />
           <Tape className="-top-3 right-14 z-10" tilt={7} />
-          <Paper tilt={0.3} className="px-5 py-5 sm:px-7 sm:py-6">
+          <Paper tilt={0.3} className="px-4 py-4 sm:px-5 sm:py-5">
             <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
               Education{" "}
               <span className="font-hand text-[1.08em] leading-none font-normal text-accent">
                 &amp; what I build
               </span>
             </h2>
-            <span aria-hidden className="mt-3 block h-0.5 w-14 rounded-full bg-accent/60" />
+            <span aria-hidden className="mt-2.5 block h-0.5 w-14 rounded-full bg-accent/60" />
 
-            <p className="mt-4 font-mono text-[10px] tracking-[0.16em] text-ink-faint uppercase">
+            <p className="mt-3.5 font-mono text-[10px] tracking-[0.16em] text-ink-faint uppercase">
               Education
             </p>
-            <ul className="mt-3">
+            <ul className="mt-2.5">
               {education.map((entry, index) => (
                 <TimelineEntry
                   key={entry.org}
@@ -80,10 +80,10 @@ export function WorkSection() {
               ))}
             </ul>
 
-            <p className="mt-6 font-mono text-[10px] tracking-[0.16em] text-ink-faint uppercase">
+            <p className="mt-5 font-mono text-[10px] tracking-[0.16em] text-ink-faint uppercase">
               What I&apos;ve been building
             </p>
-            <ul className="mt-3">
+            <ul className="mt-2.5">
               {building.map((entry, index) => (
                 <TimelineEntry
                   key={entry.org}
@@ -93,7 +93,7 @@ export function WorkSection() {
               ))}
             </ul>
 
-            <p className="mt-6 border-t border-dashed border-paper-edge pt-4 font-hand text-[17px] text-ink-soft">
+            <p className="mt-5 border-t border-dashed border-paper-edge pt-3.5 font-hand text-[17px] text-ink-soft">
               no job history yet — that&apos;s the point of this page.
             </p>
           </Paper>

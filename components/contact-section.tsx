@@ -9,19 +9,19 @@ export function ContactSection() {
       <Reveal>
         <div className="relative mx-auto max-w-2xl">
           <Tape className="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-3} />
-          <Paper tilt={-0.6} className="px-5 py-5 sm:px-7 sm:py-6">
+          <Paper tilt={-0.6} className="px-4 py-4 sm:px-5 sm:py-5">
             <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
               Say{" "}
               <span className="font-hand text-[1.08em] leading-none font-normal text-accent">
                 hello
               </span>
             </h2>
-            <p className="mt-3 max-w-md text-[13px] leading-relaxed text-ink-soft">
+            <p className="mt-2.5 max-w-md text-[13px] leading-relaxed text-ink-soft">
               Open to SDE roles, internships and product work. Based in{" "}
               {siteConfig.location.replace(", IND", "")}, happy to work remote.
             </p>
 
-            <div className="mt-5">
+            <div className="mt-4">
               <ContactForm />
             </div>
           </Paper>

@@ -45,14 +45,14 @@ export function TechStack() {
         <MatHeading hand="I reach for">Things</MatHeading>
       </Reveal>
 
-      <div className="mt-5 space-y-4">
+      <div className="mt-4 space-y-3">
         {categories.map((category, catIndex) => {
           const items = siteConfig.stack.filter((item) => item.category === category);
           if (items.length === 0) return null;
 
           return (
             <Reveal key={category} delay={catIndex * 0.05}>
-              <div className="flex flex-col gap-2.5 sm:flex-row sm:items-start sm:gap-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-4">
                 <p className="w-20 shrink-0 pt-1 font-mono text-[10px] tracking-[0.16em] text-on-mat-soft uppercase">
                   {category}
                 </p>

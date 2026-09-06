@@ -91,7 +91,7 @@ export function StickyNote({
 }) {
   return (
     <div
-      className={cn("note relative rounded-[3px] px-5 py-4", className)}
+      className={cn("note relative rounded-[3px] px-4 py-3.5", className)}
       style={{ transform: tilt ? `rotate(${String(tilt)}deg)` : undefined }}
     >
       {children}

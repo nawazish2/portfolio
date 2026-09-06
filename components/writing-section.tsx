@@ -28,9 +28,9 @@ function IndexCard({
       className="group block h-full transition-transform duration-300 hover:-translate-y-1"
     >
       <Paper tilt={tilt} className="h-full overflow-hidden">
-        <div className="h-9 border-b-2 border-[#e0736f]/45 bg-[linear-gradient(#dfd9c8_1px,transparent_1px)] bg-[length:100%_16px]" />
+        <div className="h-8 border-b-2 border-[#e0736f]/45 bg-[linear-gradient(#dfd9c8_1px,transparent_1px)] bg-[length:100%_16px]" />
         <div
-          className="px-5 py-4"
+          className="px-4 py-3.5"
           style={{
             backgroundImage: "linear-gradient(#dfd9c8 1px, transparent 1px)",
             backgroundSize: "100% 24px",
@@ -41,9 +41,9 @@ function IndexCard({
             {title}
           </h3>
           {brief ? (
-            <p className="mt-2 line-clamp-4 text-[12.5px] leading-[1.65] text-ink-soft">{brief}</p>
+            <p className="mt-1.5 line-clamp-4 text-[12.5px] leading-[1.65] text-ink-soft">{brief}</p>
           ) : null}
-          <p className="mt-3 font-mono text-[10px] text-ink-faint">{dateLabel}</p>
+          <p className="mt-2.5 font-mono text-[10px] text-ink-faint">{dateLabel}</p>
         </div>
       </Paper>
     </a>

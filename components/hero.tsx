@@ -65,7 +65,7 @@ export function Hero() {
             <Tape className="-top-3 left-8 z-10" tilt={-7} />
             <Tape className="-top-3 right-10 z-10" tilt={5} />
             <StickyNote tilt={-0.4}>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {siteConfig.heroNote.map((line, index) => (
                   <li
                     key={index}
