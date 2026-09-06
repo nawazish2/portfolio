@@ -14,6 +14,8 @@ export function ProjectCard({
   project: Project;
   index: number;
 }) {
+  const primaryStack = project.stack.slice(0, 3);
+
   return (
     <Reveal delay={index * 0.05}>
       <div className="relative pt-3 transition-transform duration-300 hover:-translate-y-1">
@@ -43,6 +45,10 @@ export function ProjectCard({
               <span className="font-mono text-[10px] text-ink-faint">{project.year}</span>
             </div>
 
+            <p className="mt-1.5 truncate font-mono text-[9.5px] tracking-wide text-ink-faint">
+              {primaryStack.join(" · ")}
+            </p>
+
             <p className="mt-1.5 font-hand text-[15px] leading-none text-accent-ink">
               {project.badge ? `${project.badge} · ` : ""}
               {project.oneLiner}
@@ -52,27 +58,16 @@ export function ProjectCard({
               {project.description}
             </p>
 
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {project.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-paper-edge bg-paper-sunk px-2 py-0.5 font-mono text-[9.5px] text-ink-soft"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-3.5 flex items-center gap-2">
+            <div className="mt-3 flex items-center gap-2">
               {project.github ? (
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} on GitHub`}
-                  className="flex size-8 items-center justify-center rounded-full border border-paper-edge text-ink-soft transition hover:bg-paper-sunk hover:text-ink"
+                  className="flex size-7 items-center justify-center rounded-full border border-paper-edge text-ink-soft transition hover:bg-paper-sunk hover:text-ink"
                 >
-                  <Github size={15} />
+                  <Github size={14} />
                 </a>
               ) : null}
               {project.live ? (
@@ -81,9 +76,9 @@ export function ProjectCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.title} live link`}
-                  className="flex size-8 items-center justify-center rounded-full border border-paper-edge text-ink-soft transition hover:bg-paper-sunk hover:text-ink"
+                  className="flex size-7 items-center justify-center rounded-full border border-paper-edge text-ink-soft transition hover:bg-paper-sunk hover:text-ink"
                 >
-                  <ExternalLink size={15} />
+                  <ExternalLink size={14} />
                 </a>
               ) : null}
               <span className="ml-auto font-mono text-[10px] tracking-wider text-ink-faint uppercase">

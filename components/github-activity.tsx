@@ -75,7 +75,7 @@ function Heatmap({
             compact ? "min-w-0 flex-1 gap-[2px]" : "w-[11px] gap-[3px]",
           )}
         >
-          <div className="relative h-4">
+          <div className="relative h-3.5">
             {week.monthLabel ? (
               <span className="absolute top-0 left-0 text-[10px] whitespace-nowrap text-ink-soft">
                 {week.monthLabel}
@@ -107,22 +107,24 @@ export async function GitHubActivity() {
     <div className="relative">
       <Tape className="-top-2.5 left-10 z-10" tilt={-7} />
       <Tape className="-top-2.5 right-12 z-10" tilt={6} />
-      <Paper tilt={-0.5} className="px-4 py-4 sm:px-5 sm:py-4">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="text-[13px] leading-none font-semibold text-ink">GitHub activity</h2>
+      <Paper tilt={-0.5} className="p-3">
+        <div className="mb-2 flex items-baseline justify-between gap-3">
+          <h2 className="text-[12px] leading-none font-medium text-ink-soft">
+            GitHub activity
+          </h2>
           <a
             href={activity?.profileUrl ?? siteConfig.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[11px] text-ink-soft transition hover:text-accent-ink"
+            className="inline-flex items-center gap-1 text-[12px] text-ink-faint transition hover:text-accent-ink"
           >
             @{siteConfig.githubUsername}
-            <ArrowUpRight size={13} />
+            <ArrowUpRight size={12} />
           </a>
         </div>
 
         {!activity || weeks.length === 0 ? (
-          <p className="mt-4 text-sm text-ink-soft">
+          <p className="text-sm text-ink-soft">
             Live contribution data could not be loaded.{" "}
             <a
               href={siteConfig.links.github}
@@ -135,18 +137,18 @@ export async function GitHubActivity() {
           </p>
         ) : (
           <>
-            <div className="mt-3 sm:hidden">
+            <div className="sm:hidden">
               <Heatmap weeks={mobileWeeks} compact />
             </div>
 
-            <div className="mt-3 hidden sm:block">
-              <div className="flex gap-2">
+            <div className="hidden sm:block">
+              <div className="flex gap-1">
                 <div className="flex w-7 shrink-0 flex-col gap-[3px]">
-                  <div className="h-4" />
+                  <div className="h-3.5" />
                   {weekdayLabels.map((label, index) => (
                     <span
                       key={`wd-${String(index)}`}
-                      className="h-[11px] text-[10px] leading-[11px] text-ink-soft"
+                      className="h-[11px] text-[9px] leading-[11px] text-ink-faint"
                     >
                       {label}
                     </span>
@@ -158,7 +160,7 @@ export async function GitHubActivity() {
               </div>
             </div>
 
-            <div className="mt-2.5 flex items-center justify-end gap-1.5 text-[10px] text-ink-soft">
+            <div className="mt-1.5 flex items-center justify-end gap-1.5 text-[10px] text-ink-faint">
               <span>Less</span>
               {([0, 1, 2, 3, 4] as const).map((level) => (
                 <span key={level} className={cn("size-[11px] rounded-[2px]", levelClass[level])} />
