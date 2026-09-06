@@ -18,6 +18,37 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "campusforms",
+    title: "CampusForms",
+    oneLiner: "Campus forms without the spreadsheet sprawl.",
+    description:
+      "Organizers publish a form and share one link; students fill it in with no account. Anonymity is enforced by a database trigger, not by the UI.",
+    problem:
+      "Campus forms live in Google Forms, get shared through a WhatsApp link half the hostel never sees, and land in a spreadsheet nobody owns.",
+    built:
+      "A public notice board of open forms, a builder with nine question types and fourteen campus templates, and results the hostel office can read in a morning.",
+    highlights: [
+      "Anonymous responses cleared by a Postgres trigger on write — no submitted_by or IP column exists to leak",
+      "Nine question types, fourteen campus templates, QR code for the notice board",
+      "Public /browse board plus CSV export, on Supabase auth and row level security",
+    ],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+    ],
+    github: "https://github.com/nawazish2/campusforms",
+    live: "https://campusforms.vercel.app",
+    year: "2026",
+    status: "Live",
+    accent: "from-blue-500 via-indigo-600 to-slate-950",
+    badge: "Full-stack",
+    image: "/projects/campusforms.jpg",
+  },
+  {
     slug: "cuprim",
     title: "Cuprim",
     oneLiner: "AI quota tracker for your menu bar.",

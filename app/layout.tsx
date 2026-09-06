@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     "TypeScript",
     "Delhi",
     "Portfolio",
+    "CampusForms",
     "Cuprim",
     "AlgoViz",
   ],
