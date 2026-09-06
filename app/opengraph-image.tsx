@@ -159,7 +159,7 @@ export default async function OpengraphImage() {
               fontSize: 21,
             }}
           >
-            nawazish.site
+            nawazishkhan.in
           </div>
         </div>
 

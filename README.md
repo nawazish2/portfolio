@@ -1,6 +1,6 @@
 # Nawazish Khan — Portfolio
 
-Personal portfolio for [nawazish.site](https://nawazish.site).
+Personal portfolio for [nawazishkhan.in](https://nawazishkhan.in).
 
 ## Stack
 

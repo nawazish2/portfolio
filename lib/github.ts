@@ -38,7 +38,7 @@ const MONTHS = [
 
 const GITHUB_HTML_HEADERS = {
   Accept: "text/html",
-  "User-Agent": "nawazish.site (portfolio contribution graph)",
+  "User-Agent": "nawazishkhan.in (portfolio contribution graph)",
   "x-requested-with": "XMLHttpRequest",
 } as const;
 

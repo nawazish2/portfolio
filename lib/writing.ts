@@ -49,7 +49,7 @@ export async function getWritingPosts(limit = 4): Promise<WritingPost[]> {
     const response = await fetch(FEED_URL, {
       headers: {
         Accept: "application/rss+xml, application/xml, text/xml",
-        "User-Agent": "nawazish.site (portfolio writing section)",
+        "User-Agent": "nawazishkhan.in (portfolio writing section)",
       },
       next: { revalidate: REVALIDATE_SECONDS },
     });

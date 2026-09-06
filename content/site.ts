@@ -14,7 +14,7 @@ export const siteConfig = {
   title: "Nawazish Khan — Portfolio",
   description:
     "Computer Science undergrad in Delhi building useful tools with Swift and TypeScript. Selected work includes CampusForms, Cuprim, ChaiTailwind, and ParkIt.",
-  url: "https://nawazish.site",
+  url: "https://nawazishkhan.in",
   locale: "en_IN",
   location: "Delhi, IND",
   role: "Software Engineer",
