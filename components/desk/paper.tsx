@@ -128,6 +128,46 @@ export function Polaroid({
   );
 }
 
+/**
+ * A link as a paper disc with a perforated ring — the social icons read as
+ * stamps stuck to the mat rather than as dark chrome floating on it.
+ */
+export function IconStamp({
+  href,
+  label,
+  children,
+  size = "md",
+}: {
+  href: string;
+  label: string;
+  children: ReactNode;
+  size?: "md" | "lg";
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      title={label}
+      className={cn(
+        "group relative flex items-center justify-center rounded-full bg-paper text-accent-ink transition duration-200 hover:-translate-y-0.5 hover:text-accent",
+        size === "lg" ? "size-11" : "size-10",
+      )}
+      style={{
+        boxShadow:
+          "0 1px 0 rgba(255,255,255,0.5) inset, 0 2px 4px rgba(0,0,0,0.28), 0 10px 18px -10px rgba(0,0,0,0.6)",
+      }}
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-[3px] rounded-full border border-dashed border-accent/55 transition group-hover:border-accent"
+      />
+      {children}
+    </a>
+  );
+}
+
 /** Section heading that sits directly on the mat, with a handwritten second half. */
 export function MatHeading({
   children,

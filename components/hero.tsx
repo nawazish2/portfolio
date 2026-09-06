@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { siteConfig, type AboutPart } from "@/content/site";
-import { Polaroid, StickyNote, Tape } from "@/components/desk/paper";
+import { IconStamp, Polaroid, StickyNote, Tape } from "@/components/desk/paper";
 
 const socials = [
   { href: siteConfig.links.github, label: "GitHub", Icon: Github },
@@ -48,28 +48,15 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2.5">
               {socials.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.07] text-on-mat-soft transition hover:bg-white/15 hover:text-on-mat"
-                >
-                  <Icon size={16} />
-                </a>
+                <IconStamp key={label} href={href} label={label}>
+                  <Icon size={16} strokeWidth={1.9} />
+                </IconStamp>
               ))}
-              <a
-                href={siteConfig.links.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X"
-                className="flex size-9 items-center justify-center rounded-full border border-white/12 bg-white/[0.07] text-on-mat-soft transition hover:bg-white/15 hover:text-on-mat"
-              >
+              <IconStamp href={siteConfig.links.x} label="X">
                 <XIcon />
-              </a>
+              </IconStamp>
             </div>
           </div>
 

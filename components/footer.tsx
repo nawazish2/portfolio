@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { siteConfig } from "@/content/site";
+import { IconStamp } from "@/components/desk/paper";
 
 const links = [
   { href: siteConfig.links.github, label: "GitHub", Icon: Github },
@@ -11,18 +12,11 @@ const links = [
 export function Footer() {
   return (
     <footer className="flex flex-col items-center gap-4 pt-4 pb-14 text-center">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2.5">
         {links.map(({ href, label, Icon }) => (
-          <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            className="flex size-10 items-center justify-center rounded-full border border-white/12 bg-white/[0.07] text-on-mat-soft transition hover:bg-white/15 hover:text-on-mat"
-          >
-            <Icon size={16} />
-          </a>
+          <IconStamp key={label} href={href} label={label} size="lg">
+            <Icon size={17} strokeWidth={1.9} />
+          </IconStamp>
         ))}
       </div>
 
