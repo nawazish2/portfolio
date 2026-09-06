@@ -11,8 +11,8 @@ export function ContactSection() {
           <Tape className="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-3} />
           <Paper tilt={-0.6} className="px-5 py-5 sm:px-7 sm:py-6">
             <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
-              Say
-              <span className="ml-2.5 font-hand text-[1.35em] leading-none font-normal text-accent">
+              Say{" "}
+              <span className="font-hand text-[1.08em] leading-none font-normal text-accent">
                 hello
               </span>
             </h2>

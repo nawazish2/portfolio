@@ -183,9 +183,12 @@ export function MatHeading({
       <h2 className="mat-title">
         {children}
         {hand ? (
-          <span className="ml-2 font-hand text-[1.45em] leading-none font-normal text-accent-soft">
-            {hand}
-          </span>
+          <>
+            {" "}
+            <span className="font-hand text-[1.08em] leading-none font-normal text-accent-soft">
+              {hand}
+            </span>
+          </>
         ) : null}
       </h2>
     </div>

@@ -60,8 +60,8 @@ export function WorkSection() {
           <Tape className="-top-3 right-14 z-10" tilt={7} />
           <Paper tilt={0.3} className="px-5 py-5 sm:px-7 sm:py-6">
             <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
-              Education
-              <span className="ml-2.5 font-hand text-[1.35em] leading-none font-normal text-accent">
+              Education{" "}
+              <span className="font-hand text-[1.08em] leading-none font-normal text-accent">
                 &amp; what I build
               </span>
             </h2>
