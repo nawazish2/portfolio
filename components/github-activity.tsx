@@ -184,26 +184,6 @@ export async function GitHubActivity() {
           </div>
 
           <Stats activity={activity} />
-
-          {activity.recent.length > 0 ? (
-            <ul className="mt-4 space-y-1.5 border-t border-dashed border-paper-edge pt-3.5">
-              {activity.recent.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-baseline justify-between gap-3 text-[12.5px] text-ink-soft transition hover:text-accent-ink"
-                  >
-                    <span className="min-w-0 truncate">{item.label}</span>
-                    <span className="shrink-0 font-mono text-[10px] text-ink-faint">
-                      {item.ago}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : null}
         </>
       )}
     </Paper>
