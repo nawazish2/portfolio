@@ -12,10 +12,10 @@ const links = [
 export function Footer() {
   return (
     <footer className="flex flex-col items-center gap-4 pt-4 pb-14 text-center">
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2">
         {links.map(({ href, label, Icon }) => (
           <IconStamp key={label} href={href} label={label} size="lg">
-            <Icon size={17} strokeWidth={1.9} />
+            <Icon size={16} strokeWidth={1.9} />
           </IconStamp>
         ))}
       </div>

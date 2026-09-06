@@ -10,7 +10,7 @@ const socials = [
   { href: siteConfig.resumeUrl, label: "Résumé", Icon: FileText },
 ];
 
-function XIcon({ size = 16 }: { size?: number }) {
+function XIcon({ size = 15 }: { size?: number }) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
       <path d="M18.9 2H22l-7.1 8.1L23.2 22h-6.6l-5.2-6.8L5.5 22H2.4l7.6-8.7L1.2 2h6.8l4.7 6.2L18.9 2Zm-1.1 18h1.8L7.3 3.9H5.4L17.8 20Z" />
@@ -48,10 +48,10 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               {socials.map(({ href, label, Icon }) => (
                 <IconStamp key={label} href={href} label={label}>
-                  <Icon size={16} strokeWidth={1.9} />
+                  <Icon size={15} strokeWidth={1.9} />
                 </IconStamp>
               ))}
               <IconStamp href={siteConfig.links.x} label="X">

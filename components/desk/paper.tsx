@@ -152,16 +152,16 @@ export function IconStamp({
       title={label}
       className={cn(
         "group relative flex items-center justify-center rounded-full bg-paper text-accent-ink transition duration-200 hover:-translate-y-0.5 hover:text-accent",
-        size === "lg" ? "size-11" : "size-10",
+        size === "lg" ? "size-10" : "size-9",
       )}
       style={{
         boxShadow:
-          "0 1px 0 rgba(255,255,255,0.5) inset, 0 2px 4px rgba(0,0,0,0.28), 0 10px 18px -10px rgba(0,0,0,0.6)",
+          "0 1px 0 rgba(255,255,255,0.5) inset, 0 1px 3px rgba(0,0,0,0.24), 0 7px 13px -8px rgba(0,0,0,0.55)",
       }}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-[3px] rounded-full border border-dashed border-accent/55 transition group-hover:border-accent"
+        className="pointer-events-none absolute inset-[2.5px] rounded-full border border-dashed border-accent/55 transition group-hover:border-accent"
       />
       {children}
     </a>
