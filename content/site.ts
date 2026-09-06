@@ -253,7 +253,7 @@ export const siteConfig = {
     },
     {
       name: "Figma",
-      category: "Design",
+      category: "Tools",
       href: "https://figma.com",
       color: "#F24E1E",
     },
@@ -268,7 +268,8 @@ export const siteConfig = {
         org: "I. K. Gujral Punjab Technical University",
         meta: "2023 — 2027 (expected)",
         role: "B.Tech, Computer Science & Engineering",
-        detail: "CGPA 8.2 / 10. Coursework in DSA, DBMS, operating systems and networks.",
+        detail:
+          "CGPA 8.50 / 10. Coursework in DBMS, operating systems and computer networks.",
       },
     ],
     building: [

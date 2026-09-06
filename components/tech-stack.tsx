@@ -2,7 +2,7 @@ import { siteConfig } from "@/content/site";
 import { Reveal } from "@/components/reveal";
 import { MatHeading } from "@/components/desk/paper";
 
-const categories = ["Frontend", "Backend", "Tools", "Design"] as const;
+const categories = ["Frontend", "Backend", "Tools"] as const;
 
 /** Each tool is a little laptop-sticker: a colour dot on a pale, slightly tilted chip. */
 function StackSticker({
