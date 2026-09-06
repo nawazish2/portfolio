@@ -38,7 +38,7 @@ export default function Home() {
               <Reveal>
                 <MatHeading hand="pinned up">Projects</MatHeading>
               </Reveal>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {projects.map((project, index) => (
                   <ProjectCard key={project.slug} project={project} index={index} />
                 ))}

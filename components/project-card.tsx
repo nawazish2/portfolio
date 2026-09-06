@@ -5,7 +5,7 @@ import { Paper, Pin } from "@/components/desk/paper";
 import { Reveal } from "@/components/reveal";
 
 /** Small, fixed tilts so the wall of cards looks pinned by hand, not randomised. */
-const tilts = [-1.6, 1.1, -0.8, 1.7, -1.2, 0.9];
+const tilts = [-1.4, 1.1, 0.9, -1.2, -0.8, 1.3];
 
 export function ProjectCard({
   project,
@@ -29,7 +29,7 @@ export function ProjectCard({
                 src={project.image}
                 alt={`${project.title} screenshot`}
                 fill
-                sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 92vw"
+                sizes="(min-width: 640px) 46vw, 92vw"
                 className="object-cover"
               />
             ) : null}
