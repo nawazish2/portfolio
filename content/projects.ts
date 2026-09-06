@@ -22,7 +22,7 @@ export const projects: Project[] = [
     title: "CampusForms",
     oneLiner: "Campus forms without the spreadsheet sprawl.",
     description:
-      "Organizers publish a form and share one link; students fill it in with no account. Anonymity is enforced by a database trigger, not by the UI.",
+      "One link per form, no student account. Anonymity is enforced by a database trigger rather than by the interface.",
     problem:
       "Campus forms live in Google Forms, get shared through a WhatsApp link half the hostel never sees, and land in a spreadsheet nobody owns.",
     built:
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     title: "Cuprim",
     oneLiner: "AI quota tracker for your menu bar.",
     description:
-      "A local-only macOS menu bar app for tracking Claude, Codex, Cursor, and Grok quotas — status at a glance without leaving your workflow.",
+      "Tracks Claude, Codex, Cursor and Grok quotas from the menu bar. Local-only, no backend, no telemetry.",
     problem:
       "AI tool quotas are scattered across dashboards, so it is easy to hit limits without noticing.",
     built:
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     title: "ChaiTailwind",
     oneLiner: "Utility CSS engine built from scratch.",
     description:
-      "A tiny utility-first CSS engine around `chai-*` classes — parse utilities and apply styles through the DOM APIs.",
+      "A utility-first CSS engine written from scratch: parses `chai-*` classes and applies styles straight through the DOM APIs.",
     problem:
       "Utility CSS can feel like magic until you build the matching and composition model yourself.",
     built:
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     title: "ParkIt",
     oneLiner: "Smart parking with realtime booking.",
     description:
-      "A full-stack parking product with live spot updates, booking flow, and JWT-secured access for busy urban areas.",
+      "Live spot availability over Socket.io, a booking flow, and JWT-secured access.",
     problem:
       "Finding and reserving parking in busy areas wastes time when availability is unclear.",
     built:
