@@ -68,8 +68,13 @@ export async function getWritingPosts(limit = 4): Promise<WritingPost[]> {
       const href = inner(item, "link");
       if (!title || !href) continue;
 
+      // Hashnode keeps re-published drafts in the feed, so the same article can
+      // appear twice under a longer title ("… (Without Making Your Brain Hurt)").
+      // Treat one normalised title as a duplicate when it prefixes another.
       const key = normalizeTitle(title);
-      if (seen.has(key)) continue;
+      if ([...seen].some((other) => other.startsWith(key) || key.startsWith(other))) {
+        continue;
+      }
       seen.add(key);
 
       const publishedAt = inner(item, "pubDate");

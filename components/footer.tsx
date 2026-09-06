@@ -1,46 +1,31 @@
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { siteConfig } from "@/content/site";
-import { Reveal } from "@/components/reveal";
+import { IconStamp } from "@/components/desk/paper";
 
-export function QuoteBand() {
-  return (
-    <Reveal>
-      <div className="flex flex-col items-center px-4 py-8 text-center sm:py-10">
-        <span
-          aria-hidden
-          className="mb-3 select-none font-serif-display text-2xl leading-none text-muted-soft/70 sm:text-3xl"
-        >
-          ”
-        </span>
-        <blockquote className="max-w-xl text-lg leading-snug font-normal tracking-wide text-quote italic sm:text-[22px] md:text-[24px]">
-          “{siteConfig.quote.text}”
-        </blockquote>
-        <p className="mt-5 flex items-center gap-2.5 text-[10px] font-medium tracking-[0.2em] text-muted-soft uppercase">
-          <span aria-hidden className="h-px w-5 bg-border-strong" />
-          {siteConfig.quote.author}
-          <span aria-hidden className="h-px w-5 bg-border-strong" />
-        </p>
-      </div>
-    </Reveal>
-  );
-}
-
-export function CreditsBand() {
-  return (
-    <div className="flex flex-col items-center gap-1 px-4 py-6 text-center text-xs text-muted-soft sm:py-8">
-      <p>
-        Designed & Developed by{" "}
-        <span className="font-medium text-muted">{siteConfig.shortName}</span>
-      </p>
-      <p>© {new Date().getFullYear()} All rights reserved.</p>
-    </div>
-  );
-}
+const links = [
+  { href: siteConfig.links.github, label: "GitHub", Icon: Github },
+  { href: siteConfig.links.linkedin, label: "LinkedIn", Icon: Linkedin },
+  { href: siteConfig.links.email, label: "Email", Icon: Mail },
+  { href: siteConfig.resumeUrl, label: "Résumé", Icon: FileText },
+];
 
 export function Footer() {
   return (
-    <footer className="w-full">
-      <QuoteBand />
-      <CreditsBand />
+    <footer className="flex flex-col items-center gap-4 pt-4 pb-14 text-center">
+      <div className="flex items-center gap-2">
+        {links.map(({ href, label, Icon }) => (
+          <IconStamp key={label} href={href} label={label} size="lg">
+            <Icon size={16} strokeWidth={1.9} />
+          </IconStamp>
+        ))}
+      </div>
+
+      <p className="font-hand text-[17px] text-on-mat-soft">
+        built on a desk in {siteConfig.location.replace(", IND", "")}, mostly at night
+      </p>
+      <p className="font-mono text-[10px] tracking-wider text-on-mat-soft/60 uppercase">
+        © {new Date().getFullYear()} {siteConfig.name}
+      </p>
     </footer>
   );
 }

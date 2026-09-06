@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { Header } from "@/components/header";
-import { SiteFrame } from "@/components/site-frame";
-import { FrameColumn, FramePad, HRule } from "@/components/grid";
-import { ConnectForm } from "@/components/connect-form";
+import { Mat } from "@/components/desk/mat";
+import { ContactSection } from "@/components/contact-section";
+import { Footer } from "@/components/footer";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -15,50 +14,30 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Sam-style contact page: home + availability, title, form, full-width CTA.
- * Tight mobile spacing so Send Message stays reachable without endless scroll.
- */
 export default function ContactPage() {
   return (
-    <SiteFrame>
-      <Header />
-
-      <FrameColumn className="mt-12">
-        {/* Top meta row — Sam: ← HOME + availability pill */}
-        <FramePad className="flex items-center justify-between gap-3 pt-5 sm:gap-4 sm:pt-8">
+    <>
+      <Mat />
+      <main className="relative z-10 mx-auto w-full max-w-5xl px-4 pt-10 pb-8 sm:px-6 sm:pt-14">
+        <div className="mx-auto flex max-w-2xl items-center justify-between gap-3">
           <Link
             href="/"
-            className="inline-flex min-h-9 items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] text-muted uppercase transition hover:text-foreground"
+            className="inline-flex items-center gap-1.5 text-[13px] text-on-mat-soft transition hover:text-on-mat"
           >
-            <ArrowLeft size={14} strokeWidth={2} />
-            Home
+            <ArrowLeft size={14} />
+            Back to the desk
           </Link>
-          <span className="max-w-[58%] truncate rounded-full border border-border px-2.5 py-1.5 text-[10px] leading-none text-muted sm:max-w-none sm:px-3 sm:text-[11px]">
+          <span className="rounded-full border border-white/12 bg-white/[0.07] px-3 py-1.5 text-[11px] text-on-mat-soft">
             {siteConfig.availabilityShort}
           </span>
-        </FramePad>
+        </div>
 
-        {/* Title block — closer to form like Sam */}
-        <FramePad className="mt-6 sm:mt-10">
-          <h1 className="font-serif-display text-[2rem] leading-none tracking-tight text-foreground sm:text-5xl md:text-[3.5rem]">
-            Let&apos;s Connect
-          </h1>
-          <p className="mt-2.5 text-[15px] text-muted sm:mt-4 sm:text-lg">
-            Let&apos;s talk about your next project
-          </p>
-        </FramePad>
-      </FrameColumn>
+        <div className="mt-8 sm:mt-12">
+          <ContactSection />
+        </div>
 
-      <div className="mt-7 sm:mt-12">
-        <HRule />
-      </div>
-
-      <FrameColumn className="pb-10 sm:pb-16">
-        <FramePad className="pt-6 sm:pt-12">
-          <ConnectForm />
-        </FramePad>
-      </FrameColumn>
-    </SiteFrame>
+        <Footer />
+      </main>
+    </>
   );
 }

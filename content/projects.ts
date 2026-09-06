@@ -18,6 +18,37 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "campusforms",
+    title: "CampusForms",
+    oneLiner: "Campus forms without the spreadsheet sprawl.",
+    description:
+      "Organizers publish a form and share one link; students fill it in with no account. Anonymity is enforced by a database trigger, not by the UI.",
+    problem:
+      "Campus forms live in Google Forms, get shared through a WhatsApp link half the hostel never sees, and land in a spreadsheet nobody owns.",
+    built:
+      "A public notice board of open forms, a builder with nine question types and fourteen campus templates, and results the hostel office can read in a morning.",
+    highlights: [
+      "Anonymous responses cleared by a Postgres trigger on write — no submitted_by or IP column exists to leak",
+      "Nine question types, fourteen campus templates, QR code for the notice board",
+      "Public /browse board plus CSV export, on Supabase auth and row level security",
+    ],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+    ],
+    github: "https://github.com/nawazish2/campusforms",
+    live: "https://campusforms.vercel.app",
+    year: "2026",
+    status: "Live",
+    accent: "from-blue-500 via-indigo-600 to-slate-950",
+    badge: "Full-stack",
+    image: "/projects/campusforms.jpg",
+  },
+  {
     slug: "cuprim",
     title: "Cuprim",
     oneLiner: "AI quota tracker for your menu bar.",
@@ -40,30 +71,6 @@ export const projects: Project[] = [
     accent: "from-violet-500 via-purple-600 to-slate-950",
     badge: "macOS",
     image: "/projects/cuprim.jpg",
-  },
-  {
-    slug: "algoviz",
-    title: "AlgoViz",
-    oneLiner: "ML algorithms you can actually explore.",
-    description:
-      "Makes gradient descent, attention, random forests, and K-means explorable in the browser — change inputs and watch results update live.",
-    problem:
-      "Core ML ideas are often taught as static diagrams, which hides how the algorithms actually move.",
-    built:
-      "An interactive TypeScript visualizer for learning ML algorithms by changing inputs and watching results update.",
-    highlights: [
-      "Interactive visualizations for core ML algorithms",
-      "Browser-first exploration without setup friction",
-      "Built to make abstract systems feel concrete",
-    ],
-    stack: ["TypeScript", "React"],
-    github: "https://github.com/nawazish2/algoviz",
-    live: "https://algoviz-ashen.vercel.app",
-    year: "2026",
-    status: "Live",
-    accent: "from-emerald-400 via-teal-500 to-slate-950",
-    badge: "ML",
-    image: "/projects/algoviz.jpg",
   },
   {
     slug: "chai-tailwind",

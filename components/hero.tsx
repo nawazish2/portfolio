@@ -1,110 +1,105 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { siteConfig } from "@/content/site";
-import { Reveal } from "@/components/reveal";
-import { FramePad } from "@/components/grid";
-import { BannerArt } from "@/components/banner-art";
-import { AnimatePresence, motion } from "motion/react";
-import { Eye } from "lucide-react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import { siteConfig, type AboutPart } from "@/content/site";
+import { IconStamp, Polaroid, StickyNote, Tape } from "@/components/desk/paper";
 
-const ROLE_INTERVAL_MS = 3500;
+const socials = [
+  { href: siteConfig.links.github, label: "GitHub", Icon: Github },
+  { href: siteConfig.links.linkedin, label: "LinkedIn", Icon: Linkedin },
+  { href: siteConfig.links.email, label: "Email", Icon: Mail },
+  { href: siteConfig.resumeUrl, label: "Résumé", Icon: FileText },
+];
 
-/**
- * Sam hero: banner flush to frame edges (minimal side pad),
- * profile under it in the same band — no extra section line between them.
- */
-export function Hero() {
-  const [views, setViews] = useState<number | null>(null);
-  const [roleIndex, setRoleIndex] = useState(0);
-
-  useEffect(() => {
-    try {
-      const key = "nawaz-portfolio-views";
-      const current = Number(localStorage.getItem(key) ?? "0") || 0;
-      const next = current + 1;
-      localStorage.setItem(key, String(next));
-      setViews(next);
-    } catch {
-      setViews(null);
-    }
-  }, []);
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setRoleIndex((i) => (i + 1) % siteConfig.roles.length);
-    }, ROLE_INTERVAL_MS);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const role = siteConfig.roles[roleIndex];
-
+function XIcon({ size = 15 }: { size?: number }) {
   return (
-    <section className="w-full pb-5 sm:pb-6">
-      {/* Banner — Sam mobile: inset + rounded; desktop: flush to rails */}
-      <Reveal>
-        <div className="px-3 sm:px-0">
-          <div className="relative h-36 w-full overflow-hidden rounded-lg sm:h-44 sm:rounded-none md:h-52">
-            <BannerArt />
-          </div>
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
+      <path d="M18.9 2H22l-7.1 8.1L23.2 22h-6.6l-5.2-6.8L5.5 22H2.4l7.6-8.7L1.2 2h6.8l4.7 6.2L18.9 2Zm-1.1 18h1.8L7.3 3.9H5.4L17.8 20Z" />
+    </svg>
+  );
+}
+
+export function Hero() {
+  return (
+    <section id="about" className="relative scroll-mt-28">
+      <div className="grid gap-5 sm:gap-7 md:grid-cols-[170px_1fr] md:items-start">
+        {/* Taped polaroid */}
+        <div className="relative mx-auto w-[156px] shrink-0 md:mx-0 md:w-[170px]">
+          <Tape className="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-5} />
+          <Polaroid tilt={-3.5} caption="that's me">
+            <Image
+              src={siteConfig.profileImage}
+              alt={siteConfig.name}
+              width={380}
+              height={430}
+              priority
+              className="h-[176px] w-full object-cover md:h-[192px]"
+            />
+          </Polaroid>
         </div>
-      </Reveal>
 
-      {/* Profile row */}
-      <FramePad className="mt-4 sm:mt-6">
-        <div className="flex items-start justify-between gap-3 sm:gap-4">
-          <div className="flex min-w-0 items-end gap-3 sm:gap-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="relative size-[5.5rem] shrink-0 overflow-hidden rounded-[14px] border border-border bg-card shadow-sm sm:size-[7.5rem] sm:rounded-[12px]"
-            >
-              <Image
-                src={siteConfig.profileImage}
-                alt={siteConfig.name}
-                fill
-                priority
-                className="object-cover"
-                sizes="120px"
-              />
-            </motion.div>
-
-            <div className="min-w-0 flex-1 pb-0.5">
-              <h1 className="font-serif-display truncate text-[22px] leading-tight text-foreground sm:text-4xl sm:leading-none">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <h1 className="text-[26px] leading-none font-semibold tracking-[-0.025em] text-on-mat sm:text-[30px]">
                 {siteConfig.name}
               </h1>
-
-              <div className="relative mt-1 h-[1.3em] overflow-hidden sm:mt-2 sm:h-[1.35em]">
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={role}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="absolute inset-x-0 truncate font-sans text-[14px] leading-snug font-normal tracking-tight text-neutral-400 sm:text-[17px] dark:text-neutral-400"
-                  >
-                    {role}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
-
-              <p className="mt-0.5 truncate font-sans text-[11px] leading-snug font-normal tracking-wide text-neutral-500 sm:text-xs dark:text-neutral-500">
-                {siteConfig.heroMeta}
+              <p className="mt-2 font-hand text-[17px] leading-none text-accent-soft sm:text-[18px]">
+                {siteConfig.heroKicker}
               </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {socials.map(({ href, label, Icon }) => (
+                <IconStamp key={label} href={href} label={label}>
+                  <Icon size={15} strokeWidth={1.9} />
+                </IconStamp>
+              ))}
+              <IconStamp href={siteConfig.links.x} label="X">
+                <XIcon />
+              </IconStamp>
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-1 pt-0.5 text-muted-soft sm:gap-1.5 sm:pt-1">
-            <Eye size={13} strokeWidth={1.75} className="sm:size-[14px]" />
-            <span className="font-mono text-[11px] tabular-nums sm:text-xs">
-              {views === null ? "—" : views.toLocaleString()}
-            </span>
+          {/* Sticky note bio */}
+          <div className="relative mt-5 sm:mt-6">
+            <Tape className="-top-3 left-8 z-10" tilt={-7} />
+            <Tape className="-top-3 right-10 z-10" tilt={5} />
+            <StickyNote tilt={-0.4}>
+              <ul className="space-y-2.5">
+                {siteConfig.heroNote.map((line, index) => (
+                  <li
+                    key={index}
+                    className="flex gap-2.5 text-[14px] leading-[1.625] text-ink"
+                  >
+                    <span aria-hidden className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent" />
+                    <span>
+                      {(line.parts as readonly AboutPart[]).map((part, partIndex) =>
+                        part.href ? (
+                          <a
+                            key={partIndex}
+                            href={part.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-ink font-medium"
+                          >
+                            {part.text}
+                          </a>
+                        ) : part.highlight ? (
+                          <span key={partIndex} className="font-hand text-[1.15em] text-accent-ink">
+                            {part.text}
+                          </span>
+                        ) : (
+                          <span key={partIndex}>{part.text}</span>
+                        ),
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </StickyNote>
           </div>
         </div>
-      </FramePad>
+      </div>
     </section>
   );
 }
