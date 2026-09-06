@@ -148,16 +148,16 @@
 
   /* Section label sitting directly on the mat */
   .mat-title {
-    font-size: 1.6rem;
+    font-size: 1.3125rem; /* 21px */
     line-height: 1.15;
     font-weight: 600;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
     color: var(--on-mat);
   }
 
   @media (min-width: 640px) {
     .mat-title {
-      font-size: 2rem;
+      font-size: 1.5rem; /* 24px — matches the reference scale */
     }
   }
 

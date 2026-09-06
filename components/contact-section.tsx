@@ -10,13 +10,13 @@ export function ContactSection() {
         <div className="relative mx-auto max-w-2xl">
           <Tape className="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-3} />
           <Paper tilt={-0.6} className="px-5 py-6 sm:px-8 sm:py-8">
-            <h2 className="text-[26px] leading-none font-semibold tracking-tight text-ink sm:text-[30px]">
+            <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
               Say
               <span className="ml-2.5 font-hand text-[1.35em] leading-none font-normal text-accent">
                 hello
               </span>
             </h2>
-            <p className="mt-3 max-w-md text-[14px] leading-relaxed text-ink-soft">
+            <p className="mt-3 max-w-md text-[13px] leading-relaxed text-ink-soft">
               Open to SDE roles, internships and product work. Based in{" "}
               {siteConfig.location.replace(", IND", "")}, happy to work remote.
             </p>

@@ -21,7 +21,7 @@ function StackSticker({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium text-ink transition-transform duration-200 hover:-translate-y-0.5"
+      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11.5px] font-medium text-ink transition-transform duration-200 hover:-translate-y-0.5"
       style={{
         transform: `rotate(${String(tilt)}deg)`,
         background: "linear-gradient(180deg, #f8f4ec, #e9e2d3)",
@@ -53,7 +53,7 @@ export function TechStack() {
           return (
             <Reveal key={category} delay={catIndex * 0.05}>
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-start sm:gap-4">
-                <p className="w-20 shrink-0 pt-1 font-mono text-[11px] tracking-[0.16em] text-on-mat-soft uppercase">
+                <p className="w-20 shrink-0 pt-1 font-mono text-[10px] tracking-[0.16em] text-on-mat-soft uppercase">
                   {category}
                 </p>
                 <div className="flex flex-wrap gap-2">

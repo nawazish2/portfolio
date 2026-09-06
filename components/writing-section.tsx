@@ -37,11 +37,11 @@ function IndexCard({
             backgroundPosition: "0 20px",
           }}
         >
-          <h3 className="text-[16px] leading-snug font-semibold text-ink group-hover:text-accent-ink">
+          <h3 className="text-[14px] leading-snug font-semibold text-ink group-hover:text-accent-ink">
             {title}
           </h3>
           {brief ? (
-            <p className="mt-2 line-clamp-4 text-[13.5px] leading-6 text-ink-soft">{brief}</p>
+            <p className="mt-2 line-clamp-4 text-[12.5px] leading-[1.65] text-ink-soft">{brief}</p>
           ) : null}
           <p className="mt-3 font-mono text-[10px] text-ink-faint">{dateLabel}</p>
         </div>
@@ -62,13 +62,13 @@ export async function WritingSection() {
             href={siteConfig.writing.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[13px] text-on-mat-soft transition hover:text-on-mat"
+            className="inline-flex items-center gap-1 text-[12px] text-on-mat-soft transition hover:text-on-mat"
           >
             {siteConfig.writing.cta}
             <ArrowUpRight size={14} />
           </a>
         </div>
-        <p className="mt-2.5 max-w-xl text-[14px] leading-relaxed text-on-mat-soft">
+        <p className="mt-2.5 max-w-xl text-[13px] leading-relaxed text-on-mat-soft">
           {siteConfig.writing.description}
         </p>
       </Reveal>

@@ -120,7 +120,7 @@ export function Polaroid({
         {children}
       </div>
       {caption ? (
-        <div className="absolute inset-x-0 bottom-1.5 px-3 text-center font-hand text-[17px] leading-none text-ink-soft">
+        <div className="absolute inset-x-0 bottom-1.5 px-3 text-center font-hand text-[15px] leading-none text-ink-soft">
           {caption}
         </div>
       ) : null}
@@ -183,7 +183,7 @@ export function MatHeading({
       <h2 className="mat-title">
         {children}
         {hand ? (
-          <span className="ml-2.5 font-hand text-[1.4em] leading-none font-normal text-accent-soft">
+          <span className="ml-2 font-hand text-[1.45em] leading-none font-normal text-accent-soft">
             {hand}
           </span>
         ) : null}

@@ -47,7 +47,7 @@ function StickerFace({
       }}
     >
       <span className="text-[24px] leading-none">{emoji}</span>
-      <span className="font-hand text-[15px] leading-tight text-ink-soft">{label}</span>
+      <span className="font-hand text-[14px] leading-tight text-ink-soft">{label}</span>
     </div>
   );
 }

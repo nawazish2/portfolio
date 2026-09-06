@@ -77,7 +77,7 @@ function Heatmap({
         >
           <div className="relative h-5">
             {week.monthLabel ? (
-              <span className="absolute top-0 left-0 text-[11px] whitespace-nowrap text-ink-soft">
+              <span className="absolute top-0 left-0 text-[10px] whitespace-nowrap text-ink-soft">
                 {week.monthLabel}
               </span>
             ) : null}
@@ -109,12 +109,12 @@ export async function GitHubActivity() {
       <Tape className="-top-2.5 right-12 z-10" tilt={6} />
       <Paper tilt={-0.5} className="px-4 py-5 sm:px-7 sm:py-6">
         <div className="flex items-center justify-between gap-3">
-          <h2 className="text-[17px] leading-none font-medium text-ink">GitHub activity</h2>
+          <h2 className="text-[13px] leading-none font-semibold text-ink">GitHub activity</h2>
           <a
             href={activity?.profileUrl ?? siteConfig.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[13px] text-ink-soft transition hover:text-accent-ink"
+            className="inline-flex items-center gap-1 text-[11px] text-ink-soft transition hover:text-accent-ink"
           >
             @{siteConfig.githubUsername}
             <ArrowUpRight size={13} />
@@ -146,7 +146,7 @@ export async function GitHubActivity() {
                   {weekdayLabels.map((label, index) => (
                     <span
                       key={`wd-${String(index)}`}
-                      className="h-[13px] text-[11px] leading-[13px] text-ink-soft"
+                      className="h-[13px] text-[10px] leading-[13px] text-ink-soft"
                     >
                       {label}
                     </span>
@@ -158,7 +158,7 @@ export async function GitHubActivity() {
               </div>
             </div>
 
-            <div className="mt-3 flex items-center justify-end gap-1.5 text-[12px] text-ink-soft">
+            <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-ink-soft">
               <span>Less</span>
               {([0, 1, 2, 3, 4] as const).map((level) => (
                 <span key={level} className={cn("size-[13px] rounded-[3px]", levelClass[level])} />

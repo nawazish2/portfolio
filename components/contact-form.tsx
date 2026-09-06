@@ -7,7 +7,7 @@ import { siteConfig } from "@/content/site";
 type FormState = "idle" | "loading" | "success" | "error";
 
 const inputClass =
-  "h-11 rounded-md border border-paper-edge bg-paper-sunk px-3.5 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-accent";
+  "h-10 rounded-md border border-paper-edge bg-paper-sunk px-3.5 text-[13px] text-ink outline-none transition placeholder:text-ink-faint focus:border-accent";
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
@@ -61,7 +61,7 @@ export function ContactForm() {
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-[13px] font-medium text-ink-soft">
+        <label className="grid gap-1.5 text-[12px] font-medium text-ink-soft">
           Name
           <input
             name="name"
@@ -70,7 +70,7 @@ export function ContactForm() {
             className={inputClass}
           />
         </label>
-        <label className="grid gap-1.5 text-[13px] font-medium text-ink-soft">
+        <label className="grid gap-1.5 text-[12px] font-medium text-ink-soft">
           Email
           <input
             name="email"
@@ -82,7 +82,7 @@ export function ContactForm() {
         </label>
       </div>
 
-      <label className="grid gap-1.5 text-[13px] font-medium text-ink-soft">
+      <label className="grid gap-1.5 text-[12px] font-medium text-ink-soft">
         Subject
         <select
           name="subject"
@@ -100,14 +100,14 @@ export function ContactForm() {
         </select>
       </label>
 
-      <label className="grid gap-1.5 text-[13px] font-medium text-ink-soft">
+      <label className="grid gap-1.5 text-[12px] font-medium text-ink-soft">
         Message
         <textarea
           name="message"
           required
           rows={4}
           placeholder="Tell me what you're building or what you need."
-          className="resize-none rounded-md border border-paper-edge bg-paper-sunk px-3.5 py-3 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-accent"
+          className="resize-none rounded-md border border-paper-edge bg-paper-sunk px-3.5 py-3 text-[13px] text-ink outline-none transition placeholder:text-ink-faint focus:border-accent"
         />
       </label>
 
@@ -115,14 +115,14 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex h-11 cursor-pointer items-center gap-2 rounded-full bg-accent px-5 text-sm font-semibold text-white transition hover:brightness-110 active:scale-[0.98] disabled:opacity-60"
+          className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full bg-accent px-5 text-[13px] font-semibold text-white transition hover:brightness-110 active:scale-[0.98] disabled:opacity-60"
         >
           {state === "loading" ? "Sending..." : "Send message"}
           <Send size={15} />
         </button>
         <a
           href={siteConfig.links.email}
-          className="font-hand text-[17px] text-ink-soft transition hover:text-accent-ink"
+          className="font-hand text-[16px] text-ink-soft transition hover:text-accent-ink"
         >
           or email directly
         </a>

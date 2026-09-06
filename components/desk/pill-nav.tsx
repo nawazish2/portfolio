@@ -45,7 +45,7 @@ export function PillNav() {
             key={section.id}
             href={`#${section.id}`}
             className={cn(
-              "rounded-full px-3 py-1.5 text-[12.5px] font-medium transition-colors sm:px-4 sm:text-[13px]",
+              "rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors sm:px-4 sm:text-[14px]",
               active === section.id
                 ? "bg-white/12 text-on-mat"
                 : "text-on-mat-soft hover:text-on-mat",
@@ -56,7 +56,7 @@ export function PillNav() {
         ))}
         <a
           href="#contact"
-          className="ml-0.5 rounded-full bg-accent px-3 py-1.5 text-[12.5px] font-semibold text-white transition hover:brightness-110 sm:px-4 sm:text-[13px]"
+          className="ml-0.5 rounded-full bg-accent px-3 py-1.5 text-[13px] font-semibold text-white transition hover:brightness-110 sm:px-4 sm:text-[14px]"
         >
           Connect
         </a>

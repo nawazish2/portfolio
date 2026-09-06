@@ -20,7 +20,7 @@ export function Footer() {
         ))}
       </div>
 
-      <p className="font-hand text-[19px] text-on-mat-soft">
+      <p className="font-hand text-[17px] text-on-mat-soft">
         built on a desk in {siteConfig.location.replace(", IND", "")}, mostly at night
       </p>
       <p className="font-mono text-[10px] tracking-wider text-on-mat-soft/60 uppercase">

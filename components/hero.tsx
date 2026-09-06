@@ -40,10 +40,10 @@ export function Hero() {
         <div className="min-w-0">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <h1 className="text-[34px] leading-none font-semibold tracking-tight text-on-mat sm:text-[44px]">
+              <h1 className="text-[26px] leading-none font-semibold tracking-[-0.025em] text-on-mat sm:text-[30px]">
                 {siteConfig.name}
               </h1>
-              <p className="mt-2.5 font-hand text-[21px] leading-none text-accent-soft sm:text-[24px]">
+              <p className="mt-2 font-hand text-[17px] leading-none text-accent-soft sm:text-[18px]">
                 {siteConfig.heroKicker}
               </p>
             </div>
@@ -69,7 +69,7 @@ export function Hero() {
                 {siteConfig.heroNote.map((line, index) => (
                   <li
                     key={index}
-                    className="flex gap-2.5 text-[14px] leading-relaxed text-ink sm:text-[15px]"
+                    className="flex gap-2.5 text-[14px] leading-[1.625] text-ink"
                   >
                     <span aria-hidden className="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent" />
                     <span>
@@ -85,7 +85,7 @@ export function Hero() {
                             {part.text}
                           </a>
                         ) : part.highlight ? (
-                          <span key={partIndex} className="font-hand text-[1.18em] text-accent-ink">
+                          <span key={partIndex} className="font-hand text-[1.15em] text-accent-ink">
                             {part.text}
                           </span>
                         ) : (

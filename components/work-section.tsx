@@ -31,18 +31,18 @@ function TimelineEntry({ entry, last }: { entry: Entry; last: boolean }) {
             href={entry.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="link-ink inline-flex items-center gap-1 text-[15px] font-semibold"
+            className="link-ink inline-flex items-center gap-1 text-[14px] font-semibold"
           >
             {entry.org}
             <ArrowUpRight size={13} />
           </a>
         ) : (
-          <span className="text-[15px] font-semibold text-ink">{entry.org}</span>
+          <span className="text-[14px] font-semibold text-ink">{entry.org}</span>
         )}
-        <span className="font-mono text-[11px] text-ink-faint">· {entry.meta}</span>
+        <span className="font-mono text-[10px] text-ink-faint">· {entry.meta}</span>
       </div>
-      <p className="mt-0.5 text-[13px] font-medium text-accent-ink">{entry.role}</p>
-      <p className="mt-1.5 max-w-2xl text-[13.5px] leading-relaxed text-ink-soft">
+      <p className="mt-0.5 text-[12px] font-medium text-accent-ink">{entry.role}</p>
+      <p className="mt-1.5 max-w-2xl text-[12.5px] leading-[1.65] text-ink-soft">
         {entry.detail}
       </p>
     </li>
@@ -59,7 +59,7 @@ export function WorkSection() {
           <Tape className="-top-3 left-12 z-10" tilt={-6} />
           <Tape className="-top-3 right-14 z-10" tilt={7} />
           <Paper tilt={0.3} className="px-5 py-6 sm:px-8 sm:py-8">
-            <h2 className="text-[26px] leading-none font-semibold tracking-tight text-ink sm:text-[30px]">
+            <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
               Education
               <span className="ml-2.5 font-hand text-[1.35em] leading-none font-normal text-accent">
                 &amp; what I build
@@ -67,7 +67,7 @@ export function WorkSection() {
             </h2>
             <span aria-hidden className="mt-3 block h-0.5 w-14 rounded-full bg-accent/60" />
 
-            <p className="mt-5 font-mono text-[11px] tracking-[0.16em] text-ink-faint uppercase">
+            <p className="mt-5 font-mono text-[10px] tracking-[0.16em] text-ink-faint uppercase">
               Education
             </p>
             <ul className="mt-3">
@@ -80,7 +80,7 @@ export function WorkSection() {
               ))}
             </ul>
 
-            <p className="mt-7 font-mono text-[11px] tracking-[0.16em] text-ink-faint uppercase">
+            <p className="mt-7 font-mono text-[10px] tracking-[0.16em] text-ink-faint uppercase">
               What I&apos;ve been building
             </p>
             <ul className="mt-3">
@@ -93,7 +93,7 @@ export function WorkSection() {
               ))}
             </ul>
 
-            <p className="mt-7 border-t border-dashed border-paper-edge pt-4 font-hand text-[19px] text-ink-soft">
+            <p className="mt-7 border-t border-dashed border-paper-edge pt-4 font-hand text-[17px] text-ink-soft">
               no job history yet — that&apos;s the point of this page.
             </p>
           </Paper>

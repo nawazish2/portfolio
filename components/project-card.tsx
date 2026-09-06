@@ -37,18 +37,18 @@ export function ProjectCard({
 
           <div className="px-1.5 pt-3">
             <div className="flex items-baseline justify-between gap-2">
-              <h3 className="text-[17px] leading-none font-semibold tracking-tight text-ink">
+              <h3 className="text-[14px] leading-none font-semibold tracking-tight text-ink">
                 {project.title}
               </h3>
               <span className="font-mono text-[10px] text-ink-faint">{project.year}</span>
             </div>
 
-            <p className="mt-1.5 font-hand text-[17px] leading-none text-accent-ink">
+            <p className="mt-1.5 font-hand text-[15px] leading-none text-accent-ink">
               {project.badge ? `${project.badge} · ` : ""}
               {project.oneLiner}
             </p>
 
-            <p className="mt-2.5 text-[13px] leading-relaxed text-ink-soft">
+            <p className="mt-2 text-[12px] leading-[1.6] text-ink-soft">
               {project.description}
             </p>
 
@@ -56,7 +56,7 @@ export function ProjectCard({
               {project.stack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full border border-paper-edge bg-paper-sunk px-2 py-0.5 font-mono text-[10px] text-ink-soft"
+                  className="rounded-full border border-paper-edge bg-paper-sunk px-2 py-0.5 font-mono text-[9.5px] text-ink-soft"
                 >
                   {tech}
                 </span>
