@@ -22,23 +22,23 @@ export default function Home() {
       <div className="relative z-10">
         <StickerLayer />
 
-        <main className="mx-auto w-full max-w-5xl px-4 pt-24 pb-8 sm:px-6 sm:pt-28">
+        <main className="mx-auto w-full max-w-4xl px-4 pt-20 pb-8 sm:px-6 sm:pt-24">
           <Hero />
 
-          <div className="mt-12 sm:mt-14">
+          <div className="mt-10 sm:mt-12">
             <GitHubActivity />
           </div>
 
-          <div className="mt-20 sm:mt-24">
+          <div className="mt-14 sm:mt-16">
             <WorkSection />
           </div>
 
-          <div className="mt-20 sm:mt-24">
+          <div className="mt-14 sm:mt-16">
             <section id="projects" className="scroll-mt-28">
               <Reveal>
                 <MatHeading hand="pinned up">Projects</MatHeading>
               </Reveal>
-              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project, index) => (
                   <ProjectCard key={project.slug} project={project} index={index} />
                 ))}
@@ -46,19 +46,19 @@ export default function Home() {
             </section>
           </div>
 
-          <div className="mt-20 sm:mt-24">
+          <div className="mt-14 sm:mt-16">
             <WritingSection />
           </div>
 
-          <div className="mt-16 sm:mt-20 xl:hidden">
+          <div className="mt-12 sm:mt-14 xl:hidden">
             <StickerStrip />
           </div>
 
-          <div className="mt-20 sm:mt-24">
+          <div className="mt-14 sm:mt-16">
             <TechStack />
           </div>
 
-          <div className="mt-20 sm:mt-24">
+          <div className="mt-14 sm:mt-16">
             <ContactSection />
           </div>
 

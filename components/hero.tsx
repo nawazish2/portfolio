@@ -21,9 +21,9 @@ function XIcon({ size = 15 }: { size?: number }) {
 export function Hero() {
   return (
     <section id="about" className="relative scroll-mt-28">
-      <div className="grid gap-6 sm:gap-8 md:grid-cols-[190px_1fr] md:items-start">
+      <div className="grid gap-5 sm:gap-7 md:grid-cols-[170px_1fr] md:items-start">
         {/* Taped polaroid */}
-        <div className="relative mx-auto w-[168px] shrink-0 md:mx-0 md:w-[190px]">
+        <div className="relative mx-auto w-[156px] shrink-0 md:mx-0 md:w-[170px]">
           <Tape className="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-5} />
           <Polaroid tilt={-3.5} caption="that's me">
             <Image
@@ -32,7 +32,7 @@ export function Hero() {
               width={380}
               height={430}
               priority
-              className="h-[190px] w-full object-cover md:h-[215px]"
+              className="h-[176px] w-full object-cover md:h-[192px]"
             />
           </Polaroid>
         </div>
@@ -61,7 +61,7 @@ export function Hero() {
           </div>
 
           {/* Sticky note bio */}
-          <div className="relative mt-6 sm:mt-7">
+          <div className="relative mt-5 sm:mt-6">
             <Tape className="-top-3 left-8 z-10" tilt={-7} />
             <Tape className="-top-3 right-10 z-10" tilt={5} />
             <StickyNote tilt={-0.4}>

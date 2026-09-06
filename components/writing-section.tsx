@@ -74,7 +74,7 @@ export async function WritingSection() {
       </Reveal>
 
       {posts.length > 0 ? (
-        <div className="mt-7 grid gap-6 sm:grid-cols-2">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2">
           {posts.map((post, index) => (
             <Reveal key={post.href} delay={index * 0.05} className="h-full">
               <IndexCard

@@ -66,16 +66,16 @@ function Heatmap({
   compact?: boolean;
 }) {
   return (
-    <div className={cn("flex", compact ? "w-full gap-[2px]" : "min-w-max gap-[4px]")}>
+    <div className={cn("flex", compact ? "w-full gap-[2px]" : "min-w-max gap-[3px]")}>
       {weeks.map((week) => (
         <div
           key={week.key}
           className={cn(
             "flex flex-col",
-            compact ? "min-w-0 flex-1 gap-[2px]" : "w-[13px] gap-[4px]",
+            compact ? "min-w-0 flex-1 gap-[2px]" : "w-[11px] gap-[3px]",
           )}
         >
-          <div className="relative h-5">
+          <div className="relative h-4">
             {week.monthLabel ? (
               <span className="absolute top-0 left-0 text-[10px] whitespace-nowrap text-ink-soft">
                 {week.monthLabel}
@@ -87,8 +87,8 @@ function Heatmap({
               key={day?.date ?? `${week.key}-${String(index)}`}
               day={day}
               className={cn(
-                "rounded-[3px]",
-                compact ? "aspect-square w-full" : "size-[13px]",
+                "rounded-[2px]",
+                compact ? "aspect-square w-full" : "size-[11px]",
               )}
             />
           ))}
@@ -107,7 +107,7 @@ export async function GitHubActivity() {
     <div className="relative">
       <Tape className="-top-2.5 left-10 z-10" tilt={-7} />
       <Tape className="-top-2.5 right-12 z-10" tilt={6} />
-      <Paper tilt={-0.5} className="px-4 py-5 sm:px-7 sm:py-6">
+      <Paper tilt={-0.5} className="px-4 py-4 sm:px-5 sm:py-4">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-[13px] leading-none font-semibold text-ink">GitHub activity</h2>
           <a
@@ -139,14 +139,14 @@ export async function GitHubActivity() {
               <Heatmap weeks={mobileWeeks} compact />
             </div>
 
-            <div className="mt-4 hidden sm:block">
+            <div className="mt-3 hidden sm:block">
               <div className="flex gap-2">
-                <div className="flex w-9 shrink-0 flex-col gap-[4px]">
-                  <div className="h-5" />
+                <div className="flex w-7 shrink-0 flex-col gap-[3px]">
+                  <div className="h-4" />
                   {weekdayLabels.map((label, index) => (
                     <span
                       key={`wd-${String(index)}`}
-                      className="h-[13px] text-[10px] leading-[13px] text-ink-soft"
+                      className="h-[11px] text-[10px] leading-[11px] text-ink-soft"
                     >
                       {label}
                     </span>
@@ -158,10 +158,10 @@ export async function GitHubActivity() {
               </div>
             </div>
 
-            <div className="mt-3 flex items-center justify-end gap-1.5 text-[10px] text-ink-soft">
+            <div className="mt-2.5 flex items-center justify-end gap-1.5 text-[10px] text-ink-soft">
               <span>Less</span>
               {([0, 1, 2, 3, 4] as const).map((level) => (
-                <span key={level} className={cn("size-[13px] rounded-[3px]", levelClass[level])} />
+                <span key={level} className={cn("size-[11px] rounded-[2px]", levelClass[level])} />
               ))}
               <span>More</span>
             </div>

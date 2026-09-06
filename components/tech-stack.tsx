@@ -45,7 +45,7 @@ export function TechStack() {
         <MatHeading hand="I reach for">Things</MatHeading>
       </Reveal>
 
-      <div className="mt-6 space-y-5">
+      <div className="mt-5 space-y-4">
         {categories.map((category, catIndex) => {
           const items = siteConfig.stack.filter((item) => item.category === category);
           if (items.length === 0) return null;

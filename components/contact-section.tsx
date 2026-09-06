@@ -9,7 +9,7 @@ export function ContactSection() {
       <Reveal>
         <div className="relative mx-auto max-w-2xl">
           <Tape className="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-3} />
-          <Paper tilt={-0.6} className="px-5 py-6 sm:px-8 sm:py-8">
+          <Paper tilt={-0.6} className="px-5 py-5 sm:px-7 sm:py-6">
             <h2 className="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
               Say
               <span className="ml-2.5 font-hand text-[1.35em] leading-none font-normal text-accent">
@@ -21,7 +21,7 @@ export function ContactSection() {
               {siteConfig.location.replace(", IND", "")}, happy to work remote.
             </p>
 
-            <div className="mt-6">
+            <div className="mt-5">
               <ContactForm />
             </div>
           </Paper>
