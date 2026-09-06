@@ -11,7 +11,7 @@
   --mat-edge: #0f1d17;
   --mat-grid-fine: rgba(168, 216, 188, 0.1);
   --mat-grid-coarse: rgba(232, 168, 90, 0.13);
-  --mat-ruler: rgba(206, 244, 222, 0.16);
+  --mat-ruler: rgba(206, 244, 222, 0.3);
   /* Floating chrome that sits on the mat: nav pill, icon buttons */
   --chrome: rgba(17, 33, 27, 0.82);
 
