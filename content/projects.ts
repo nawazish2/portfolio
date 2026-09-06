@@ -73,30 +73,6 @@ export const projects: Project[] = [
     image: "/projects/cuprim.jpg",
   },
   {
-    slug: "algoviz",
-    title: "AlgoViz",
-    oneLiner: "ML algorithms you can actually explore.",
-    description:
-      "Makes gradient descent, attention, random forests, and K-means explorable in the browser — change inputs and watch results update live.",
-    problem:
-      "Core ML ideas are often taught as static diagrams, which hides how the algorithms actually move.",
-    built:
-      "An interactive TypeScript visualizer for learning ML algorithms by changing inputs and watching results update.",
-    highlights: [
-      "Interactive visualizations for core ML algorithms",
-      "Browser-first exploration without setup friction",
-      "Built to make abstract systems feel concrete",
-    ],
-    stack: ["TypeScript", "React"],
-    github: "https://github.com/nawazish2/algoviz",
-    live: "https://algoviz-ashen.vercel.app",
-    year: "2026",
-    status: "Live",
-    accent: "from-emerald-400 via-teal-500 to-slate-950",
-    badge: "ML",
-    image: "/projects/algoviz.jpg",
-  },
-  {
     slug: "chai-tailwind",
     title: "ChaiTailwind",
     oneLiner: "Utility CSS engine built from scratch.",
