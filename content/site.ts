@@ -168,12 +168,6 @@ export const siteConfig = {
       color: "#06B6D4",
     },
     {
-      name: "Framer Motion",
-      category: "Frontend",
-      href: "https://motion.dev",
-      color: "#FF0055",
-    },
-    {
       name: "Swift",
       category: "Frontend",
       href: "https://www.swift.org",
@@ -256,24 +250,6 @@ export const siteConfig = {
       category: "Tools",
       href: "https://docs.anthropic.com/en/docs/claude-code",
       color: "#D97757",
-    },
-    {
-      name: "Codex",
-      category: "Tools",
-      href: "https://openai.com/codex",
-      color: "#10A37F",
-    },
-    {
-      name: "Grok",
-      category: "Tools",
-      href: "https://x.ai",
-      color: "#000000",
-    },
-    {
-      name: "VS Code",
-      category: "Tools",
-      href: "https://code.visualstudio.com",
-      color: "#007ACC",
     },
     {
       name: "Figma",

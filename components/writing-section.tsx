@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { Paper, MatHeading } from "@/components/desk/paper";
 import { getWritingPosts } from "@/lib/writing";
 
-const tilts = [-1.4, 1, -0.9];
+const tilts = [-1.3, 0.9, 1.1, -0.8];
 
 /** Ruled index card — the top red line is the giveaway. */
 function IndexCard({
@@ -25,23 +25,23 @@ function IndexCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block transition-transform duration-300 hover:-translate-y-1"
+      className="group block h-full transition-transform duration-300 hover:-translate-y-1"
     >
       <Paper tilt={tilt} className="h-full overflow-hidden">
-        <div className="h-8 border-b-2 border-[#e0736f]/45 bg-[linear-gradient(#dfd9c8_1px,transparent_1px)] bg-[length:100%_16px]" />
+        <div className="h-9 border-b-2 border-[#e0736f]/45 bg-[linear-gradient(#dfd9c8_1px,transparent_1px)] bg-[length:100%_16px]" />
         <div
-          className="px-4 py-3.5"
+          className="px-5 py-4"
           style={{
             backgroundImage: "linear-gradient(#dfd9c8 1px, transparent 1px)",
             backgroundSize: "100% 24px",
             backgroundPosition: "0 20px",
           }}
         >
-          <h3 className="text-[15px] leading-snug font-semibold text-ink group-hover:text-accent-ink">
+          <h3 className="text-[16px] leading-snug font-semibold text-ink group-hover:text-accent-ink">
             {title}
           </h3>
           {brief ? (
-            <p className="mt-2 line-clamp-3 text-[13px] leading-6 text-ink-soft">{brief}</p>
+            <p className="mt-2 line-clamp-4 text-[13.5px] leading-6 text-ink-soft">{brief}</p>
           ) : null}
           <p className="mt-3 font-mono text-[10px] text-ink-faint">{dateLabel}</p>
         </div>
@@ -51,7 +51,7 @@ function IndexCard({
 }
 
 export async function WritingSection() {
-  const posts = await getWritingPosts(3);
+  const posts = await getWritingPosts(4);
 
   return (
     <section id="notes" className="scroll-mt-28">
@@ -74,9 +74,9 @@ export async function WritingSection() {
       </Reveal>
 
       {posts.length > 0 ? (
-        <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-7 grid gap-6 sm:grid-cols-2">
           {posts.map((post, index) => (
-            <Reveal key={post.href} delay={index * 0.05}>
+            <Reveal key={post.href} delay={index * 0.05} className="h-full">
               <IndexCard
                 title={post.title}
                 brief={post.brief}
