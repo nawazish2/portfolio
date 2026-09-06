@@ -1,106 +1,66 @@
-import { Header } from "@/components/header";
-import { QuoteBand, CreditsBand } from "@/components/footer";
-import { SiteFrame } from "@/components/site-frame";
-import { FrameColumn, FramePad, HRule } from "@/components/grid";
+import { Mat } from "@/components/desk/mat";
+import { PillNav } from "@/components/desk/pill-nav";
+import { StickerLayer } from "@/components/desk/sticker-layer";
+import { MatHeading } from "@/components/desk/paper";
 import { Hero } from "@/components/hero";
-import { AboutSection, ContactSection } from "@/components/about-section";
-import { ProjectCard } from "@/components/project-card";
-import { TechStack } from "@/components/tech-stack";
 import { GitHubActivity } from "@/components/github-activity";
-import { CtaSection } from "@/components/cta-section";
+import { WorkSection } from "@/components/work-section";
+import { WritingSection } from "@/components/writing-section";
+import { TechStack } from "@/components/tech-stack";
+import { ProjectCard } from "@/components/project-card";
+import { ContactSection } from "@/components/contact-section";
+import { Footer } from "@/components/footer";
 import { Reveal } from "@/components/reveal";
 import { projects } from "@/content/projects";
-import { ArrowUpRight } from "lucide-react";
 
-/**
- * Sam line pattern:
- * - Thin single HRule between every section (full viewport, past vertical rails)
- * - Section title + body stay in ONE band
- * - Vertical rails = FrameRails only
- */
 export default function Home() {
   return (
-    <SiteFrame>
-      <Header />
+    <>
+      <Mat />
+      <PillNav />
 
-      <FrameColumn className="mt-12">
-        <Hero />
-      </FrameColumn>
+      <div className="relative z-10">
+        <StickerLayer />
 
-      <HRule />
+        <main className="mx-auto w-full max-w-5xl px-4 pt-24 pb-8 sm:px-6 sm:pt-28">
+          <Hero />
 
-      <FrameColumn>
-        <AboutSection />
-      </FrameColumn>
-
-      <HRule />
-
-      <FrameColumn>
-        <ContactSection />
-      </FrameColumn>
-
-      <HRule />
-
-      <FrameColumn>
-        <section id="projects" className="scroll-mt-16">
-          <Reveal>
-            <FramePad className="flex items-end justify-between gap-3 pt-6 pb-3 sm:pt-8 sm:pb-4">
-              <h2 className="section-title">Projects</h2>
-              <a
-                href="#projects"
-                className="mb-0.5 inline-flex items-center gap-1 text-xs text-muted transition hover:text-foreground sm:text-sm"
-              >
-                View all
-                <ArrowUpRight size={14} />
-              </a>
-            </FramePad>
-          </Reveal>
-          <div className="grid grid-cols-1 border-t border-dashed border-border md:grid-cols-2">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                index={index}
-                total={projects.length}
-              />
-            ))}
+          <div className="mt-12 sm:mt-14">
+            <GitHubActivity />
           </div>
-        </section>
-      </FrameColumn>
 
-      <HRule />
+          <div className="mt-20 sm:mt-24">
+            <WorkSection />
+          </div>
 
-      <FrameColumn>
-        <section id="stack" className="scroll-mt-16">
-          <TechStack />
-        </section>
-      </FrameColumn>
+          <div className="mt-20 sm:mt-24">
+            <section id="projects" className="scroll-mt-28">
+              <Reveal>
+                <MatHeading hand="pinned up">Projects</MatHeading>
+              </Reveal>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {projects.map((project, index) => (
+                  <ProjectCard key={project.slug} project={project} index={index} />
+                ))}
+              </div>
+            </section>
+          </div>
 
-      <HRule />
+          <div className="mt-20 sm:mt-24">
+            <WritingSection />
+          </div>
 
-      <FrameColumn>
-        <section className="scroll-mt-16">
-          <GitHubActivity />
-        </section>
-      </FrameColumn>
+          <div className="mt-20 sm:mt-24">
+            <TechStack />
+          </div>
 
-      <HRule />
+          <div className="mt-20 sm:mt-24">
+            <ContactSection />
+          </div>
 
-      <FrameColumn>
-        <CtaSection />
-      </FrameColumn>
-
-      <HRule />
-
-      <FrameColumn>
-        <QuoteBand />
-      </FrameColumn>
-
-      <HRule />
-
-      <FrameColumn>
-        <CreditsBand />
-      </FrameColumn>
-    </SiteFrame>
+          <Footer />
+        </main>
+      </div>
+    </>
   );
 }

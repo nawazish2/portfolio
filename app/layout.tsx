@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Serif, Inter } from "next/font/google";
+import { Caveat, Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { ThemeProvider } from "@/components/theme-provider";
 import { JsonLd } from "@/components/json-ld";
 import { siteConfig } from "@/content/site";
 import "./globals.css";
@@ -12,10 +11,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument",
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
-  weight: "400",
   display: "swap",
 });
 
@@ -78,22 +76,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${instrumentSerif.variable} ${geistMono.variable} h-full`}
+      className={`${inter.variable} ${caveat.variable} ${geistMono.variable} h-full`}
     >
-      <head>
-        {/* Prevent theme flash; mirrors samworks persistence pattern */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('nawaz-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else{document.documentElement.classList.add('dark')}}catch(e){document.documentElement.classList.add('dark')}})();`,
-          }}
-        />
-      </head>
-      <body className="flex min-h-full flex-col overflow-x-hidden bg-background font-sans text-foreground antialiased">
-        <ThemeProvider>
-          <JsonLd />
-          {children}
-          <Analytics />
-        </ThemeProvider>
+      <body className="min-h-full overflow-x-hidden font-sans antialiased">
+        <JsonLd />
+        {children}
+        <Analytics />
       </body>
     </html>
   );
