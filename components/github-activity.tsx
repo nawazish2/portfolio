@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/content/site";
-import { Paper } from "@/components/desk/paper";
+import { Paper, Tape } from "@/components/desk/paper";
 import { cn } from "@/lib/utils";
 import {
   applyMonthLabels,
@@ -8,17 +8,15 @@ import {
   toWeekColumns,
   type ContributionDay,
   type ContributionLevel,
-  type GitHubActivityData,
   type WeekColumn,
 } from "@/lib/github";
 
-/** Warm amber ramp so the graph belongs to the desk, not to GitHub. */
 const levelClass: Record<ContributionLevel, string> = {
-  0: "bg-[#e7e0d0]",
-  1: "bg-[#f6d9a8]",
-  2: "bg-[#f0b45f]",
-  3: "bg-[#e2793c]",
-  4: "bg-[#b8551f]",
+  0: "bg-[#e4e9e3]",
+  1: "bg-[#a8e6b0]",
+  2: "bg-[#6dcb7c]",
+  3: "bg-[#3aa758]",
+  4: "bg-[#1d6b34]",
 };
 
 const weekdayLabels = ["", "Mon", "", "Wed", "", "Fri", ""] as const;
@@ -68,18 +66,18 @@ function Heatmap({
   compact?: boolean;
 }) {
   return (
-    <div className={cn("flex", compact ? "w-full gap-[2px]" : "min-w-max gap-[3px]")}>
+    <div className={cn("flex", compact ? "w-full gap-[2px]" : "min-w-max gap-[4px]")}>
       {weeks.map((week) => (
         <div
           key={week.key}
           className={cn(
             "flex flex-col",
-            compact ? "min-w-0 flex-1 gap-[2px]" : "w-[11px] gap-[3px]",
+            compact ? "min-w-0 flex-1 gap-[2px]" : "w-[13px] gap-[4px]",
           )}
         >
-          <div className="relative h-4">
+          <div className="relative h-5">
             {week.monthLabel ? (
-              <span className="absolute top-0 left-0 font-mono text-[10px] whitespace-nowrap text-ink-faint">
+              <span className="absolute top-0 left-0 text-[11px] whitespace-nowrap text-ink-soft">
                 {week.monthLabel}
               </span>
             ) : null}
@@ -89,8 +87,8 @@ function Heatmap({
               key={day?.date ?? `${week.key}-${String(index)}`}
               day={day}
               className={cn(
-                "rounded-[2px]",
-                compact ? "aspect-square w-full" : "size-[11px]",
+                "rounded-[3px]",
+                compact ? "aspect-square w-full" : "size-[13px]",
               )}
             />
           ))}
@@ -100,92 +98,76 @@ function Heatmap({
   );
 }
 
-function Stats({ activity }: { activity: GitHubActivityData }) {
-  const items = [
-    `${activity.activeDays} active days`,
-    activity.currentStreak > 0
-      ? `${activity.currentStreak}-day streak`
-      : `Longest streak ${activity.longestStreak} ${activity.longestStreak === 1 ? "day" : "days"}`,
-    activity.publicRepos > 0 ? `${activity.publicRepos} public repos` : null,
-    activity.followers > 0 ? `${activity.followers} followers` : null,
-  ].filter((item): item is string => item !== null);
-
-  return <p className="mt-2 text-[10px] text-ink-faint sm:text-xs">{items.join(" · ")}</p>;
-}
-
 export async function GitHubActivity() {
   const activity = await getGitHubActivity(siteConfig.githubUsername);
   const weeks = activity ? toWeekColumns(activity.days) : [];
   const mobileWeeks = applyMonthLabels(weeks.slice(-20));
 
   return (
-    <Paper tilt={-0.5} className="px-4 py-4 sm:px-6 sm:py-5">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="font-hand text-[22px] leading-none text-ink-soft">
-          this is where the hours go
-        </h2>
-        <a
-          href={activity?.profileUrl ?? siteConfig.links.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 font-mono text-[11px] text-ink-faint transition hover:text-accent-ink"
-        >
-          @{siteConfig.githubUsername}
-          <ArrowUpRight size={13} />
-        </a>
-      </div>
-
-      {!activity || weeks.length === 0 ? (
-        <p className="mt-4 text-sm text-ink-soft">
-          Live contribution data could not be loaded.{" "}
+    <div className="relative">
+      <Tape className="-top-2.5 left-10 z-10" tilt={-7} />
+      <Tape className="-top-2.5 right-12 z-10" tilt={6} />
+      <Paper tilt={-0.5} className="px-4 py-5 sm:px-7 sm:py-6">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-[17px] leading-none font-medium text-ink">GitHub activity</h2>
           <a
-            href={siteConfig.links.github}
+            href={activity?.profileUrl ?? siteConfig.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="link-ink"
+            className="inline-flex items-center gap-1 text-[13px] text-ink-soft transition hover:text-accent-ink"
           >
-            View GitHub profile
+            @{siteConfig.githubUsername}
+            <ArrowUpRight size={13} />
           </a>
-        </p>
-      ) : (
-        <>
-          <div className="mt-3 sm:hidden">
-            <Heatmap weeks={mobileWeeks} compact />
-          </div>
+        </div>
 
-          <div className="mt-4 hidden sm:block">
-            <div className="flex gap-2">
-              <div className="flex w-7 shrink-0 flex-col gap-[3px]">
-                <div className="h-4" />
-                {weekdayLabels.map((label, index) => (
-                  <span
-                    key={`wd-${String(index)}`}
-                    className="h-[11px] font-mono text-[10px] leading-[11px] text-ink-faint"
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
-              <div className="min-w-0 flex-1 overflow-x-auto pb-1">
-                <Heatmap weeks={weeks} />
+        {!activity || weeks.length === 0 ? (
+          <p className="mt-4 text-sm text-ink-soft">
+            Live contribution data could not be loaded.{" "}
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-ink"
+            >
+              View GitHub profile
+            </a>
+          </p>
+        ) : (
+          <>
+            <div className="mt-3 sm:hidden">
+              <Heatmap weeks={mobileWeeks} compact />
+            </div>
+
+            <div className="mt-4 hidden sm:block">
+              <div className="flex gap-2">
+                <div className="flex w-9 shrink-0 flex-col gap-[4px]">
+                  <div className="h-5" />
+                  {weekdayLabels.map((label, index) => (
+                    <span
+                      key={`wd-${String(index)}`}
+                      className="h-[13px] text-[11px] leading-[13px] text-ink-soft"
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
+                <div className="min-w-0 flex-1 overflow-x-auto pb-1">
+                  <Heatmap weeks={weeks} />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] text-ink-faint sm:text-xs">
-            <span>{activity.total.toLocaleString()} contributions in the last year</span>
-            <div className="flex items-center gap-1.5">
+            <div className="mt-3 flex items-center justify-end gap-1.5 text-[12px] text-ink-soft">
               <span>Less</span>
               {([0, 1, 2, 3, 4] as const).map((level) => (
-                <span key={level} className={cn("size-2.5 rounded-[2px]", levelClass[level])} />
+                <span key={level} className={cn("size-[13px] rounded-[3px]", levelClass[level])} />
               ))}
               <span>More</span>
             </div>
-          </div>
-
-          <Stats activity={activity} />
-        </>
-      )}
-    </Paper>
+          </>
+        )}
+      </Paper>
+    </div>
   );
 }
