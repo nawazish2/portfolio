@@ -13,26 +13,19 @@ export const siteConfig = {
   shortName: "Nawazish",
   title: "Nawazish Khan — Portfolio",
   description:
-    "Software engineer in Delhi building useful tools with Swift and TypeScript. Selected work includes Cuprim, AlgoViz, ChaiTailwind, and ParkIt.",
+    "Computer Science undergrad in Delhi building useful tools with Swift and TypeScript. Selected work includes Cuprim, AlgoViz, ChaiTailwind, and ParkIt.",
   url: "https://nawazish.site",
   locale: "en_IN",
   location: "Delhi, IND",
   role: "Software Engineer",
-  /** Rotating hero titles */
-  roles: ["Software Engineer", "Full Stack Developer"] as const,
-  /** Sam-style meta under role: age/city/country */
-  heroMeta: "22, Delhi, IND",
-  tagline: "I build useful software and learn systems by taking them apart.",
   summary:
-    "Software engineer based in Delhi. I work mostly with Swift and TypeScript, and I like small tools, clear interfaces, and backends that do not surprise you.",
+    "Computer Science undergrad in Delhi, graduating in 2027 and aiming at SDE roles. I work mostly with Swift and TypeScript, and I like small tools, clear interfaces, and backends that do not surprise you.",
   availability: "Open to SDE roles and interesting product work",
   availabilityShort: "Open to roles & remote",
-  education: "Computer Science student at IKGPTU",
   email: "knawazish153@gmail.com",
   resumeUrl:
     "https://drive.google.com/file/d/18oBtva6I1yADfVEruERkpnRMAfEbv5l6/view?usp=drive_link",
   profileImage: "/profile.jpg",
-  bannerImage: "/banner.gif",
   githubUsername: "nawazish2",
   links: {
     github: "https://github.com/nawazish2",
@@ -41,10 +34,6 @@ export const siteConfig = {
     blog: "https://nawazish.hashnode.dev",
     email: "mailto:knawazish153@gmail.com",
   },
-  nav: [
-    { href: "/", label: "Home" },
-    { href: "#projects", label: "Projects" },
-  ],
   /** Handwritten line under the name in the hero */
   heroKicker: "CS undergrad · Delhi · Swift + TypeScript",
   /** Sticky-note bullets in the hero. `parts` mirrors AboutLine. */
@@ -102,37 +91,6 @@ export const siteConfig = {
           href: "https://nawazish.hashnode.dev",
         },
         { text: " before I forget them." },
-      ],
-    },
-  ] satisfies AboutLine[],
-  about: [
-    {
-      parts: [
-        { text: "I'm a " },
-        { text: "Software Engineer", highlight: true },
-        {
-          text: " passionate about building useful tools where clean code meets clear interfaces.",
-        },
-      ],
-    },
-    {
-      parts: [
-        { text: "I design and develop products with " },
-        { text: "Swift", highlight: true },
-        { text: ", " },
-        { text: "TypeScript", highlight: true },
-        { text: ", and " },
-        { text: "React", highlight: true },
-        {
-          text: " — focusing on usability, performance, and maintainable architecture.",
-        },
-      ],
-    },
-    {
-      parts: [
-        {
-          text: "Currently a Computer Science student at IKGPTU, I enjoy turning ideas into polished software, exploring systems, and writing down what I learn.",
-        },
       ],
     },
   ] satisfies AboutLine[],
@@ -321,18 +279,8 @@ export const siteConfig = {
     href: "https://nawazish.hashnode.dev",
     cta: "Read my writing",
   },
-  quote: {
-    text: "The only way to do great work is to love what you do.",
-    author: "Steve Jobs",
-  },
-  cta: {
-    title: "Scrolled Too Far",
-    description:
-      "If you've read this far, you might be interested in what I do.",
-    button: "Let's Talk",
-  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;
 export type StackItem = (typeof siteConfig.stack)[number];
-export type StackCategory = StackItem["category"] | "All";
+export type StackCategory = StackItem["category"];

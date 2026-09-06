@@ -9,8 +9,9 @@ type Spot = { top: string; left?: string; right?: string; tilt: number };
 
 /**
  * Resting spots live in the page gutters, so the layer never covers content.
- * Only rendered from `lg` up — below that there is no gutter to drop them in,
- * and a draggable element fights touch scrolling.
+ * Only rendered from `xl` up — that is the first width with a gutter wide
+ * enough, and below it a draggable element fights touch scrolling. Narrower
+ * screens get `StickerStrip` instead.
  */
 const spots: Spot[] = [
   { top: "13%", left: "12px", tilt: -9 },
@@ -26,6 +27,49 @@ const dragBounds = { left: -160, right: 160, top: -260, bottom: 260 };
 const STORAGE_KEY = "desk-stickers-v1";
 
 type Offset = { x: number; y: number };
+
+function StickerFace({
+  emoji,
+  label,
+  tilt,
+}: {
+  emoji: string;
+  label: string;
+  tilt: number;
+}) {
+  return (
+    <div
+      className="flex w-[96px] flex-col items-center gap-1 rounded-2xl px-2.5 py-2.5 text-center"
+      style={{
+        transform: `rotate(${String(tilt)}deg)`,
+        background: "linear-gradient(180deg, #fbf7ef, #ece5d5)",
+        boxShadow: "0 1px 2px rgba(0,0,0,0.3), 0 12px 22px -12px rgba(0,0,0,0.75)",
+      }}
+    >
+      <span className="text-[24px] leading-none">{emoji}</span>
+      <span className="font-hand text-[15px] leading-tight text-ink-soft">{label}</span>
+    </div>
+  );
+}
+
+/** Below `xl` there is no gutter, so the stickers lie in a row on the mat. */
+export function StickerStrip() {
+  return (
+    <div
+      aria-hidden
+      className="flex flex-wrap justify-center gap-3 sm:gap-5 xl:hidden"
+    >
+      {siteConfig.stickers.map((sticker, index) => (
+        <StickerFace
+          key={sticker.label}
+          emoji={sticker.emoji}
+          label={sticker.label}
+          tilt={spots[index % spots.length].tilt}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function StickerLayer() {
   const reduceMotion = useReducedMotion();
@@ -99,20 +143,11 @@ export function StickerLayer() {
               });
             }}
           >
-            <div
-              className="flex w-[104px] flex-col items-center gap-1 rounded-2xl px-2.5 py-2.5 text-center"
-              style={{
-                transform: `rotate(${String(spot.tilt)}deg)`,
-                background: "linear-gradient(180deg, #fbf7ef, #ece5d5)",
-                boxShadow:
-                  "0 1px 2px rgba(0,0,0,0.3), 0 12px 22px -12px rgba(0,0,0,0.75)",
-              }}
-            >
-              <span className="text-[24px] leading-none">{sticker.emoji}</span>
-              <span className="font-hand text-[15px] leading-tight text-ink-soft">
-                {sticker.label}
-              </span>
-            </div>
+            <StickerFace
+              emoji={sticker.emoji}
+              label={sticker.label}
+              tilt={spot.tilt}
+            />
           </motion.div>
         );
       })}

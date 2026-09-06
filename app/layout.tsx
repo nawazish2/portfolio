@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Caveat, Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { JsonLd } from "@/components/json-ld";
@@ -65,6 +65,12 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+};
+
+/** Matches the mat, so mobile browser chrome does not fall back to white. */
+export const viewport: Viewport = {
+  themeColor: "#1a2e26",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

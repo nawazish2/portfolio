@@ -1,6 +1,6 @@
 import { Mat } from "@/components/desk/mat";
 import { PillNav } from "@/components/desk/pill-nav";
-import { StickerLayer } from "@/components/desk/sticker-layer";
+import { StickerLayer, StickerStrip } from "@/components/desk/sticker-layer";
 import { MatHeading } from "@/components/desk/paper";
 import { Hero } from "@/components/hero";
 import { GitHubActivity } from "@/components/github-activity";
@@ -48,6 +48,10 @@ export default function Home() {
 
           <div className="mt-20 sm:mt-24">
             <WritingSection />
+          </div>
+
+          <div className="mt-16 sm:mt-20 xl:hidden">
+            <StickerStrip />
           </div>
 
           <div className="mt-20 sm:mt-24">
