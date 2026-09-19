@@ -192,18 +192,6 @@ export const siteConfig = {
       color: "#2496ED",
     },
     {
-      name: "Vercel",
-      category: "Tools",
-      href: "https://vercel.com",
-      color: "#000000",
-    },
-    {
-      name: "Cursor",
-      category: "Tools",
-      href: "https://cursor.com",
-      color: "#000000",
-    },
-    {
       name: "Claude Code",
       category: "Tools",
       href: "https://docs.anthropic.com/en/docs/claude-code",
