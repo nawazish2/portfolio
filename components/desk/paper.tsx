@@ -16,10 +16,7 @@ export function Tape({
   return (
     <span
       aria-hidden
-      className={cn(
-        "absolute h-6 w-24 rounded-[2px] backdrop-blur-[1px]",
-        className,
-      )}
+      className={cn("absolute h-6 w-24 rounded-[2px]", className)}
       style={{
         transform: `rotate(${String(tilt)}deg)`,
         background:

@@ -38,7 +38,7 @@ export function PillNav() {
     <div className="fixed inset-x-0 top-3 z-50 flex justify-center px-3 sm:top-5">
       <nav
         aria-label="Sections"
-        className="flex items-center gap-0.5 rounded-full border border-white/12 bg-[var(--chrome)] p-1 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] backdrop-blur-md sm:gap-1"
+        className="flex items-center gap-0.5 rounded-full border border-white/12 bg-[var(--chrome)] p-1 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] backdrop-blur-sm sm:gap-1"
       >
         {sections.map((section) => (
           <a

@@ -156,7 +156,7 @@ export function StickerLayer() {
         <button
           type="button"
           onClick={reset}
-          className="pointer-events-auto fixed bottom-5 left-5 z-40 inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-[var(--chrome)] px-3.5 py-2 font-hand text-[16px] text-on-mat-soft backdrop-blur-md transition hover:text-on-mat"
+          className="pointer-events-auto fixed bottom-5 left-5 z-40 inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-[var(--chrome)] px-3.5 py-2 font-hand text-[16px] text-on-mat-soft backdrop-blur-sm transition hover:text-on-mat"
         >
           <RotateCcw size={13} />
           put the stickers back
