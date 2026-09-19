@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const sections = [
   { id: "about", label: "About" },
   { id: "work", label: "Work" },
-  { id: "notes", label: "Notes" },
   { id: "projects", label: "Projects" },
+  { id: "notes", label: "Notes" },
 ];
 
 export function PillNav() {
