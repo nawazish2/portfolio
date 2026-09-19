@@ -7,7 +7,7 @@ const sections = [
   { id: "about", label: "About" },
   { id: "work", label: "Work" },
   { id: "projects", label: "Projects" },
-  { id: "notes", label: "Notes" },
+  { id: "notes", label: "Writing" },
 ];
 
 export function PillNav() {

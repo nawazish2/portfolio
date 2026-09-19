@@ -57,7 +57,7 @@ export async function WritingSection() {
     <section id="notes" className="scroll-mt-28">
       <Reveal>
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <MatHeading hand="from the desk">Notes</MatHeading>
+          <MatHeading hand="from the desk">Writing</MatHeading>
           <a
             href={siteConfig.writing.href}
             target="_blank"

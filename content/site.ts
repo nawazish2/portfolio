@@ -261,7 +261,7 @@ export const siteConfig = {
     { emoji: "🌙", label: "night shift dev" },
   ],
   writing: {
-    title: "Notes",
+    title: "Writing",
     description:
       "Sometimes I write the lesson down before I forget it — mostly JavaScript, backend engineering, and notes from whatever I am building.",
     href: "https://nawazish.hashnode.dev",
