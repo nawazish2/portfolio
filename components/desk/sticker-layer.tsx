@@ -10,8 +10,7 @@ type Spot = { top: string; left?: string; right?: string; tilt: number };
 /**
  * Resting spots live in the page gutters, so the layer never covers content.
  * Only rendered from `xl` up — that is the first width with a gutter wide
- * enough, and below it a draggable element fights touch scrolling. Narrower
- * screens get `StickerStrip` instead.
+ * enough, and below it a draggable element fights touch scrolling.
  */
 const spots: Spot[] = [
   { top: "13%", left: "12px", tilt: -9 },
@@ -48,25 +47,6 @@ function StickerFace({
     >
       <span className="text-[24px] leading-none">{emoji}</span>
       <span className="font-hand text-[14px] leading-tight text-ink-soft">{label}</span>
-    </div>
-  );
-}
-
-/** Below `xl` there is no gutter, so the stickers lie in a row on the mat. */
-export function StickerStrip() {
-  return (
-    <div
-      aria-hidden
-      className="flex flex-wrap justify-center gap-3 sm:gap-5 xl:hidden"
-    >
-      {siteConfig.stickers.map((sticker, index) => (
-        <StickerFace
-          key={sticker.label}
-          emoji={sticker.emoji}
-          label={sticker.label}
-          tilt={spots[index % spots.length].tilt}
-        />
-      ))}
     </div>
   );
 }

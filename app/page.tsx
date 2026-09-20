@@ -1,6 +1,6 @@
 import { Mat } from "@/components/desk/mat";
 import { PillNav } from "@/components/desk/pill-nav";
-import { StickerLayer, StickerStrip } from "@/components/desk/sticker-layer";
+import { StickerLayer } from "@/components/desk/sticker-layer";
 import { MatHeading } from "@/components/desk/paper";
 import { Hero } from "@/components/hero";
 import { GitHubActivity } from "@/components/github-activity";
@@ -25,10 +25,6 @@ export default function Home() {
 
         <main className="mx-auto w-full max-w-4xl px-4 pt-20 pb-8 sm:px-6 sm:pt-24">
           <Hero />
-
-          <div className="mt-8 sm:mt-10 xl:hidden">
-            <StickerStrip />
-          </div>
 
           <div className="mt-10 sm:mt-12">
             <GitHubActivity />
