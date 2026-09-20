@@ -215,11 +215,12 @@ export const siteConfig = {
         href: "https://github.com/nawazish2/cuprim",
       },
       {
-        org: "Full-stack web",
-        meta: "2024 — present",
-        role: "React · Next.js · Node · MongoDB / MySQL",
+        org: "CampusForms",
+        meta: "2026 · live",
+        role: "Solo — Next.js, Supabase, Postgres",
         detail:
-          "Multi-role platforms built solo: 50+ REST endpoints, role-based JWT auth, Socket.io realtime, Razorpay payments with HMAC signature verification, Playwright E2E coverage.",
+          "One link per form, no student account. Public board of open forms, nine question types, fourteen campus templates, QR for the notice board — anonymity enforced by a Postgres trigger on write.",
+        href: "https://campusforms.vercel.app",
       },
       {
         org: "Learning by rebuilding",
