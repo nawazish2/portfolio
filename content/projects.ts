@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   oneLiner: string;
   description: string;
+  metric?: string;
   problem?: string;
   built?: string;
   highlights?: string[];
@@ -21,6 +22,7 @@ export const projects: Project[] = [
     slug: "campusforms",
     title: "CampusForms",
     oneLiner: "Campus forms without the spreadsheet sprawl.",
+    metric: "9 question types · 14 templates · trigger-enforced anonymity",
     description:
       "One link per form, no student account. Anonymity is enforced by a database trigger rather than by the interface.",
     problem:
@@ -30,14 +32,13 @@ export const projects: Project[] = [
     highlights: [
       "Anonymous responses cleared by a Postgres trigger on write — no submitted_by or IP column exists to leak",
       "Nine question types, fourteen campus templates, QR code for the notice board",
-      "Public /browse board plus CSV export, on Supabase auth and row level security",
+      "Public /browse board plus CSV export, with auth and row level security",
     ],
     stack: [
       "TypeScript",
       "Next.js",
       "React",
       "Tailwind CSS",
-      "Supabase",
       "PostgreSQL",
     ],
     github: "https://github.com/nawazish2/campusforms",
@@ -52,6 +53,7 @@ export const projects: Project[] = [
     slug: "cuprim",
     title: "Cuprim",
     oneLiner: "AI quota tracker for your menu bar.",
+    metric: "4 providers · MIT · local-only, no telemetry",
     description:
       "Tracks Claude, Codex, Cursor and Grok quotas from the menu bar. Local-only, no backend, no telemetry.",
     problem:
@@ -76,6 +78,7 @@ export const projects: Project[] = [
     slug: "chai-tailwind",
     title: "ChaiTailwind",
     oneLiner: "Utility CSS engine built from scratch.",
+    metric: "chai-* parser · zero-dep DOM pipeline",
     description:
       "A utility-first CSS engine written from scratch: parses `chai-*` classes and applies styles straight through the DOM APIs.",
     problem:
@@ -93,13 +96,14 @@ export const projects: Project[] = [
     year: "2026",
     status: "Shipped",
     accent: "from-amber-400 via-orange-500 to-slate-950",
-    badge: "CSS",
+    badge: "From scratch",
     image: "/projects/chai-tailwind.jpg",
   },
   {
     slug: "parkit",
     title: "ParkIt",
     oneLiner: "Smart parking with realtime booking.",
+    metric: "Socket.io live spots · JWT-secured booking",
     description:
       "Live spot availability over Socket.io, a booking flow, and JWT-secured access.",
     problem:

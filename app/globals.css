@@ -64,7 +64,17 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
+    /* `clip` (not `hidden`) avoids creating a scroll container, which keeps
+       `position: fixed` and momentum scrolling smooth on iOS Safari. */
     overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  /* Touch devices handle momentum natively — CSS smooth-scroll fights it. */
+  @media (hover: none) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
@@ -75,6 +85,7 @@
     -moz-osx-font-smoothing: grayscale;
     min-height: 100%;
     overflow-x: hidden;
+    overflow-x: clip;
   }
 
   ::selection {

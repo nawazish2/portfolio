@@ -127,8 +127,8 @@ export default async function OpengraphImage() {
               maxWidth: 800,
             }}
           >
-            I ship small, useful tools — Cuprim for macOS, AlgoViz for ML, and
-            full-stack web work in React and Node.
+            I ship small, useful tools — Cuprim for macOS, CampusForms for
+            campus life, and full-stack web work in React and Node.
           </div>
 
           <div style={{ display: "flex", gap: 11, marginTop: 28 }}>

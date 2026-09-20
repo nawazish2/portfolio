@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     "Portfolio",
     "CampusForms",
     "Cuprim",
-    "AlgoViz",
   ],
   alternates: {
     canonical: siteConfig.url,
@@ -85,7 +84,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${caveat.variable} ${geistMono.variable} h-full`}
     >
-      <body className="min-h-full overflow-x-hidden font-sans antialiased">
+      <body className="min-h-full overflow-x-clip font-sans antialiased">
         <JsonLd />
         {children}
         <Analytics />

@@ -107,7 +107,6 @@ export function Mat() {
     <div
       aria-hidden
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
-      style={{ willChange: "transform" }}
     >
       <div
         className="absolute inset-0"

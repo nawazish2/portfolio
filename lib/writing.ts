@@ -37,6 +37,24 @@ function formatDate(rfc822: string): string {
   });
 }
 
+/** Trim RSS descriptions to a full sentence / word boundary so cards never end mid-word. */
+function cleanBrief(raw: string, max = 160): string {
+  const text = raw
+    .replace(/<[^>]*>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (text.length <= max) return text;
+  const sliced = text.slice(0, max);
+  const lastSentence = Math.max(
+    sliced.lastIndexOf(". "),
+    sliced.lastIndexOf("! "),
+    sliced.lastIndexOf("? "),
+  );
+  if (lastSentence > 80) return `${sliced.slice(0, lastSentence + 1).trim()}`;
+  const lastSpace = sliced.lastIndexOf(" ");
+  return `${sliced.slice(0, lastSpace > 0 ? lastSpace : max).trim()}…`;
+}
+
 function normalizeTitle(title: string): string {
   return title
     .toLowerCase()
@@ -78,7 +96,7 @@ export async function getWritingPosts(limit = 4): Promise<WritingPost[]> {
       seen.add(key);
 
       const publishedAt = inner(item, "pubDate");
-      const brief = inner(item, "description").replace(/\s+/g, " ").trim();
+      const brief = cleanBrief(inner(item, "description"));
 
       posts.push({
         title,

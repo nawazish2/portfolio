@@ -154,7 +154,7 @@ export async function GitHubActivity() {
                     </span>
                   ))}
                 </div>
-                <div className="min-w-0 flex-1 overflow-x-auto pb-1">
+                <div className="min-w-0 flex-1 overflow-x-auto overscroll-x-contain pb-1">
                   <Heatmap weeks={weeks} />
                 </div>
               </div>

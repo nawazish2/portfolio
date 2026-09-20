@@ -7,6 +7,7 @@ const sections = [
   { id: "about", label: "About" },
   { id: "work", label: "Work" },
   { id: "projects", label: "Projects" },
+  { id: "opensource", label: "OSS" },
   { id: "notes", label: "Writing" },
 ];
 
@@ -38,14 +39,14 @@ export function PillNav() {
     <div className="fixed inset-x-0 top-3 z-50 flex justify-center px-3 sm:top-5">
       <nav
         aria-label="Sections"
-        className="flex items-center gap-0.5 rounded-full border border-white/12 bg-[var(--chrome)] p-1 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] backdrop-blur-sm sm:gap-1"
+        className="flex max-w-full items-center gap-0.5 overflow-x-auto rounded-full border border-white/12 bg-[var(--chrome)] p-1 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] backdrop-blur-sm [scrollbar-width:none] sm:gap-1 [&::-webkit-scrollbar]:hidden"
       >
         {sections.map((section) => (
           <a
             key={section.id}
             href={`#${section.id}`}
             className={cn(
-              "rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors sm:px-4 sm:text-[14px]",
+              "shrink-0 rounded-full px-2.5 py-1.5 text-[12px] font-medium transition-colors sm:px-4 sm:text-[14px]",
               active === section.id
                 ? "bg-white/12 text-on-mat"
                 : "text-on-mat-soft hover:text-on-mat",
@@ -56,8 +57,9 @@ export function PillNav() {
         ))}
         <a
           href="#contact"
-          className="ml-0.5 rounded-full bg-accent px-3 py-1.5 text-[13px] font-semibold text-white transition hover:brightness-110 sm:px-4 sm:text-[14px]"
+          className="ml-0.5 inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent px-2.5 py-1.5 text-[12px] font-semibold text-white transition hover:brightness-110 sm:px-4 sm:text-[14px]"
         >
+          <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-white" />
           Connect
         </a>
       </nav>

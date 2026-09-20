@@ -13,7 +13,7 @@ export const siteConfig = {
   shortName: "Nawazish",
   title: "Nawazish Khan — Portfolio",
   description:
-    "Computer Science undergrad in Delhi building useful tools with Swift and TypeScript. Selected work includes CampusForms, Cuprim, ChaiTailwind, and ParkIt.",
+    "Computer Science undergrad (CGPA 8.50) in Delhi building useful tools with Swift and TypeScript. Selected work includes CampusForms, Cuprim, ChaiTailwind, and merged upstream open-source PRs.",
   url: "https://nawazishkhan.in",
   locale: "en_IN",
   location: "Delhi, IND",
@@ -66,20 +66,7 @@ export const siteConfig = {
           highlight: true,
           href: "https://github.com/nawazish2/chai-tailwind",
         },
-        { text: " and " },
-        {
-          text: "AlgoViz",
-          highlight: true,
-          href: "https://algoviz-ashen.vercel.app",
-        },
         { text: " came from." },
-      ],
-    },
-    {
-      parts: [
-        { text: "On the web side: role-based JWT auth, Socket.io realtime, Razorpay payments, Playwright E2E — mostly " },
-        { text: "React, Next.js and Node", highlight: true },
-        { text: "." },
       ],
     },
     {
@@ -127,13 +114,13 @@ export const siteConfig = {
     },
     {
       name: "Swift",
-      category: "Frontend",
+      category: "Native",
       href: "https://www.swift.org",
       color: "#F05138",
     },
     {
       name: "SwiftUI",
-      category: "Frontend",
+      category: "Native",
       href: "https://developer.apple.com/xcode/swiftui/",
       color: "#0A84FF",
     },
@@ -239,8 +226,7 @@ export const siteConfig = {
         meta: "ongoing",
         role: "TypeScript, from scratch",
         detail:
-          "Gradient descent, attention, k-means and random forests implemented from first principles, then made interactive in AlgoViz. A utility CSS engine written from scratch in ChaiTailwind.",
-        href: "https://algoviz-ashen.vercel.app",
+          "Machine-learning algorithms implemented from first principles, and a utility CSS engine written from scratch in ChaiTailwind.",
       },
       {
         org: "DSA & writing",

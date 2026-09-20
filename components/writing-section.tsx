@@ -41,7 +41,7 @@ function IndexCard({
             {title}
           </h3>
           {brief ? (
-            <p className="mt-1.5 line-clamp-4 text-[12.5px] leading-[1.65] text-ink-soft">{brief}</p>
+            <p className="mt-1.5 line-clamp-3 text-[12.5px] leading-[1.65] text-ink-soft">{brief}</p>
           ) : null}
           <p className="mt-2.5 font-mono text-[10px] text-ink-faint">{dateLabel}</p>
         </div>

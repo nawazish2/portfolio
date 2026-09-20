@@ -21,11 +21,11 @@ export function ProjectCard({
       <div className="relative pt-3 transition-transform duration-300 hover:-translate-y-1">
         <Paper
           tilt={tilts[index % tilts.length]}
-          className="flex h-full flex-col p-2.5 pb-4"
+          className="flex h-full flex-col p-2 pb-3"
         >
           <Pin />
 
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[5px] bg-paper-sunk">
+          <div className="relative aspect-[16/8] overflow-hidden rounded-[5px] bg-paper-sunk">
             {project.image ? (
               <Image
                 src={project.image}
@@ -34,10 +34,14 @@ export function ProjectCard({
                 sizes="(min-width: 640px) 46vw, 92vw"
                 className="object-cover"
               />
-            ) : null}
+            ) : (
+              <div className="flex h-full items-center justify-center px-4 text-center font-hand text-[18px] text-ink-soft">
+                {project.oneLiner}
+              </div>
+            )}
           </div>
 
-          <div className="px-1.5 pt-3">
+          <div className="px-1 pt-2">
             <div className="flex items-baseline justify-between gap-2">
               <h3 className="text-[14px] leading-none font-semibold tracking-tight text-ink">
                 {project.title}
@@ -45,20 +49,26 @@ export function ProjectCard({
               <span className="font-mono text-[10px] text-ink-faint">{project.year}</span>
             </div>
 
-            <p className="mt-1.5 truncate font-mono text-[9.5px] tracking-wide text-ink-faint">
+            <p className="mt-1 truncate font-mono text-[10px] tracking-wide text-ink-faint">
               {primaryStack.join(" · ")}
             </p>
 
-            <p className="mt-1.5 font-hand text-[15px] leading-none text-accent-ink">
+            <p className="mt-1 font-hand text-[14.5px] leading-tight text-accent-ink">
               {project.badge ? `${project.badge} · ` : ""}
               {project.oneLiner}
             </p>
 
-            <p className="mt-2 text-[12px] leading-[1.6] text-ink-soft">
+            <p className="mt-1.5 line-clamp-2 text-[12.5px] leading-[1.65] text-ink-soft">
               {project.description}
             </p>
 
-            <div className="mt-3 flex items-center gap-2">
+            {project.metric ? (
+              <p className="mt-1.5 inline-block rounded-full bg-paper-sunk px-2 py-0.5 font-mono text-[10px] leading-relaxed text-ink">
+                {project.metric}
+              </p>
+            ) : null}
+
+            <div className="mt-2.5 flex items-center gap-2">
               {project.github ? (
                 <a
                   href={project.github}

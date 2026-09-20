@@ -32,6 +32,7 @@ export function Hero() {
               width={380}
               height={430}
               priority
+              sizes="170px"
               className="h-[176px] w-full object-cover md:h-[192px]"
             />
           </Polaroid>
@@ -60,7 +61,7 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Sticky note bio */}
+            {/* Sticky note bio */}
           <div className="relative mt-5 sm:mt-6">
             <Tape className="-top-3 left-8 z-10" tilt={-7} />
             <Tape className="-top-3 right-10 z-10" tilt={5} />

@@ -5,6 +5,7 @@ import { MatHeading } from "@/components/desk/paper";
 import { Hero } from "@/components/hero";
 import { GitHubActivity } from "@/components/github-activity";
 import { WorkSection } from "@/components/work-section";
+import { OpenSourceSection } from "@/components/opensource-section";
 import { WritingSection } from "@/components/writing-section";
 import { TechStack } from "@/components/tech-stack";
 import { ProjectCard } from "@/components/project-card";
@@ -24,6 +25,10 @@ export default function Home() {
 
         <main className="mx-auto w-full max-w-4xl px-4 pt-20 pb-8 sm:px-6 sm:pt-24">
           <Hero />
+
+          <div className="mt-8 sm:mt-10 xl:hidden">
+            <StickerStrip />
+          </div>
 
           <div className="mt-10 sm:mt-12">
             <GitHubActivity />
@@ -47,11 +52,11 @@ export default function Home() {
           </div>
 
           <div className="mt-14 sm:mt-16">
-            <WritingSection />
+            <OpenSourceSection />
           </div>
 
-          <div className="mt-12 sm:mt-14 xl:hidden">
-            <StickerStrip />
+          <div className="mt-14 sm:mt-16">
+            <WritingSection />
           </div>
 
           <div className="mt-14 sm:mt-16">
