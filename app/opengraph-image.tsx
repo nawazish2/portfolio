@@ -1,5 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { env } from "cloudflare:workers";
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/content/site";
 
@@ -7,7 +6,11 @@ export const alt = `${siteConfig.name} — ${siteConfig.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const fontDir = join(process.cwd(), "app", "_fonts");
+// Workers have no filesystem; fonts are served as static assets from public/og-fonts.
+const loadFont = async (file: string) => {
+  const res = await env.ASSETS.fetch(new Request(`https://assets.local/og-fonts/${file}`));
+  return res.arrayBuffer();
+};
 
 const tags = ["Swift", "SwiftUI", "TypeScript", "React", "Next.js", "Node.js"];
 
@@ -18,9 +21,9 @@ const tags = ["Swift", "SwiftUI", "TypeScript", "React", "Next.js", "Node.js"];
  */
 export default async function OpengraphImage() {
   const [inter, interBold, caveat] = await Promise.all([
-    readFile(join(fontDir, "Inter-Regular.ttf")),
-    readFile(join(fontDir, "Inter-Bold.ttf")),
-    readFile(join(fontDir, "Caveat-SemiBold.ttf")),
+    loadFont("Inter-Regular.ttf"),
+    loadFont("Inter-Bold.ttf"),
+    loadFont("Caveat-SemiBold.ttf"),
   ]);
 
   return new ImageResponse(
