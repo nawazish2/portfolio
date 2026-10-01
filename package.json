@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@react-email/components": "^1.0.12",
-    "@vercel/analytics": "^2.0.1",
     "@vinext/cloudflare": "^1.0.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.511.0",

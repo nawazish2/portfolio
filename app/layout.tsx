@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Caveat, Geist_Mono, Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import { JsonLd } from "@/components/json-ld";
 import { siteConfig } from "@/content/site";
 import "./globals.css";
@@ -87,7 +87,12 @@ export default function RootLayout({
       <body className="min-h-full overflow-x-clip font-sans antialiased">
         <JsonLd />
         {children}
-        <Analytics />
+        <Script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "fe18b9d36cf74b94a22dd071a4021970"}'
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
