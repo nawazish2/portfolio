@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+  tilt?: number;
+}
+const { class: className, tilt = -4 } = Astro.props;
+---
+
+<span
+  aria-hidden="true"
+  class:list={["absolute h-6 w-24 rounded-[2px]", className]}
+  style={{
+    transform: `rotate(${tilt}deg)`,
+    background: "linear-gradient(180deg, rgba(244,236,205,0.72), rgba(226,214,172,0.6))",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.28)",
+    maskImage:
+      "linear-gradient(90deg, transparent 0, black 6px, black calc(100% - 6px), transparent 100%)",
+    WebkitMaskImage:
+      "linear-gradient(90deg, transparent 0, black 6px, black calc(100% - 6px), transparent 100%)",
+  }}
+></span>

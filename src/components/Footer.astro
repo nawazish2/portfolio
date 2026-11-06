@@ -1,0 +1,30 @@
+---
+import { siteConfig } from "@/content/site";
+import Icon, { type IconName } from "@/components/Icon.astro";
+import IconStamp from "@/components/desk/IconStamp.astro";
+
+const links: { href: string; label: string; icon: IconName }[] = [
+  { href: siteConfig.links.github, label: "GitHub", icon: "github" },
+  { href: siteConfig.links.linkedin, label: "LinkedIn", icon: "linkedin" },
+  { href: siteConfig.links.email, label: "Email", icon: "mail" },
+  { href: siteConfig.resumeUrl, label: "Résumé", icon: "file-text" },
+];
+---
+
+<footer class="flex flex-col items-center gap-4 pt-4 pb-14 text-center">
+  <div class="flex items-center gap-2">
+    {
+      links.map(({ href, label, icon }) => (
+        <IconStamp href={href} label={label} size="lg">
+          <Icon name={icon} size={16} strokeWidth={1.9} />
+        </IconStamp>
+      ))
+    }
+  </div>
+  <p class="font-hand text-[17px] text-on-mat-soft">
+    built on a desk in {siteConfig.location.replace(", IND", "")}, mostly at night
+  </p>
+  <p class="font-mono text-[10px] tracking-wider text-on-mat-soft/60 uppercase">
+    © {new Date().getFullYear()} {siteConfig.name}
+  </p>
+</footer>

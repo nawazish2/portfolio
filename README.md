@@ -4,41 +4,54 @@ Personal portfolio - [nawazishkhan.in](https://nawazishkhan.in).
 
 ## Stack
 
-- Next.js 16
+- [Astro](https://astro.build): every page is static HTML built ahead of time
 - TypeScript
 - Tailwind CSS 4
-- Motion
-- Vercel
+- Cloudflare Workers: static assets, plus one Worker route for the contact form
+
+The page ships about 2.5 KB of JavaScript (under 1.5 KB gzipped): the nav highlight, the scroll fade-ins, the draggable stickers and the contact form, all as plain scripts. There is no framework runtime in the browser.
 
 ## Develop
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev          # http://localhost:4321
 ```
 
-## Build
+## Build & deploy
 
 ```bash
-npm run build
-npm start
+pnpm build        # static site -> dist/client, Worker -> dist/server
+pnpm preview      # build, then run the real Worker locally with wrangler
+pnpm deploy       # build, then wrangler deploy
+pnpm typecheck
 ```
+
+GitHub activity, open-source star counts and Hashnode posts are fetched **at build time**.
+Rebuild and deploy to refresh them. Set `GITHUB_TOKEN` in the build environment to avoid GitHub API rate limits.
 
 ## Content
 
 Edit:
 
-- `content/site.ts` — identity, links, about, stack
-- `content/projects.ts` — selected work
+- `src/content/site.ts` — identity, links, about, stack
+- `src/content/projects.ts` — selected work (images live in `src/assets/projects/`)
+- `src/content/opensource.ts` — merged upstream PRs
 
-## Contact
+Images in `src/assets` are resized and converted to AVIF/WebP at build time.
+The share image (`/og.png`) is also rendered at build time from `src/pages/og.png.ts`.
 
-Optional env vars for the contact form:
+## Contact form
+
+The form posts to `/api/contact` (`src/pages/api/contact.ts`), which sends mail through Resend.
+Set these on the Worker (`RESEND_API_KEY` as a secret):
 
 ```bash
-RESEND_API_KEY=
+wrangler secret put RESEND_API_KEY
+# optional vars:
 CONTACT_TO_EMAIL=knawazish153@gmail.com
 RESEND_FROM_EMAIL="Portfolio <onboarding@resend.dev>"
 ```
 
-Without `RESEND_API_KEY`, the form returns a configuration error and the mailto fallback remains available.
+For local `pnpm preview`, put them in `.dev.vars`.
+Without `RESEND_API_KEY` the form returns a configuration error and the mailto fallback remains available.

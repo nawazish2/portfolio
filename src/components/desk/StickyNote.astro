@@ -1,0 +1,14 @@
+---
+interface Props {
+  class?: string;
+  tilt?: number;
+}
+const { class: className, tilt = 0 } = Astro.props;
+---
+
+<div
+  class:list={["note relative rounded-[3px] px-4 py-3.5", className]}
+  style={tilt ? { transform: `rotate(${tilt}deg)` } : undefined}
+>
+  <slot />
+</div>

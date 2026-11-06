@@ -1,0 +1,17 @@
+---
+/** A sheet of paper resting on the mat. `tilt` is in degrees. */
+interface Props {
+  class?: string;
+  tilt?: number;
+  id?: string;
+}
+const { class: className, tilt = 0, id } = Astro.props;
+---
+
+<div
+  id={id}
+  class:list={["paper paper-grain relative", className]}
+  style={tilt ? { transform: `rotate(${tilt}deg)` } : undefined}
+>
+  <slot />
+</div>

@@ -1,0 +1,100 @@
+---
+/**
+ * The drafting mat the whole page sits on: a soft vignette, a fine 24px grid,
+ * a coarse 120px grid, and the angle rules a real cutting mat is printed with —
+ * dashed diagonals, dashed protractor arcs and degree marks.
+ *
+ * Fixed, and isolated into its own GPU layer (`contain` + `translateZ`), so it
+ * is painted once and only composited while you scroll. Nothing on top of it
+ * uses backdrop-filter, which is what used to force a repaint every frame.
+ */
+const dash = "5 8";
+const rays = [30, 45, 60];
+const radii = [170, 260, 350, 440, 530];
+
+function protractor(origin: "bottom-left" | "top-left") {
+  const cy = origin === "bottom-left" ? 600 : 0;
+  const up = origin === "bottom-left" ? -1 : 1;
+  return {
+    cy,
+    lines: rays.map((angle) => {
+      const r = (angle * Math.PI) / 180;
+      return {
+        angle,
+        x2: 560 * Math.cos(r),
+        y2: cy + up * 560 * Math.sin(r),
+        lx: 215 * Math.cos(r),
+        ly: cy + up * 215 * Math.sin(r),
+        dy: up === -1 ? -6 : 14,
+      };
+    }),
+  };
+}
+
+const topLeft = protractor("top-left");
+const bottomLeft = protractor("bottom-left");
+const rules = [
+  { top: "18%", angle: 38 },
+  { top: "74%", angle: -38 },
+  { top: "46%", angle: 12 },
+];
+---
+
+<div
+  aria-hidden="true"
+  class="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+  style="contain: strict; transform: translateZ(0);"
+>
+  <div
+    class="absolute inset-0"
+    style="background: radial-gradient(130% 95% at 50% 32%, var(--mat-top) 0%, var(--mat-base) 62%, var(--mat-edge) 100%);"
+  ></div>
+
+  {/* fine + coarse grid in one layer */}
+  <div
+    class="absolute inset-0"
+    style="background-image: linear-gradient(var(--mat-grid-coarse) 1px, transparent 1px), linear-gradient(90deg, var(--mat-grid-coarse) 1px, transparent 1px), linear-gradient(var(--mat-grid-fine) 1px, transparent 1px), linear-gradient(90deg, var(--mat-grid-fine) 1px, transparent 1px); background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;"
+  ></div>
+
+  {/* dashed cut guides running corner to corner */}
+  {
+    rules.map((rule) => (
+      <div
+        class="absolute -left-[50%] w-[200%] origin-center"
+        style={{
+          top: rule.top,
+          transform: `rotate(${rule.angle}deg)`,
+          borderTop: "1px dashed var(--mat-ruler)",
+          opacity: 0.75,
+        }}
+      />
+    ))
+  }
+
+  {/* protractor rules in the corners */}
+  <svg viewBox="0 0 600 600" fill="none" class="absolute -top-28 -left-24 h-[560px] w-[560px] opacity-80">
+    {radii.map((r) => <circle cx="0" cy={topLeft.cy} r={r} stroke="var(--mat-ruler)" stroke-dasharray={dash} />)}
+    {topLeft.lines.map((l) => <line x1="0" y1={topLeft.cy} x2={l.x2} y2={l.y2} stroke="var(--mat-ruler)" stroke-dasharray={dash} />)}
+  </svg>
+  <svg viewBox="0 0 600 600" fill="none" class="absolute -bottom-16 left-0 h-[600px] w-[600px] opacity-80">
+    {radii.map((r) => <circle cx="0" cy={bottomLeft.cy} r={r} stroke="var(--mat-ruler)" stroke-dasharray={dash} />)}
+    {bottomLeft.lines.map((l) => <line x1="0" y1={bottomLeft.cy} x2={l.x2} y2={l.y2} stroke="var(--mat-ruler)" stroke-dasharray={dash} />)}
+    {
+      bottomLeft.lines.map((l) => (
+        <text x={l.lx} y={l.ly} dx="12" dy={l.dy} fill="var(--mat-ruler)" font-size="15" font-family="ui-monospace, monospace">
+          {l.angle}°
+        </text>
+      ))
+    }
+  </svg>
+
+  {/* ruler ticks along the top and left edges */}
+  <div
+    class="absolute inset-x-0 top-0 h-6 opacity-70"
+    style="background-image: repeating-linear-gradient(90deg, var(--mat-ruler) 0 1px, transparent 1px 24px); mask-image: linear-gradient(to bottom, black, transparent); -webkit-mask-image: linear-gradient(to bottom, black, transparent);"
+  ></div>
+  <div
+    class="absolute inset-y-0 left-0 w-6 opacity-70"
+    style="background-image: repeating-linear-gradient(180deg, var(--mat-ruler) 0 1px, transparent 1px 24px); mask-image: linear-gradient(to right, black, transparent); -webkit-mask-image: linear-gradient(to right, black, transparent);"
+  ></div>
+</div>

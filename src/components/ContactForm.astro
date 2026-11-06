@@ -1,0 +1,110 @@
+---
+import { siteConfig } from "@/content/site";
+import Icon from "@/components/Icon.astro";
+
+const inputClass =
+  "h-10 rounded-md border border-paper-edge bg-paper-sunk px-3.5 text-[13px] text-ink outline-none transition placeholder:text-ink-faint focus:border-accent";
+---
+
+<form data-contact-form action="/api/contact" method="post" class="grid gap-4">
+  <label class="hidden">
+    Website
+    <input name="website" type="text" tabindex="-1" autocomplete="off" />
+  </label>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <label class="grid gap-1.5 text-[12px] font-medium text-ink-soft">
+      Name
+      <input name="name" required maxlength="120" autocomplete="name" placeholder="Your name" class={inputClass} />
+    </label>
+    <label class="grid gap-1.5 text-[12px] font-medium text-ink-soft">
+      Email
+      <input
+        name="email"
+        type="email"
+        required
+        maxlength="160"
+        autocomplete="email"
+        placeholder="you@example.com"
+        class={inputClass}
+      />
+    </label>
+  </div>
+
+  <label class="grid gap-1.5 text-[12px] font-medium text-ink-soft">
+    Subject
+    <select name="subject" required class={inputClass}>
+      <option value="" disabled selected>Choose a subject</option>
+      <option>Internship or role</option>
+      <option>Product collaboration</option>
+      <option>Project feedback</option>
+      <option>Other</option>
+    </select>
+  </label>
+
+  <label class="grid gap-1.5 text-[12px] font-medium text-ink-soft">
+    Message
+    <textarea
+      name="message"
+      required
+      rows="4"
+      maxlength="3000"
+      placeholder="Tell me what you're building or what you need."
+      class="resize-none rounded-md border border-paper-edge bg-paper-sunk px-3.5 py-3 text-[13px] text-ink outline-none transition placeholder:text-ink-faint focus:border-accent"
+    ></textarea>
+  </label>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <button
+      type="submit"
+      class="inline-flex h-10 cursor-pointer items-center gap-2 rounded-full bg-accent px-5 text-[13px] font-semibold text-white transition hover:brightness-110 active:scale-[0.98] disabled:opacity-60"
+    >
+      <span data-label>Send message</span>
+      <Icon name="send" size={15} />
+    </button>
+    <a href={siteConfig.links.email} class="font-hand text-[16px] text-ink-soft transition hover:text-accent-ink">
+      or email directly
+    </a>
+  </div>
+
+  <p data-status class="hidden text-sm" role="status"></p>
+</form>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>("[data-contact-form]")) {
+    const button = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+    const label = form.querySelector<HTMLElement>("[data-label]")!;
+    const status = form.querySelector<HTMLElement>("[data-status]")!;
+
+    const show = (ok: boolean, text: string) => {
+      status.textContent = text;
+      status.className = `text-sm ${ok ? "text-emerald-700" : "text-red-600"}`;
+      status.setAttribute("role", ok ? "status" : "alert");
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      button.disabled = true;
+      label.textContent = "Sending...";
+      status.className = "hidden";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(Object.fromEntries(data)),
+        });
+        const result = (await response.json().catch(() => ({}))) as { error?: string };
+        if (!response.ok) throw new Error(result.error ?? "Message could not be sent.");
+        form.reset();
+        show(true, "Message sent. I'll get back to you soon.");
+      } catch (error) {
+        show(false, error instanceof Error ? error.message : "Message could not be sent right now.");
+      } finally {
+        button.disabled = false;
+        label.textContent = "Send message";
+      }
+    });
+  }
+</script>

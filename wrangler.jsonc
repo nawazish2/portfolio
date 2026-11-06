@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "compatibility_date": "2026-09-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [
+    { "pattern": "nawazishkhan.in", "custom_domain": true },
+    { "pattern": "www.nawazishkhan.in", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

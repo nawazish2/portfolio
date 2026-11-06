@@ -1,45 +1,30 @@
 {
   "name": "portfolio",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "dev:vinext": "vite dev --port 3001",
-    "build:vinext": "vite build",
-    "start:vinext": "vite preview",
-    "deploy:vinext": "vinext-cloudflare deploy"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && wrangler dev",
+    "typecheck": "wrangler types && tsc --noEmit",
+    "deploy": "astro build && wrangler deploy"
   },
   "dependencies": {
-    "@react-email/components": "^1.0.12",
-    "@vinext/cloudflare": "^1.0.0",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.511.0",
-    "motion": "^12.38.0",
-    "next": "16.2.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "react-server-dom-webpack": "^19.3.0",
-    "resend": "^6.12.3",
-    "tailwind-merge": "^3.5.0",
-    "vinext": "^1.0.0"
+    "@astrojs/cloudflare": "^14.4.6",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/caveat": "^5.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "astro": "^7.4.7",
+    "resend": "^6.37.0"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "2.0.0-beta.sha-ad79608dd",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.1.1",
-    "@vitejs/plugin-rsc": "^0.5.35",
-    "cf": "1.0.0-beta.5",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.2",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vite": "8.3.0"
-  },
-  "type": "module"
+    "@tailwindcss/vite": "^4.3.4",
+    "lucide-static": "^1.70.0",
+    "satori": "^0.63.2",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.4",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.158.0"
+  }
 }

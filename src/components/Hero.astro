@@ -1,0 +1,97 @@
+---
+import { Picture } from "astro:assets";
+import { siteConfig, type AboutPart } from "@/content/site";
+import { localImage } from "@/lib/images";
+import Icon, { type IconName } from "@/components/Icon.astro";
+import XIcon from "@/components/XIcon.astro";
+import IconStamp from "@/components/desk/IconStamp.astro";
+import Polaroid from "@/components/desk/Polaroid.astro";
+import StickyNote from "@/components/desk/StickyNote.astro";
+import Tape from "@/components/desk/Tape.astro";
+
+const socials: { href: string; label: string; icon: IconName }[] = [
+  { href: siteConfig.links.github, label: "GitHub", icon: "github" },
+  { href: siteConfig.links.linkedin, label: "LinkedIn", icon: "linkedin" },
+  { href: siteConfig.links.email, label: "Email", icon: "mail" },
+  { href: siteConfig.resumeUrl, label: "Résumé", icon: "file-text" },
+];
+
+const profile = localImage(siteConfig.profileImage)!;
+---
+
+<section id="about" class="relative scroll-mt-28">
+  <div class="grid gap-5 sm:gap-7 md:grid-cols-[170px_1fr] md:items-start">
+    {/* Taped polaroid */}
+    <div class="relative mx-auto w-[156px] shrink-0 md:mx-0 md:w-[170px]">
+      <Tape class="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-5} />
+      <Polaroid tilt={-3.5} caption="that's me">
+        <Picture
+          src={profile}
+          alt={siteConfig.name}
+          formats={["avif", "webp"]}
+          widths={[170, 340]}
+          sizes="170px"
+          loading="eager"
+          fetchpriority="high"
+          class="h-[176px] w-full object-cover md:h-[192px]"
+        />
+      </Polaroid>
+    </div>
+
+    <div class="min-w-0">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 class="text-[26px] leading-none font-semibold tracking-[-0.025em] text-on-mat sm:text-[30px]">
+            {siteConfig.name}
+          </h1>
+          <p class="mt-2 font-hand text-[17px] leading-none text-accent-soft sm:text-[18px]">
+            {siteConfig.heroKicker}
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          {
+            socials.map(({ href, label, icon }) => (
+              <IconStamp href={href} label={label}>
+                <Icon name={icon} size={15} strokeWidth={1.9} />
+              </IconStamp>
+            ))
+          }
+          <IconStamp href={siteConfig.links.x} label="X">
+            <XIcon />
+          </IconStamp>
+        </div>
+      </div>
+
+      {/* Sticky note bio */}
+      <div class="relative mt-5 sm:mt-6">
+        <Tape class="-top-3 left-8 z-10" tilt={-7} />
+        <Tape class="-top-3 right-10 z-10" tilt={5} />
+        <StickyNote tilt={-0.4}>
+          <ul class="space-y-2">
+            {
+              siteConfig.heroNote.map((line) => (
+                <li class="flex gap-2.5 text-[14px] leading-[1.625] text-ink">
+                  <span aria-hidden="true" class="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent" />
+                  <span>
+                    {(line.parts as readonly AboutPart[]).map((part) =>
+                      part.href ? (
+                        <a href={part.href} target="_blank" rel="noopener noreferrer" class="link-ink font-medium">
+                          {part.text}
+                        </a>
+                      ) : part.highlight ? (
+                        <span class="font-hand text-[1.15em] text-accent-ink">{part.text}</span>
+                      ) : (
+                        <span>{part.text}</span>
+                      ),
+                    )}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </StickyNote>
+      </div>
+    </div>
+  </div>
+</section>

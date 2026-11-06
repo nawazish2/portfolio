@@ -1,0 +1,38 @@
+---
+import Icon from "@/components/Icon.astro";
+
+interface Props {
+  entry: { org: string; meta: string; role: string; detail: string; href?: string };
+  last: boolean;
+}
+const { entry, last } = Astro.props;
+---
+
+<li class="relative pb-4 pl-5 last:pb-0">
+  {last ? null : <span aria-hidden="true" class="absolute top-2.5 bottom-0 left-[5px] w-px bg-paper-edge" />}
+  <span
+    aria-hidden="true"
+    class="absolute top-[6px] left-0 size-[11px] rounded-full border-2 border-accent bg-paper"
+  ></span>
+
+  <div class="flex flex-wrap items-baseline gap-x-2">
+    {
+      entry.href ? (
+        <a
+          href={entry.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-ink inline-flex items-center gap-1 text-[14px] font-semibold"
+        >
+          {entry.org}
+          <Icon name="arrow-up-right" size={13} />
+        </a>
+      ) : (
+        <span class="text-[14px] font-semibold text-ink">{entry.org}</span>
+      )
+    }
+    <span class="font-mono text-[10px] text-ink-faint">· {entry.meta}</span>
+  </div>
+  <p class="mt-0.5 text-[12px] font-medium text-accent-ink">{entry.role}</p>
+  <p class="mt-1.5 max-w-2xl text-[12.5px] leading-[1.65] text-ink-soft">{entry.detail}</p>
+</li>

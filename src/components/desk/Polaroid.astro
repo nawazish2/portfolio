@@ -1,0 +1,25 @@
+---
+/** A photo in a polaroid frame: thick white border, deep bottom lip. */
+interface Props {
+  caption?: string;
+  class?: string;
+  tilt?: number;
+}
+const { caption, class: className, tilt = 0 } = Astro.props;
+---
+
+<div
+  class:list={["paper relative p-2.5 pb-9", className]}
+  style={tilt ? { transform: `rotate(${tilt}deg)` } : undefined}
+>
+  <div class="relative overflow-hidden rounded-[3px] bg-paper-sunk">
+    <slot />
+  </div>
+  {
+    caption ? (
+      <div class="absolute inset-x-0 bottom-1.5 px-3 text-center font-hand text-[15px] leading-none text-ink-soft">
+        {caption}
+      </div>
+    ) : null
+  }
+</div>

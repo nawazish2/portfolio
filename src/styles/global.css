@@ -1,0 +1,228 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/caveat/wght.css";
+
+/*
+ * "Desk" theme — paper objects laid out on a dark drafting mat.
+ * Single look (no light/dark toggle): the mat IS the background.
+ */
+:root {
+  /* Mat (page background) */
+  --mat-top: #2b473a;
+  --mat-base: #1a2e26;
+  --mat-edge: #0f1d17;
+  --mat-grid-fine: rgba(168, 216, 188, 0.1);
+  --mat-grid-coarse: rgba(232, 168, 90, 0.13);
+  --mat-ruler: rgba(206, 244, 222, 0.3);
+  /* Floating chrome on the mat: nav pill, icon buttons. Nearly opaque instead of
+     backdrop-blurred — a blur over the fixed mat re-rendered on every scroll frame. */
+  --chrome: rgba(17, 33, 27, 0.94);
+
+  /* Paper objects sitting on the mat */
+  --paper: #f7f3ea;
+  --paper-edge: #e2dccd;
+  --paper-sunk: #efe9dc;
+  --note: #fdf1bd;
+  --note-edge: #f0dd94;
+
+  /* Ink */
+  --ink: #23211d;
+  --ink-soft: #635c50;
+  --ink-faint: #948b7c;
+
+  /* Text sitting directly on the mat */
+  --on-mat: #f0f6f1;
+  --on-mat-soft: #a9c1b3;
+
+  /* Accents */
+  --accent: #e2793c;
+  --accent-soft: #f0b429;
+  --accent-ink: #b8551f;
+
+  --tape: rgba(240, 227, 180, 0.62);
+  --radius: 0.75rem;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-edge: var(--paper-edge);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-note: var(--note);
+  --color-note-edge: var(--note-edge);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-on-mat: var(--on-mat);
+  --color-on-mat-soft: var(--on-mat-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat Variable", ui-rounded, cursive;
+  /* System mono: one less font download, and it only sets tiny labels. */
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    /* `clip` (not `hidden`) avoids creating a scroll container, which keeps
+       `position: fixed` and momentum scrolling smooth on iOS Safari. */
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  /* Touch devices handle momentum natively — CSS smooth-scroll fights it. */
+  @media (hover: none) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--mat-base);
+    color: var(--on-mat);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 2px;
+  }
+
+  input,
+  textarea {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .font-hand {
+    font-family: var(--font-hand);
+    letter-spacing: 0.01em;
+  }
+
+  /* A sheet of paper resting on the mat */
+  .paper {
+    background-color: var(--paper);
+    color: var(--ink);
+    border-radius: var(--radius);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.35) inset,
+      0 2px 4px rgba(0, 0, 0, 0.22),
+      0 14px 28px -10px rgba(0, 0, 0, 0.45);
+  }
+
+  .paper-thin {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.3) inset,
+      0 1px 2px rgba(0, 0, 0, 0.18),
+      0 8px 18px -10px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Faint paper fibre so the cream is not flat */
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image:
+      radial-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+      radial-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+    background-size:
+      7px 7px,
+      11px 11px;
+    background-position:
+      0 0,
+      3px 4px;
+  }
+
+  /* Sticky note */
+  .note {
+    background-color: var(--note);
+    color: var(--ink);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.5) inset,
+      0 2px 3px rgba(0, 0, 0, 0.2),
+      0 16px 26px -14px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Section label sitting directly on the mat */
+  .mat-title {
+    font-size: 1.3125rem; /* 21px */
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--on-mat);
+  }
+
+  @media (min-width: 640px) {
+    .mat-title {
+      font-size: 1.5rem; /* 24px — matches the reference scale */
+    }
+  }
+
+  .link-ink {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    text-underline-offset: 3px;
+    transition: color 150ms;
+  }
+
+  .link-ink:hover {
+    color: var(--accent-ink);
+  }
+}
+
+/*
+   * Scroll reveal. Content is only hidden once JS has marked <html class="js">,
+   * so it is never invisible without JS. Transform + opacity only: both run on
+   * the compositor and never trigger layout or repaint.
+   */
+  .js .reveal {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+    transition:
+      opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+      transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .js .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

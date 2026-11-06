@@ -1,0 +1,28 @@
+---
+import { siteConfig } from "@/content/site";
+import ContactForm from "@/components/ContactForm.astro";
+import Reveal from "@/components/Reveal.astro";
+import Paper from "@/components/desk/Paper.astro";
+import Tape from "@/components/desk/Tape.astro";
+---
+
+<section id="contact" class="scroll-mt-28">
+  <Reveal>
+    <div class="relative mx-auto max-w-2xl">
+      <Tape class="-top-3 left-1/2 z-10 -translate-x-1/2" tilt={-3} />
+      <Paper tilt={-0.6} class="px-4 py-4 sm:px-5 sm:py-5">
+        <h2 class="text-[21px] leading-none font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">
+          Say{" "}
+          <span class="font-hand text-[1.08em] leading-none font-normal text-accent">hello</span>
+        </h2>
+        <p class="mt-2.5 max-w-md text-[13px] leading-relaxed text-ink-soft">
+          Open to SDE roles, internships and product work. Based in {siteConfig.location.replace(", IND", "")}, happy
+          to work remote.
+        </p>
+        <div class="mt-4">
+          <ContactForm />
+        </div>
+      </Paper>
+    </div>
+  </Reveal>
+</section>

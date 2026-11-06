@@ -1,0 +1,17 @@
+---
+import Base from "@/layouts/Base.astro";
+import Mat from "@/components/desk/Mat.astro";
+import Icon from "@/components/Icon.astro";
+---
+
+<Base title="Not found" description="This page is not on the desk." path="/404">
+  <Mat />
+  <main class="relative z-10 mx-auto flex min-h-[80vh] max-w-md flex-col items-center justify-center px-4 text-center">
+    <p class="font-hand text-[22px] text-accent-soft">nothing pinned here</p>
+    <h1 class="mt-2 text-[30px] font-semibold tracking-[-0.025em] text-on-mat">Page not found</h1>
+    <a href="/" class="mt-6 inline-flex items-center gap-1.5 text-[13px] text-on-mat-soft transition hover:text-on-mat">
+      <Icon name="arrow-left" size={14} />
+      Back to the desk
+    </a>
+  </main>
+</Base>

@@ -1,0 +1,99 @@
+---
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import caveatLatin from "@fontsource-variable/caveat/files/caveat-latin-wght-normal.woff2?url";
+import { siteConfig } from "@/content/site";
+import JsonLd from "@/components/JsonLd.astro";
+import "@/styles/global.css";
+
+interface Props {
+  /** Page title; the site title is used when omitted. */
+  title?: string;
+  description?: string;
+  /** Path of the page, e.g. "/contact". */
+  path?: string;
+  jsonLd?: boolean;
+}
+
+const { title, description = siteConfig.description, path = "/", jsonLd = false } = Astro.props;
+const fullTitle = title ? `${title} · ${siteConfig.name}` : siteConfig.title;
+const canonical = new URL(path, siteConfig.url).href;
+const ogImage = new URL("/og.png", siteConfig.url).href;
+const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Marks JS as available before first paint, so .reveal content is only hidden when it can be revealed. */}
+    <script is:inline>document.documentElement.classList.add("js")</script>
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.name} />
+    <meta name="application-name" content={siteConfig.name} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#1a2e26" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={caveatLatin} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={siteConfig.locale} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@nawazish_khan1" />
+    <meta name="twitter:creator" content="@nawazish_khan1" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+
+    {jsonLd ? <JsonLd /> : null}
+  </head>
+  <body class="min-h-full overflow-x-clip font-sans antialiased">
+    <slot />
+
+    <script>
+      // One observer for every .reveal block on the page.
+      const blocks = document.querySelectorAll<HTMLElement>(".reveal");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("is-in");
+              observer.unobserve(entry.target);
+            }
+          },
+          { threshold: 0.15 },
+        );
+        for (const block of blocks) observer.observe(block);
+      } else {
+        for (const block of blocks) block.classList.add("is-in");
+      }
+    </script>
+
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "fe18b9d36cf74b94a22dd071a4021970"}'></script>
+  </body>
+</html>

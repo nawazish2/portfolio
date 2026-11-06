@@ -1,0 +1,129 @@
+---
+import { siteConfig } from "@/content/site";
+import Icon from "@/components/Icon.astro";
+import Paper from "@/components/desk/Paper.astro";
+import Tape from "@/components/desk/Tape.astro";
+import {
+  applyMonthLabels,
+  getGitHubActivity,
+  toWeekColumns,
+  type ContributionDay,
+  type ContributionLevel,
+  type WeekColumn,
+} from "@/lib/github";
+
+const levelClass: Record<ContributionLevel, string> = {
+  0: "bg-[#e4e9e3]",
+  1: "bg-[#a8e6b0]",
+  2: "bg-[#6dcb7c]",
+  3: "bg-[#3aa758]",
+  4: "bg-[#1d6b34]",
+};
+
+const weekdayLabels = ["", "Mon", "", "Wed", "", "Fri", ""];
+
+function dayTitle(day: ContributionDay): string {
+  const when = new Date(`${day.date}T12:00:00Z`).toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  if (day.count === 0) return `No contributions on ${when}`;
+  const noun = day.count === 1 ? "contribution" : "contributions";
+  return `${day.count.toLocaleString()} ${noun} on ${when}`;
+}
+
+const activity = await getGitHubActivity(siteConfig.githubUsername);
+const weeks: WeekColumn[] = activity ? toWeekColumns(activity.days) : [];
+const mobileWeeks = applyMonthLabels(weeks.slice(-20));
+
+const views = [
+  { weeks: mobileWeeks, compact: true },
+  { weeks, compact: false },
+];
+---
+
+<div class="relative">
+  <Tape class="-top-2.5 left-10 z-10" tilt={-7} />
+  <Tape class="-top-2.5 right-12 z-10" tilt={6} />
+  <Paper tilt={-0.5} class="p-3">
+    <div class="mb-2 flex items-baseline justify-between gap-3">
+      <h2 class="text-[12px] leading-none font-medium text-ink-soft">GitHub activity</h2>
+      <a
+        href={activity?.profileUrl ?? siteConfig.links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1 text-[12px] text-ink-faint transition hover:text-accent-ink"
+      >
+        @{siteConfig.githubUsername}
+        <Icon name="arrow-up-right" size={12} />
+      </a>
+    </div>
+
+    {
+      !activity || weeks.length === 0 ? (
+        <p class="text-sm text-ink-soft">
+          Live contribution data could not be loaded.{" "}
+          <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" class="link-ink">
+            View GitHub profile
+          </a>
+        </p>
+      ) : (
+        <>
+          <p class="sr-only">
+            {activity.total.toLocaleString()} contributions in the last year.
+          </p>
+          {views.map(({ weeks: cols, compact }) => (
+            <div class={compact ? "sm:hidden" : "hidden sm:block"} aria-hidden="true">
+              <div class="flex gap-1">
+                {!compact && (
+                  <div class="flex w-7 shrink-0 flex-col gap-[3px]">
+                    <div class="h-3.5" />
+                    {weekdayLabels.map((label) => (
+                      <span class="h-[11px] text-[9px] leading-[11px] text-ink-faint">{label}</span>
+                    ))}
+                  </div>
+                )}
+                <div class={compact ? "min-w-0 flex-1" : "min-w-0 flex-1 overflow-x-auto overscroll-x-contain pb-1"}>
+                  <div class={compact ? "flex w-full gap-[2px]" : "flex min-w-max gap-[3px]"}>
+                    {cols.map((week) => (
+                      <div class={compact ? "flex min-w-0 flex-1 flex-col gap-[2px]" : "flex w-[11px] flex-col gap-[3px]"}>
+                        <div class="relative h-3.5">
+                          {week.monthLabel ? (
+                            <span class="absolute top-0 left-0 text-[10px] whitespace-nowrap text-ink-soft">
+                              {week.monthLabel}
+                            </span>
+                          ) : null}
+                        </div>
+                        {week.days.map((day) => (
+                          <div
+                            title={day ? dayTitle(day) : undefined}
+                            class:list={[
+                              "rounded-[2px]",
+                              compact ? "aspect-square w-full" : "size-[11px]",
+                              day ? levelClass[day.level] : "bg-transparent",
+                            ]}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          <div class="mt-1.5 flex items-center justify-end gap-1.5 text-[10px] text-ink-faint" aria-hidden="true">
+            <span>Less</span>
+            {([0, 1, 2, 3, 4] as const).map((level) => (
+              <span class:list={["size-[11px] rounded-[2px]", levelClass[level]]} />
+            ))}
+            <span>More</span>
+          </div>
+        </>
+      )
+    }
+  </Paper>
+</div>
