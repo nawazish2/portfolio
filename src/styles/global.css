@@ -14,19 +14,23 @@
   --line-strong: rgba(240, 246, 241, 0.3);
   --hover: rgba(240, 246, 241, 0.06);
   --grid: rgba(168, 216, 188, 0.035);
-  --text: #f0f6f1;
-  --text-soft: #a9c1b3;
+  --text: #f2f7f3;
+  --text-soft: #bfd2c6;
+  --accent-text: #f08c52;
 
   --card: #f7f3ea;
   --card-sunk: #ede7d9;
   --card-line: #e2dccd;
-  --ink: #23211d;
-  --ink-soft: #5f584c;
-  --ink-faint: #8f8676;
+  --ink: #1f1d1a;
+  --ink-soft: #4f483d;
+  --ink-faint: #6b6356;
   --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
 
+  /* Every text/background pair here meets WCAG AA (4.5:1) or better. */
   --accent: #e2793c;
-  --accent-ink: #b0511c;
+  --accent-ink: #a8491a;
+  --btn: #bd5119;
+  --btn-hover: #a54515;
   color-scheme: dark;
 }
 
@@ -37,18 +41,19 @@
   --line-strong: rgba(20, 24, 22, 0.35);
   --hover: rgba(20, 24, 22, 0.05);
   --grid: rgba(20, 24, 22, 0.045);
-  --text: #151917;
-  --text-soft: #4f5752;
+  --text: #121614;
+  --text-soft: #454d48;
+  --accent-text: #a8491a;
 
   --card: #ffffff;
   --card-sunk: #f1f2ef;
   --card-line: #e4e6e2;
-  --ink: #151917;
-  --ink-soft: #4f5752;
-  --ink-faint: #7c847f;
+  --ink: #121614;
+  --ink-soft: #454d48;
+  --ink-faint: #5f6762;
   --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px -12px rgba(0, 0, 0, 0.18);
 
-  --accent-ink: #b0511c;
+  --accent-ink: #a8491a;
   color-scheme: light;
 }
 
@@ -66,6 +71,7 @@
   --color-ink-faint: var(--ink-faint);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
 }
@@ -96,6 +102,9 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    /* Inter alternates that tell l, I and 1 apart at small sizes. */
+    font-feature-settings: "cv05", "cv08", "ss03";
     /* Keep content clear of the notch on phones in landscape. */
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
@@ -110,6 +119,17 @@
   ::selection {
     background: var(--accent);
     color: #fff;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   :focus-visible {
@@ -133,8 +153,8 @@
   }
 
   .section-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.375rem;
+    font-weight: 700;
     letter-spacing: -0.015em;
     color: var(--text);
   }
@@ -152,12 +172,12 @@
   }
 
   .btn-primary {
-    background: var(--accent);
+    background: var(--btn);
     color: #fff;
   }
 
   .btn-primary:hover {
-    background: #cf6a30;
+    background: var(--btn-hover);
   }
 
   .btn-ghost {

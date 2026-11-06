@@ -34,13 +34,13 @@ const featured = siteConfig.featuredProjects
 
             <div class="flex flex-col p-5">
               <div class="flex items-center gap-2">
-                <h3 class="text-lg font-semibold tracking-tight">{project.title}</h3>
-                <span class="rounded-full bg-card-sunk px-2 py-0.5 text-xs text-ink-soft">{project.status}</span>
+                <h3 class="text-xl font-semibold tracking-tight">{project.title}</h3>
+                <span class="rounded-full bg-card-sunk px-2 py-0.5 text-xs font-medium text-ink-soft">{project.status}</span>
               </div>
-              <p class="mt-1 text-sm font-medium text-accent-ink">{project.oneLiner}</p>
-              <p class="mt-2 text-sm leading-relaxed text-ink-soft">{project.description}</p>
+              <p class="mt-1 text-[15px] font-semibold text-accent-ink">{project.oneLiner}</p>
+              <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">{project.description}</p>
 
-              <p class="mt-3 text-xs text-ink-faint">{project.stack.join(" · ")}</p>
+              <p class="mt-3 text-[13px] text-ink-faint">{project.stack.join(" · ")}</p>
 
               <div class="-mx-1 mt-2 flex gap-3 text-sm font-semibold">
                 {project.live ? (
