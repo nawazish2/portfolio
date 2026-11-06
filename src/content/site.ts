@@ -22,7 +22,12 @@ export const siteConfig = {
   focus: "Web apps with AI",
   summary:
     "Computer Science undergrad in Delhi, graduating in 2027 and aiming at SDE roles. I work mostly with Swift and TypeScript, and I like small tools, clear interfaces, and backends that do not surprise you.",
-  availability: "Open to SDE roles from January 2027 · Remote or relocation",
+  /**
+   * The 8th semester is the college's industry training/internship term, so
+   * January–June 2027 is a full-time internship that can convert after the
+   * degree finishes in June 2027.
+   */
+  availability: "Available January 2027 for a 6-month SDE internship, then full-time · Remote or relocation",
   /**
    * The intro under the name. `{prs}` is replaced with the number of merged
    * PRs in content/opensource.ts, so it stays right as that list grows.
