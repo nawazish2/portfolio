@@ -40,6 +40,20 @@ export const siteConfig = {
   educationShort: "B.Tech CSE at IKGPTU · Class of 2027 · CGPA 8.50",
   /** Projects shown on the page, in order */
   featuredProjects: ["campusforms", "cuprim", "chai-tailwind"],
+  /** Tech shown on the page — only what the projects actually use */
+  featuredStack: [
+    "Swift",
+    "SwiftUI",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "Node.js",
+    "Express",
+    "PostgreSQL",
+    "Docker",
+    "Git",
+  ],
   /** Sticky-note bullets in the hero. `parts` mirrors AboutLine. */
   heroNote: [
     {

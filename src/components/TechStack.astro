@@ -1,0 +1,21 @@
+---
+import { siteConfig } from "@/content/site";
+
+const stack = siteConfig.featuredStack
+  .map((name) => siteConfig.stack.find((item) => item.name === name))
+  .filter((item) => item !== undefined);
+---
+
+<section id="stack" class="scroll-mt-20">
+  <h2 class="section-title">Tech stack</h2>
+  <ul class="mt-5 flex flex-wrap gap-2">
+    {
+      stack.map((item) => (
+        <li class="inline-flex items-center gap-2 rounded-full border border-line bg-bg-raised px-3 py-1.5 text-sm text-text">
+          <span aria-hidden="true" class="size-2 rounded-full" style={{ backgroundColor: item.color === "#000000" || item.color === "#181717" ? "#f0f6f1" : item.color }} />
+          {item.name}
+        </li>
+      ))
+    }
+  </ul>
+</section>

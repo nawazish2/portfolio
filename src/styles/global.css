@@ -53,8 +53,13 @@
     }
   }
 
+  /* A faint 24px grid — one static background, painted once. */
   body {
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(rgba(168, 216, 188, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168, 216, 188, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
     color: var(--text);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;

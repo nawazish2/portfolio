@@ -11,7 +11,7 @@ import gitPullRequestArrow from "lucide-static/icons/git-pull-request-arrow.svg?
 import star from "lucide-static/icons/star.svg?raw";
 import send from "lucide-static/icons/send.svg?raw";
 import arrowLeft from "lucide-static/icons/arrow-left.svg?raw";
-import rotateCcw from "lucide-static/icons/rotate-ccw.svg?raw";
+import penLine from "lucide-static/icons/pen-line.svg?raw";
 
 const inner = (svg: string) =>
   svg.replace(/<!--[\s\S]*?-->/g, "").replace(/^[\s\S]*?<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
@@ -29,7 +29,7 @@ const icons = {
   star: inner(star),
   send: inner(send),
   "arrow-left": inner(arrowLeft),
-  "rotate-ccw": inner(rotateCcw),
+  "pen-line": inner(penLine),
 } as const;
 
 export type IconName = keyof typeof icons;
