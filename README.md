@@ -9,7 +9,7 @@ Personal portfolio - [nawazishkhan.in](https://nawazishkhan.in).
 - Tailwind CSS 4
 - Cloudflare Workers: static assets, plus one Worker route for the contact form
 
-The page ships about 2.5 KB of JavaScript (under 1.5 KB gzipped): the nav highlight, the scroll fade-ins, the draggable stickers and the contact form, all as plain scripts. There is no framework runtime in the browser.
+One simple page: intro, projects, open source, contact. The only JavaScript is a small script for the contact form (under 1.5 KB gzipped). There is no framework runtime in the browser.
 
 ## Develop
 
@@ -27,15 +27,14 @@ pnpm deploy       # build, then wrangler deploy
 pnpm typecheck
 ```
 
-GitHub activity, open-source star counts and Hashnode posts are fetched **at build time**.
-Rebuild and deploy to refresh them. Set `GITHUB_TOKEN` in the build environment to avoid GitHub API rate limits.
+Open-source star counts are fetched **at build time**. Rebuild and deploy to refresh them. Set `GITHUB_TOKEN` in the build environment to avoid GitHub API rate limits.
 
 ## Content
 
 Edit:
 
-- `src/content/site.ts` — identity, links, about, stack
-- `src/content/projects.ts` — selected work (images live in `src/assets/projects/`)
+- `src/content/site.ts` — name, intro, links, and `featuredProjects` (which projects show, in order)
+- `src/content/projects.ts` — project details (images live in `src/assets/projects/`)
 - `src/content/opensource.ts` — merged upstream PRs
 
 Images in `src/assets` are resized and converted to AVIF/WebP at build time.

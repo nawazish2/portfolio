@@ -28,7 +28,9 @@ const itemList = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   name: "Selected work by Nawazish Khan",
-  itemListElement: projects.map((project, index) => ({
+  itemListElement: siteConfig.featuredProjects
+    .map((slug) => projects.find((project) => project.slug === slug)!)
+    .map((project, index) => ({
     "@type": "ListItem",
     position: index + 1,
     name: project.title,

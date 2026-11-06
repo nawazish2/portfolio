@@ -1,0 +1,30 @@
+---
+import { siteConfig } from "@/content/site";
+
+const links = [
+  { href: "/#projects", label: "Projects" },
+  { href: "/#opensource", label: "Open source" },
+  { href: "/#contact", label: "Contact" },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-bg/95">
+  <div class="mx-auto flex h-14 max-w-3xl items-center justify-between gap-4 px-4 sm:px-6">
+    <a href="/" class="font-semibold tracking-tight text-text">{siteConfig.name}</a>
+    <nav aria-label="Main" class="flex items-center gap-1 sm:gap-2">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="hidden rounded-full px-3 py-1.5 text-sm text-text-soft transition-colors hover:text-text sm:inline-block"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary h-9 px-4">
+        Résumé
+      </a>
+    </nav>
+  </div>
+</header>

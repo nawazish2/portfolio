@@ -1,9 +1,8 @@
 ---
 import Base from "@/layouts/Base.astro";
-import Mat from "@/components/desk/Mat.astro";
-import ContactSection from "@/components/ContactSection.astro";
+import Header from "@/components/Header.astro";
+import Contact from "@/components/Contact.astro";
 import Footer from "@/components/Footer.astro";
-import Icon from "@/components/Icon.astro";
 import { siteConfig } from "@/content/site";
 ---
 
@@ -12,22 +11,11 @@ import { siteConfig } from "@/content/site";
   description={`Get in touch with ${siteConfig.name}. Open to SDE roles, product work, and collaborations.`}
   path="/contact"
 >
-  <Mat />
-  <main class="relative z-10 mx-auto w-full max-w-5xl px-4 pt-10 pb-8 sm:px-6 sm:pt-14">
-    <div class="mx-auto flex max-w-2xl items-center justify-between gap-3">
-      <a href="/" class="inline-flex items-center gap-1.5 text-[13px] text-on-mat-soft transition hover:text-on-mat">
-        <Icon name="arrow-left" size={14} />
-        Back to the desk
-      </a>
-      <span class="rounded-full border border-white/12 bg-white/[0.07] px-3 py-1.5 text-[11px] text-on-mat-soft">
-        {siteConfig.availabilityShort}
-      </span>
-    </div>
-
-    <div class="mt-8 sm:mt-12">
-      <ContactSection />
-    </div>
-
-    <Footer />
+  <Header />
+  <main class="mx-auto max-w-3xl px-4 pt-12 sm:px-6 sm:pt-16">
+    <Contact />
   </main>
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <Footer />
+  </div>
 </Base>

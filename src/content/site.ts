@@ -36,6 +36,10 @@ export const siteConfig = {
   },
   /** Handwritten line under the name in the hero */
   heroKicker: "CS undergrad · Delhi · Swift + TypeScript",
+  /** One-line education shown under the intro */
+  educationShort: "B.Tech CSE at IKGPTU · Class of 2027 · CGPA 8.50",
+  /** Projects shown on the page, in order */
+  featuredProjects: ["campusforms", "cuprim", "chai-tailwind"],
   /** Sticky-note bullets in the hero. `parts` mirrors AboutLine. */
   heroNote: [
     {

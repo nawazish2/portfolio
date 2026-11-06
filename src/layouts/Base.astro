@@ -1,6 +1,5 @@
 ---
 import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
-import caveatLatin from "@fontsource-variable/caveat/files/caveat-latin-wght-normal.woff2?url";
 import { siteConfig } from "@/content/site";
 import JsonLd from "@/components/JsonLd.astro";
 import "@/styles/global.css";
@@ -26,8 +25,6 @@ const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {/* Marks JS as available before first paint, so .reveal content is only hidden when it can be revealed. */}
-    <script is:inline>document.documentElement.classList.add("js")</script>
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -35,7 +32,7 @@ const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
     <meta name="application-name" content={siteConfig.name} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#1a2e26" />
+    <meta name="theme-color" content="#16271f" />
     <meta name="color-scheme" content="dark" />
 
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -44,7 +41,6 @@ const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={caveatLatin} as="font" type="font/woff2" crossorigin />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={siteConfig.locale} />
@@ -67,28 +63,8 @@ const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
 
     {jsonLd ? <JsonLd /> : null}
   </head>
-  <body class="min-h-full overflow-x-clip font-sans antialiased">
+  <body class="min-h-full font-sans antialiased">
     <slot />
-
-    <script>
-      // One observer for every .reveal block on the page.
-      const blocks = document.querySelectorAll<HTMLElement>(".reveal");
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              entry.target.classList.add("is-in");
-              observer.unobserve(entry.target);
-            }
-          },
-          { threshold: 0.15 },
-        );
-        for (const block of blocks) observer.observe(block);
-      } else {
-        for (const block of blocks) block.classList.add("is-in");
-      }
-    </script>
 
     <script
       is:inline

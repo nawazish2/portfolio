@@ -1,69 +1,22 @@
 ---
 import Base from "@/layouts/Base.astro";
-import Mat from "@/components/desk/Mat.astro";
-import PillNav from "@/components/desk/PillNav.astro";
-import StickerLayer from "@/components/desk/StickerLayer.astro";
-import MatHeading from "@/components/desk/MatHeading.astro";
+import Header from "@/components/Header.astro";
 import Hero from "@/components/Hero.astro";
-import GitHubActivity from "@/components/GitHubActivity.astro";
-import WorkSection from "@/components/WorkSection.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
-import OpenSourceSection from "@/components/OpenSourceSection.astro";
-import WritingSection from "@/components/WritingSection.astro";
-import TechStack from "@/components/TechStack.astro";
-import ContactSection from "@/components/ContactSection.astro";
+import Projects from "@/components/Projects.astro";
+import OpenSource from "@/components/OpenSource.astro";
+import Contact from "@/components/Contact.astro";
 import Footer from "@/components/Footer.astro";
-import Reveal from "@/components/Reveal.astro";
-import { projects } from "@/content/projects";
 ---
 
 <Base jsonLd>
-  <Mat />
-  <PillNav />
-
-  <div class="relative z-10">
-    <StickerLayer />
-
-    <main class="mx-auto w-full max-w-4xl px-4 pt-20 pb-8 sm:px-6 sm:pt-24">
-      {/* Above the fold renders immediately — no fade-in on the hero. */}
-      <Hero />
-
-      <div class="mt-10 sm:mt-12">
-        <GitHubActivity />
-      </div>
-
-      <div class="mt-14 sm:mt-16">
-        <WorkSection />
-      </div>
-
-      <div class="mt-14 sm:mt-16">
-        <section id="projects" class="scroll-mt-28">
-          <Reveal>
-            <MatHeading hand="pinned up">Projects</MatHeading>
-          </Reveal>
-          <div class="mt-6 grid gap-5 sm:grid-cols-2">
-            {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-          </div>
-        </section>
-      </div>
-
-      <div class="mt-14 sm:mt-16">
-        <OpenSourceSection />
-      </div>
-
-      <div class="mt-14 sm:mt-16">
-        <WritingSection />
-      </div>
-
-      <div class="mt-14 sm:mt-16">
-        <TechStack />
-      </div>
-
-      <div class="mt-14 sm:mt-16">
-        <ContactSection />
-      </div>
-
-      <Footer />
-    </main>
+  <Header />
+  <main class="mx-auto max-w-3xl space-y-16 px-4 sm:px-6">
+    <Hero />
+    <Projects />
+    <OpenSource />
+    <Contact />
+  </main>
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <Footer />
   </div>
 </Base>
