@@ -86,7 +86,7 @@ export const GET: APIRoute = async () => {
         h(
           "div",
           { fontSize: 32, fontWeight: 700, color: colors.accent, marginTop: 10 },
-          `${siteConfig.role} · Swift & TypeScript`,
+          `${siteConfig.role} · ${siteConfig.focus}`,
         ),
       ),
     ),

@@ -13,11 +13,13 @@ export const siteConfig = {
   shortName: "Nawazish",
   title: "Nawazish Khan — Portfolio",
   description:
-    "Computer Science undergrad (CGPA 8.50) in Delhi building useful tools with Swift and TypeScript. Selected work includes CampusForms, Cuprim, ChaiTailwind, and merged upstream open-source PRs.",
+    "Full-stack developer building web apps with AI. Projects include Arjuna Agri, CampusForms and ParkIt, plus merged open-source PRs. CS undergrad, CGPA 8.50.",
   url: "https://nawazishkhan.in",
   locale: "en_IN",
   location: "Delhi, IND",
-  role: "Software Engineer",
+  role: "Full-Stack Developer",
+  /** Shown after the role, e.g. "Full-Stack Developer · Web apps with AI" */
+  focus: "Web apps with AI",
   summary:
     "Computer Science undergrad in Delhi, graduating in 2027 and aiming at SDE roles. I work mostly with Swift and TypeScript, and I like small tools, clear interfaces, and backends that do not surprise you.",
   availability: "Open to SDE roles from January 2027 · Remote or relocation",
@@ -26,7 +28,7 @@ export const siteConfig = {
    * PRs in content/opensource.ts, so it stays right as that list grows.
    */
   intro:
-    "I build native macOS apps and full-stack web tools. Shipped Cuprim and CampusForms, and have {prs} merged PRs in other people's open-source projects.",
+    "I build full-stack web apps with AI built in. Shipped Arjuna Agri, an AI farming assistant, and CampusForms, and have {prs} merged PRs in other people's open-source projects. On the side, I make macOS apps.",
   availabilityShort: "Open to roles & remote",
   email: "knawazish153@gmail.com",
   /** Web copy of the résumé (no phone number), served from public/resume.pdf */
@@ -45,20 +47,22 @@ export const siteConfig = {
   /** One-line education shown under the intro */
   educationShort: "B.Tech CSE at IKGPTU · Class of 2027 · CGPA 8.50",
   /** Projects shown on the page, in order */
-  featuredProjects: ["campusforms", "cuprim", "chai-tailwind"],
+  featuredProjects: ["arjuna-agri", "campusforms", "parkit", "cuprim"],
   /** Tech shown on the page — only what the projects actually use */
   featuredStack: [
-    "Swift",
-    "SwiftUI",
     "TypeScript",
     "React",
     "Next.js",
-    "Tailwind CSS",
     "Node.js",
     "Express",
+    "Gemini API",
+    "Groq",
     "PostgreSQL",
+    "Convex",
+    "Tailwind CSS",
     "Docker",
     "Git",
+    "Swift",
   ],
   /** Sticky-note bullets in the hero. `parts` mirrors AboutLine. */
   heroNote: [
@@ -167,6 +171,24 @@ export const siteConfig = {
       color: "#4169E1",
     },
     {
+      name: "Convex",
+      category: "Backend",
+      href: "https://www.convex.dev",
+      color: "#EE342F",
+    },
+    {
+      name: "Gemini API",
+      category: "AI",
+      href: "https://ai.google.dev",
+      color: "#4285F4",
+    },
+    {
+      name: "Groq",
+      category: "AI",
+      href: "https://groq.com",
+      color: "#F55036",
+    },
+    {
       name: "MongoDB",
       category: "Backend",
       href: "https://www.mongodb.com",
@@ -241,9 +263,9 @@ export const siteConfig = {
       {
         org: "CampusForms",
         meta: "2026 · live",
-        role: "Solo — Next.js, Supabase, Postgres",
+        role: "Solo — Next.js, Convex",
         detail:
-          "One link per form, no student account. Public board of open forms, nine question types, fourteen campus templates, QR for the notice board — anonymity enforced by a Postgres trigger on write.",
+          "One link per form, no student account. Public board of open forms, nine question types, fourteen campus templates, QR for the notice board — anonymity enforced on the server.",
         href: "https://campusforms.vercel.app",
       },
       {

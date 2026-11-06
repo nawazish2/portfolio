@@ -19,28 +19,40 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "arjuna-agri",
+    title: "Arjuna Agri",
+    oneLiner: "AI farming assistant for Indian farmers.",
+    description:
+      "Soil analysis, crop disease detection from photos, irrigation planning and yield prediction in one web app. Built with a team of 4 at the Hack-N-Win 3.0 hackathon.",
+    highlights: [
+      "Groq (Llama 3.3 70B) answers text questions and falls back to Gemini automatically when it hits a rate limit",
+      "Gemini reads crop photos and soil reports; a 24-hour cache and API-key rotation keep it within free quotas",
+    ],
+    stack: ["Next.js", "TypeScript", "Gemini API", "Groq", "Supabase"],
+    github: "https://github.com/nawazish2/arjunaAgri",
+    live: "https://arjuna-agri.vercel.app",
+    year: "2026",
+    status: "Live",
+    accent: "from-green-500 via-emerald-600 to-slate-950",
+    badge: "AI · Full-stack",
+    image: "/projects/arjuna-agri.jpg",
+  },
+  {
     slug: "campusforms",
     title: "CampusForms",
     oneLiner: "Campus forms without the spreadsheet sprawl.",
-    metric: "9 question types · 14 templates · trigger-enforced anonymity",
+    metric: "10 question types · 14 templates · server-enforced anonymity",
     description:
-      "One link per form, no student account. Anonymity is enforced by a database trigger rather than by the interface.",
+      "One link per form, no student account. Anonymity is enforced on the server, not just hidden in the interface.",
     problem:
       "Campus forms live in Google Forms, get shared through a WhatsApp link half the hostel never sees, and land in a spreadsheet nobody owns.",
     built:
-      "A public notice board of open forms, a builder with nine question types and fourteen campus templates, and results the hostel office can read in a morning.",
+      "A public notice board of open forms, a builder with ten question types and fourteen campus templates, and results the hostel office can read in a morning.",
     highlights: [
-      "Anonymous responses cleared by a Postgres trigger on write — no submitted_by or IP column exists to leak",
-      "Nine question types, fourteen campus templates, QR code for the notice board",
-      "Public /browse board plus CSV export, with auth and row level security",
+      "Anonymous forms never store the name, email or IP of whoever answered, so there is nothing to leak",
+      "Deadlines, a flood limit and answer types are checked on the server and covered by automated tests",
     ],
-    stack: [
-      "TypeScript",
-      "Next.js",
-      "React",
-      "Tailwind CSS",
-      "PostgreSQL",
-    ],
+    stack: ["TypeScript", "Next.js", "Convex", "Tailwind CSS"],
     github: "https://github.com/nawazish2/campusforms",
     live: "https://campusforms.vercel.app",
     year: "2026",
@@ -105,17 +117,16 @@ export const projects: Project[] = [
     oneLiner: "Smart parking with realtime booking.",
     metric: "Socket.io live spots · JWT-secured booking",
     description:
-      "Live spot availability over Socket.io, a booking flow, and JWT-secured access.",
+      "A real-time parking platform with 3 role-based portals and 22 REST endpoints, from booking to payment.",
     problem:
       "Finding and reserving parking in busy areas wastes time when availability is unclear.",
     built:
       "A full-stack parking product with live spot updates, booking flow, and JWT-secured access.",
     highlights: [
-      "Realtime availability with Socket.io",
-      "Booking-oriented full-stack architecture",
-      "JWT auth and a modern React frontend",
+      "Slot availability updates for every user in under a second over Socket.io, with no polling",
+      "Razorpay payments verified with HMAC SHA-256 signatures and server-side amount checks",
     ],
-    stack: ["React", "TypeScript", "Node.js", "Express", "Socket.io", "JWT"],
+    stack: ["React", "TypeScript", "Node.js", "Express", "Socket.io", "MySQL", "Razorpay"],
     github: "https://github.com/nawazish2/parkit",
     live: "https://parkit-kappa.vercel.app/",
     year: "2026",
