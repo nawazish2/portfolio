@@ -11,13 +11,13 @@ const links = [
 
 <header class="sticky top-0 z-50 border-b border-line bg-bg/95">
   <div class="mx-auto flex h-14 max-w-3xl items-center justify-between gap-4 px-4 sm:px-6">
-    <a href="/" class="font-semibold tracking-tight text-text">{siteConfig.name}</a>
+    <a href="/" class="py-2.5 font-semibold tracking-tight text-text">{siteConfig.name}</a>
     <nav aria-label="Main" class="flex items-center gap-1 sm:gap-2">
       {
         links.map((link) => (
           <a
             href={link.href}
-            class="hidden rounded-full px-3 py-1.5 text-sm text-text-soft transition-colors hover:text-text sm:inline-block"
+            class="hidden rounded-full px-3 py-2.5 text-sm text-text-soft transition-colors hover:text-text sm:inline-block"
           >
             {link.label}
           </a>
@@ -28,12 +28,12 @@ const links = [
         data-theme-toggle
         aria-label="Switch between light and dark theme"
         title="Switch theme"
-        class="flex size-9 cursor-pointer items-center justify-center rounded-full text-text-soft transition-colors hover:bg-[var(--hover)] hover:text-text"
+        class="flex size-10 cursor-pointer items-center justify-center rounded-full text-text-soft transition-colors hover:bg-[var(--hover)] hover:text-text"
       >
         <Icon name="sun" size={17} class="hidden dark-only" />
         <Icon name="moon" size={17} class="hidden light-only" />
       </button>
-      <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary h-9 px-4">
+      <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary h-10 px-4">
         Résumé
       </a>
     </nav>

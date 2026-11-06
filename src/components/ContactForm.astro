@@ -2,7 +2,7 @@
 import Icon from "@/components/Icon.astro";
 
 const inputClass =
-  "h-11 rounded-lg border border-card-line bg-card-sunk px-3.5 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-accent";
+  "h-11 rounded-lg border border-card-line bg-card-sunk px-3.5 text-base text-ink outline-none transition placeholder:text-ink-faint focus:border-accent";
 ---
 
 <form data-contact-form action="/api/contact" method="post" class="grid gap-4">
@@ -49,7 +49,7 @@ const inputClass =
       rows="4"
       maxlength="3000"
       placeholder="Tell me what you're building or what you need."
-      class="resize-none rounded-lg border border-card-line bg-card-sunk px-3.5 py-3 text-sm text-ink outline-none transition placeholder:text-ink-faint focus:border-accent"
+      class="resize-none rounded-lg border border-card-line bg-card-sunk px-3.5 py-3 text-base text-ink outline-none transition placeholder:text-ink-faint focus:border-accent"
     ></textarea>
   </label>
 
