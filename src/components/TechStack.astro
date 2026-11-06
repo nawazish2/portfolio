@@ -12,7 +12,7 @@ const stack = siteConfig.featuredStack
     {
       stack.map((item) => (
         <li class="inline-flex items-center gap-2 rounded-full border border-line bg-bg-raised px-3 py-1.5 text-sm text-text">
-          <span aria-hidden="true" class="size-2 rounded-full" style={{ backgroundColor: item.color === "#000000" || item.color === "#181717" ? "#f0f6f1" : item.color }} />
+          <span aria-hidden="true" class="size-2 rounded-full" style={{ backgroundColor: item.color === "#000000" || item.color === "#181717" ? "var(--text)" : item.color }} />
           {item.name}
         </li>
       ))

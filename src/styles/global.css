@@ -2,13 +2,18 @@
 @import "@fontsource-variable/inter/wght.css";
 
 /*
- * Two surfaces, one accent: cream cards on a dark green page, orange for
- * anything you can click. Nothing animates except hover states.
+ * Two themes, one accent. Dark (default): cream cards on deep green.
+ * Light: white cards on soft grey. Orange marks anything you can click.
+ * The theme follows the device setting until the visitor picks one with
+ * the header toggle (stored as data-theme on <html>).
  */
 :root {
-  --bg: #16271f;
-  --bg-raised: #1d3329;
-  --line: rgba(240, 246, 241, 0.1);
+  --bg: #0e1613;
+  --bg-raised: #16211c;
+  --line: rgba(240, 246, 241, 0.12);
+  --line-strong: rgba(240, 246, 241, 0.3);
+  --hover: rgba(240, 246, 241, 0.06);
+  --grid: rgba(168, 216, 188, 0.035);
   --text: #f0f6f1;
   --text-soft: #a9c1b3;
 
@@ -18,10 +23,33 @@
   --ink: #23211d;
   --ink-soft: #5f584c;
   --ink-faint: #8f8676;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
 
   --accent: #e2793c;
   --accent-ink: #b0511c;
   color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f3f4f2;
+  --bg-raised: #e6e8e4;
+  --line: rgba(20, 24, 22, 0.14);
+  --line-strong: rgba(20, 24, 22, 0.35);
+  --hover: rgba(20, 24, 22, 0.05);
+  --grid: rgba(20, 24, 22, 0.045);
+  --text: #151917;
+  --text-soft: #4f5752;
+
+  --card: #ffffff;
+  --card-sunk: #f1f2ef;
+  --card-line: #e4e6e2;
+  --ink: #151917;
+  --ink-soft: #4f5752;
+  --ink-faint: #7c847f;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px -12px rgba(0, 0, 0, 0.18);
+
+  --accent-ink: #b0511c;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -57,8 +85,8 @@
   body {
     background-color: var(--bg);
     background-image:
-      linear-gradient(rgba(168, 216, 188, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(168, 216, 188, 0.05) 1px, transparent 1px);
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
     background-size: 24px 24px;
     color: var(--text);
     font-family: var(--font-sans);
@@ -77,12 +105,18 @@
   }
 }
 
+/* Theme toggle shows the sun in dark mode, the moon in light mode. */
+:root:not([data-theme="light"]) .dark-only,
+:root[data-theme="light"] .light-only {
+  display: block;
+}
+
 @layer components {
   .card {
     background: var(--card);
     color: var(--ink);
     border-radius: 1rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--card-shadow);
   }
 
   .section-title {
@@ -119,8 +153,8 @@
   }
 
   .btn-ghost:hover {
-    border-color: rgba(240, 246, 241, 0.3);
-    background: rgba(240, 246, 241, 0.05);
+    border-color: var(--line-strong);
+    background: var(--hover);
   }
 }
 

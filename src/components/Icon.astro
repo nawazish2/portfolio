@@ -11,6 +11,8 @@ import gitPullRequestArrow from "lucide-static/icons/git-pull-request-arrow.svg?
 import star from "lucide-static/icons/star.svg?raw";
 import send from "lucide-static/icons/send.svg?raw";
 import arrowLeft from "lucide-static/icons/arrow-left.svg?raw";
+import sun from "lucide-static/icons/sun.svg?raw";
+import moon from "lucide-static/icons/moon.svg?raw";
 import penLine from "lucide-static/icons/pen-line.svg?raw";
 
 const inner = (svg: string) =>
@@ -30,6 +32,8 @@ const icons = {
   send: inner(send),
   "arrow-left": inner(arrowLeft),
   "pen-line": inner(penLine),
+  sun: inner(sun),
+  moon: inner(moon),
 } as const;
 
 export type IconName = keyof typeof icons;

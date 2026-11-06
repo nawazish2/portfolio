@@ -25,6 +25,17 @@ const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Set the theme before first paint so there is no flash of the wrong colours. */}
+    <script is:inline>
+      (() => {
+        let theme;
+        try { theme = localStorage.getItem("theme"); } catch {}
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -32,8 +43,9 @@ const ogAlt = `${siteConfig.name} — ${siteConfig.role}`;
     <meta name="application-name" content={siteConfig.name} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#16271f" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0e1613" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f4f2" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
 
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

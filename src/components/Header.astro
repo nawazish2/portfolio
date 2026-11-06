@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "@/content/site";
+import Icon from "@/components/Icon.astro";
 
 const links = [
   { href: "/#projects", label: "Projects" },
@@ -22,9 +23,37 @@ const links = [
           </a>
         ))
       }
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Switch between light and dark theme"
+        title="Switch theme"
+        class="flex size-9 cursor-pointer items-center justify-center rounded-full text-text-soft transition-colors hover:bg-[var(--hover)] hover:text-text"
+      >
+        <Icon name="sun" size={17} class="hidden dark-only" />
+        <Icon name="moon" size={17} class="hidden light-only" />
+      </button>
       <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary h-9 px-4">
         Résumé
       </a>
     </nav>
   </div>
 </header>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")) {
+    button.addEventListener("click", () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === "light" ? "dark" : "light";
+      root.dataset.theme = next;
+      for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+        meta.setAttribute("content", next === "light" ? "#f3f4f2" : "#0e1613");
+      }
+      try {
+        localStorage.setItem("theme", next);
+      } catch {
+        // private mode: the choice just won't be remembered
+      }
+    });
+  }
+</script>
