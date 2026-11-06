@@ -16,7 +16,7 @@ export const ossContributions: OSSContribution[] = [
     pr: "#989",
     prUrl: "https://github.com/libredb/libredb-studio/pull/989",
     title: "Disclose that the Admin Audit tab omits proxy-recorded denials",
-    impact: "Audit-integrity fix — closes a honesty gap in a security surface.",
+    impact: "Audit-integrity fix — closes an honesty gap in a security surface.",
     status: "merged",
   },
   {

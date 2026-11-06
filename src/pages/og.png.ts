@@ -4,15 +4,24 @@ import { join } from "node:path";
 import satori from "satori";
 import sharp from "sharp";
 import { siteConfig } from "@/content/site";
+import { ossContributions } from "@/content/opensource";
 
 /**
- * The share card, rendered once at build time: cream paper taped to the green
- * mat — the site in miniature. Fonts are read from src/og-fonts and never ship.
+ * The share card (LinkedIn, X, WhatsApp previews), rendered once at build
+ * time in the site's dark theme. Fonts are read from src/og-fonts and never ship.
  */
 export const prerender = true;
 
 const size = { width: 1200, height: 630 };
-const tags = ["Swift", "SwiftUI", "TypeScript", "React", "Next.js", "Node.js"];
+const colors = {
+  bg: "#0e1613",
+  grid: "rgba(168,216,188,0.05)",
+  text: "#f2f7f3",
+  soft: "#bfd2c6",
+  accent: "#f08c52",
+  chip: "#16211c",
+  line: "rgba(240,246,241,0.14)",
+};
 
 type Node = { type: string; props: Record<string, unknown> };
 const h = (type: string, style: Record<string, unknown>, ...children: unknown[]): Node => ({
@@ -20,85 +29,100 @@ const h = (type: string, style: Record<string, unknown>, ...children: unknown[])
   props: { style: { display: "flex", ...style }, children: children.length === 1 ? children[0] : children },
 });
 
-const font = (file: string) => readFile(join(process.cwd(), "src/og-fonts", file));
+const root = process.cwd();
+const font = (file: string) => readFile(join(root, "src/og-fonts", file));
 
 export const GET: APIRoute = async () => {
-  const [inter, interBold, caveat] = await Promise.all([
+  const [inter, interBold, photo] = await Promise.all([
     font("Inter-Regular.ttf"),
     font("Inter-Bold.ttf"),
-    font("Caveat-SemiBold.ttf"),
+    sharp(join(root, "src/assets", siteConfig.profileImage)).resize(280, 280).jpeg({ quality: 85 }).toBuffer(),
   ]);
 
-  // satori will not tile a repeating gradient, so the mat grid is real 1px lines.
-  const line = (i: number) => (i % 5 === 0 ? "rgba(232,168,90,0.16)" : "rgba(168,216,188,0.11)");
-  const vertical = Array.from({ length: Math.ceil(size.width / 30) }, (_, i) =>
-    h("div", { position: "absolute", top: 0, left: i * 30, width: 1, height: size.height, backgroundColor: line(i) }),
-  );
-  const horizontal = Array.from({ length: Math.ceil(size.height / 30) }, (_, i) =>
-    h("div", { position: "absolute", left: 0, top: i * 30, height: 1, width: size.width, backgroundColor: line(i) }),
-  );
+  const prs = ossContributions.filter((oss) => oss.status === "merged").length;
+  const intro = siteConfig.intro.replace("{prs}", String(prs));
+  const tags = siteConfig.featuredStack.slice(0, 6);
 
-  const card = h(
-    "div",
-    {
-      flexDirection: "column",
-      width: 900,
-      padding: "50px 58px",
-      borderRadius: 22,
-      backgroundColor: "#f7f3ea",
-      boxShadow: "0 30px 60px rgba(0,0,0,0.45)",
-      transform: "rotate(-0.7deg)",
-    },
-    h("div", { fontSize: 34, color: "#e2793c", fontFamily: "Caveat" }, "hey — I'm"),
-    h("div", { fontSize: 84, fontWeight: 700, color: "#23211d", letterSpacing: -2 }, siteConfig.name),
-    h("div", { fontSize: 38, color: "#b8551f", fontFamily: "Caveat", marginTop: 8 }, siteConfig.heroKicker),
-    h(
-      "div",
-      { fontSize: 24, lineHeight: 1.45, color: "#635c50", marginTop: 22, maxWidth: 800 },
-      "I ship small, useful tools — Cuprim for macOS, CampusForms for campus life, and full-stack web work in React and Node.",
+  // satori will not tile a repeating gradient, so the grid is real 1px lines.
+  const grid = [
+    ...Array.from({ length: Math.ceil(size.width / 30) }, (_, i) =>
+      h("div", { position: "absolute", top: 0, left: i * 30, width: 1, height: size.height, backgroundColor: colors.grid }),
     ),
-    h(
-      "div",
-      { gap: 11, marginTop: 28 },
-      ...tags.map((tag) =>
-        h("div", { padding: "8px 17px", borderRadius: 999, backgroundColor: "#ece5d5", color: "#635c50", fontSize: 20 }, tag),
-      ),
+    ...Array.from({ length: Math.ceil(size.height / 30) }, (_, i) =>
+      h("div", { position: "absolute", left: 0, top: i * 30, height: 1, width: size.width, backgroundColor: colors.grid }),
     ),
-    h(
-      "div",
-      { marginTop: 30, paddingTop: 20, borderTop: "1px solid #e2dccd", color: "#948b7c", fontSize: 21 },
-      "nawazishkhan.in",
-    ),
-  );
+  ];
 
   const tree = h(
     "div",
     {
+      position: "relative",
       width: "100%",
       height: "100%",
-      alignItems: "center",
+      flexDirection: "column",
       justifyContent: "center",
-      backgroundColor: "#1a2e26",
+      padding: "0 80px",
+      backgroundColor: colors.bg,
       fontFamily: "Inter",
+      color: colors.text,
     },
-    h("div", {
-      position: "absolute",
-      inset: 0,
-      backgroundImage: "radial-gradient(130% 95% at 50% 30%, #2d4b3d 0%, #1a2e26 60%, #0e1c16 100%)",
-    }),
-    ...vertical,
-    ...horizontal,
-    card,
-    // tape, painted last so it sits over the paper edge
-    h("div", {
-      position: "absolute",
-      top: 44,
-      left: 525,
-      width: 160,
-      height: 36,
-      backgroundColor: "rgba(243,235,200,0.7)",
-      transform: "rotate(-4deg)",
-    }),
+    ...grid,
+    h(
+      "div",
+      { alignItems: "center", gap: 32 },
+      {
+        type: "img",
+        props: {
+          src: `data:image/jpeg;base64,${photo.toString("base64")}`,
+          width: 140,
+          height: 140,
+          style: { borderRadius: 999, border: `3px solid ${colors.line}` },
+        },
+      },
+      h(
+        "div",
+        { flexDirection: "column" },
+        h("div", { fontSize: 72, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05 }, siteConfig.name),
+        h(
+          "div",
+          { fontSize: 32, fontWeight: 700, color: colors.accent, marginTop: 10 },
+          `${siteConfig.role} · Swift & TypeScript`,
+        ),
+      ),
+    ),
+    h("div", { fontSize: 28, lineHeight: 1.45, color: colors.soft, marginTop: 36, maxWidth: 1000 }, intro),
+    h(
+      "div",
+      { gap: 12, marginTop: 34 },
+      ...tags.map((tag) =>
+        h(
+          "div",
+          {
+            padding: "8px 18px",
+            borderRadius: 999,
+            backgroundColor: colors.chip,
+            border: `1px solid ${colors.line}`,
+            fontSize: 22,
+            color: colors.text,
+          },
+          tag,
+        ),
+      ),
+    ),
+    h(
+      "div",
+      {
+        position: "absolute",
+        left: 80,
+        bottom: 44,
+        width: size.width - 160,
+        justifyContent: "space-between",
+        fontSize: 22,
+        color: colors.soft,
+      },
+      h("div", { color: colors.text, fontWeight: 700 }, "nawazishkhan.in"),
+      h("div", {}, siteConfig.availability.split(" · ")[0]),
+    ),
   );
 
   const svg = await satori(tree as never, {
@@ -106,7 +130,6 @@ export const GET: APIRoute = async () => {
     fonts: [
       { name: "Inter", data: inter, weight: 400, style: "normal" },
       { name: "Inter", data: interBold, weight: 700, style: "normal" },
-      { name: "Caveat", data: caveat, weight: 600, style: "normal" },
     ],
   });
 

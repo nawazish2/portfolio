@@ -1,10 +1,13 @@
 ---
 import { Picture } from "astro:assets";
 import { siteConfig } from "@/content/site";
+import { ossContributions } from "@/content/opensource";
 import { localImage } from "@/lib/images";
 import Icon, { type IconName } from "@/components/Icon.astro";
 
 const profile = localImage(siteConfig.profileImage)!;
+const mergedPrs = ossContributions.filter((oss) => oss.status === "merged").length;
+const intro = siteConfig.intro.replace("{prs}", String(mergedPrs));
 
 const links: { href: string; label: string; icon: IconName }[] = [
   { href: siteConfig.links.github, label: "GitHub", icon: "github" },
@@ -31,7 +34,7 @@ const links: { href: string; label: string; icon: IconName }[] = [
   </h1>
   <p class="mt-2 text-lg font-semibold text-accent-text">{siteConfig.role} · Swift &amp; TypeScript</p>
 
-  <p class="mt-4 max-w-[60ch] text-[17px] leading-relaxed text-text-soft">{siteConfig.summary}</p>
+  <p class="mt-4 max-w-[60ch] text-[17px] leading-relaxed text-text-soft">{intro}</p>
   <p class="mt-3 text-[15px] text-text-soft">{siteConfig.educationShort}</p>
 
   <p class="mt-5 inline-flex items-center gap-2 rounded-full bg-bg-raised px-3 py-1.5 text-sm font-medium text-text">

@@ -20,7 +20,13 @@ export const siteConfig = {
   role: "Software Engineer",
   summary:
     "Computer Science undergrad in Delhi, graduating in 2027 and aiming at SDE roles. I work mostly with Swift and TypeScript, and I like small tools, clear interfaces, and backends that do not surprise you.",
-  availability: "Open to SDE roles and interesting product work",
+  availability: "Open to SDE internships and 2027 new-grad roles · Remote or Delhi NCR",
+  /**
+   * The intro under the name. `{prs}` is replaced with the number of merged
+   * PRs in content/opensource.ts, so it stays right as that list grows.
+   */
+  intro:
+    "I build native macOS apps and full-stack web tools. Shipped Cuprim and CampusForms, and have {prs} merged PRs in other people's open-source projects.",
   availabilityShort: "Open to roles & remote",
   email: "knawazish153@gmail.com",
   resumeUrl:
