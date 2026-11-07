@@ -9,23 +9,28 @@ Personal portfolio - [nawazishkhan.in](https://nawazishkhan.in).
 - Tailwind CSS 4
 - Cloudflare Workers: static assets, plus one Worker route for the contact form
 
-One simple page: intro, projects, open source, contact. The only JavaScript is a small script for the contact form (under 1.5 KB gzipped). There is no framework runtime in the browser.
+One simple page: intro, projects, open source, contact. The only JavaScript is two small scripts, for the contact form and the theme toggle. There is no framework runtime in the browser.
 
 ## Develop
 
+Uses [Bun](https://bun.sh) for everything. Node.js is not needed.
+
 ```bash
-pnpm install
-pnpm dev          # http://localhost:4321
+curl -fsSL https://bun.sh/install | bash   # once
+bun install
+bun run dev        # http://localhost:4321
 ```
 
 ## Build & deploy
 
 ```bash
-pnpm build        # static site -> dist/client, Worker -> dist/server
-pnpm preview      # build, then run the real Worker locally with wrangler
-pnpm deploy       # build, then wrangler deploy
-pnpm typecheck
+bun run build      # static site -> dist/client, Worker -> dist/server
+bun run deploy     # build, then wrangler deploy (run `bunx wrangler login` once)
+bun run typecheck
 ```
+
+`bun run dev` runs plain Astro. The Cloudflare adapter is only used for
+`build`/`deploy`, because Wrangler's local Worker runtime cannot run under Bun.
 
 Open-source star counts are fetched **at build time**. Rebuild and deploy to refresh them. Set `GITHUB_TOKEN` in the build environment to avoid GitHub API rate limits.
 
@@ -46,11 +51,11 @@ The form posts to `/api/contact` (`src/pages/api/contact.ts`), which sends mail 
 Set these on the Worker (`RESEND_API_KEY` as a secret):
 
 ```bash
-wrangler secret put RESEND_API_KEY
+bunx wrangler secret put RESEND_API_KEY
 # optional vars:
 CONTACT_TO_EMAIL=knawazish153@gmail.com
 RESEND_FROM_EMAIL="Portfolio <onboarding@resend.dev>"
 ```
 
-For local `pnpm preview`, put them in `.dev.vars`.
+For local `bun run dev`, put them in a `.env` file.
 Without `RESEND_API_KEY` the form returns a configuration error and the mailto fallback remains available.

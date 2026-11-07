@@ -1,16 +1,10 @@
 import type { APIRoute } from "astro";
-import { env } from "cloudflare:workers";
+import { getSecret } from "astro:env/server";
 import { Resend } from "resend";
 import { contactEmailHtml, contactEmailText } from "@/lib/contact-email";
 
 // The one route that runs on the Worker; everything else is static HTML.
 export const prerender = false;
-
-type Env = {
-  RESEND_API_KEY?: string;
-  CONTACT_TO_EMAIL?: string;
-  RESEND_FROM_EMAIL?: string;
-};
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -37,7 +31,10 @@ async function readPayload(request: Request): Promise<Record<string, unknown> | 
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL, RESEND_FROM_EMAIL } = env as Env;
+  // Read per request: on Cloudflare these come from the Worker's secrets/vars.
+  const RESEND_API_KEY = getSecret("RESEND_API_KEY");
+  const CONTACT_TO_EMAIL = getSecret("CONTACT_TO_EMAIL");
+  const RESEND_FROM_EMAIL = getSecret("RESEND_FROM_EMAIL");
 
   if (!RESEND_API_KEY) {
     return Response.json({ error: "Email service is not configured." }, { status: 500 });

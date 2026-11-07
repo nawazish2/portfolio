@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro build && wrangler dev",
-    "typecheck": "wrangler types && tsc --noEmit",
-    "deploy": "astro build && wrangler deploy"
+    "dev": "bun --bun astro dev",
+    "build": "bun --bun astro build",
+    "preview": "bun --bun astro build && bun --bun wrangler dev",
+    "typecheck": "bun --bun wrangler types && bun --bun tsc --noEmit",
+    "deploy": "bun --bun astro build && bun --bun wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.6",
@@ -25,5 +25,10 @@
     "tailwindcss": "^4.3.4",
     "typescript": "^5.9.3",
     "wrangler": "^4.158.0"
-  }
+  },
+  "trustedDependencies": [
+    "esbuild",
+    "sharp",
+    "workerd"
+  ]
 }
