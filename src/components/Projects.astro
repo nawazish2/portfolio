@@ -17,42 +17,41 @@ const featured = siteConfig.featuredProjects
 <section id="projects" class="scroll-mt-20">
   <h2 class="section-title">Projects</h2>
 
-  <div class="mt-5 space-y-6">
+  <div class="mt-5 space-y-4">
     {
       featured.map((project, index) => {
         const image = project.image ? localImage(project.image) : undefined;
         return (
-          <article class="card overflow-hidden p-3 sm:grid sm:grid-cols-[1.1fr_1fr] sm:gap-5 sm:p-4">
+          <article class="card overflow-hidden p-3 sm:grid sm:grid-cols-2 sm:items-center sm:gap-5">
             {image ? (
-              <div class="sm:self-start">
+              <div>
               <BrowserFrame
                 image={image}
                 alt={`${project.title} screenshot`}
                 url={project.live?.includes("github.com") ? project.github : (project.live ?? project.github)}
                 eager={index === 0}
-                sizes="(min-width: 640px) 380px, 100vw"
+                sizes="(min-width: 640px) 360px, 100vw"
               />
               </div>
             ) : null}
-            <div class="flex flex-col px-1 pt-4 pb-1 sm:pt-1">
+            <div class="flex flex-col px-1 pt-3 pb-1 sm:py-1 sm:pr-2">
               <p class="font-mono text-sm font-semibold text-accent-ink">
                 {String(index + 1).padStart(2, "0")} <span class="font-sans text-xs font-semibold tracking-wide text-ink-faint uppercase">· {project.badge}</span>
               </p>
-              <h3 class="mt-1 text-xl font-bold tracking-tight">{project.title}</h3>
-              <p class="mt-1 text-[15px] font-semibold text-accent-ink">{project.oneLiner}</p>
-              <p class="mt-2 text-[14px] leading-relaxed text-ink-soft">{project.description}</p>
+              <h3 class="mt-0.5 text-lg font-bold tracking-tight">{project.title}</h3>
+              <p class="text-[14px] font-semibold text-accent-ink">{project.oneLiner}</p>
               {project.highlights?.length ? (
-                <ul class="mt-3 space-y-1.5">
+                <ul class="mt-2.5 space-y-1.5">
                   {project.highlights.slice(0, 2).map((highlight) => (
-                    <li class="flex gap-2 text-[14px] leading-snug text-ink">
-                      <span aria-hidden="true" class="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent" />
+                    <li class="flex gap-2 text-[13.5px] leading-snug text-ink">
+                      <span aria-hidden="true" class="mt-[6px] size-1.5 shrink-0 rounded-full bg-accent" />
                       {highlight}
                     </li>
                   ))}
                 </ul>
               ) : null}
-              <p class="mt-3 text-[13px] text-ink-faint">{project.stack.join(" · ")}</p>
-              <div class="mt-4 sm:mt-auto sm:pt-4">
+              <p class="mt-2 text-[13px] text-ink-faint">{project.stack.join(" · ")}</p>
+              <div class="mt-3">
                 <ProjectLinks project={project} tone="card" />
               </div>
             </div>
