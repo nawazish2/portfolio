@@ -1,0 +1,45 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+/**
+ * A screenshot inside a minimal browser window: three dots and an address bar
+ * showing where the project actually lives.
+ */
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  url?: string;
+  eager?: boolean;
+  sizes: string;
+}
+const { image, alt, url, eager = false, sizes } = Astro.props;
+const address = url ? url.replace(/^https?:\/\//, "").replace(/\/$/, "") : undefined;
+---
+
+<div class="browser overflow-hidden rounded-xl">
+  <div class="flex items-center gap-3 border-b border-[var(--frame-line)] px-3 py-2">
+    <span class="flex shrink-0 gap-1.5" aria-hidden="true">
+      <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
+      <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
+      <span class="size-2.5 rounded-full bg-[#28c840]"></span>
+    </span>
+    {
+      address ? (
+        <span class="min-w-0 flex-1 truncate rounded-md bg-[var(--frame-bar)] px-2.5 py-0.5 text-center text-xs text-[var(--frame-text)]">
+          {address}
+        </span>
+      ) : null
+    }
+  </div>
+  <Picture
+    src={image}
+    alt={alt}
+    formats={["avif", "webp"]}
+    widths={[480, 720, 1080]}
+    sizes={sizes}
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+    class="aspect-[16/10] w-full object-cover object-top"
+  />
+</div>

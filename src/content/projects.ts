@@ -83,7 +83,7 @@ export const projects: Project[] = [
     year: "2026",
     status: "Shipped",
     accent: "from-violet-500 via-purple-600 to-slate-950",
-    badge: "macOS",
+    badge: "macOS · Side project",
     image: "/projects/cuprim.jpg",
   },
   {

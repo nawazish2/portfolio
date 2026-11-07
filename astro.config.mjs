@@ -26,6 +26,7 @@ export default defineConfig({
         prerenderEnvironment: "node",
       }),
   session: false,
+  devToolbar: { enabled: false },
   env: {
     // Read by /api/contact. On Cloudflare they come from Worker secrets/vars;
     // locally from .env.

@@ -60,8 +60,6 @@ export const siteConfig = {
     "Next.js",
     "Node.js",
     "Express",
-    "Gemini API",
-    "Groq",
     "PostgreSQL",
     "Convex",
     "Tailwind CSS",

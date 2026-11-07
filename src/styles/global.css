@@ -198,3 +198,24 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Browser-window frame around project screenshots */
+:root {
+  --frame-bg: #1b2722;
+  --frame-bar: rgba(240, 246, 241, 0.08);
+  --frame-line: rgba(240, 246, 241, 0.1);
+  --frame-text: #bfd2c6;
+}
+
+:root[data-theme="light"] {
+  --frame-bg: #ffffff;
+  --frame-bar: #f1f2ef;
+  --frame-line: #e4e6e2;
+  --frame-text: #454d48;
+}
+
+.browser {
+  background: var(--frame-bg);
+  border: 1px solid var(--frame-line);
+  box-shadow: var(--card-shadow);
+}
