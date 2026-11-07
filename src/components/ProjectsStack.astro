@@ -1,0 +1,55 @@
+---
+/**
+ * Option D — stacking cards. Each big card sticks near the top while the next
+ * one slides over it, like a deck. Pure CSS (position: sticky), no JS.
+ */
+import { projects } from "@/content/projects";
+import { siteConfig } from "@/content/site";
+import { localImage } from "@/lib/images";
+import BrowserFrame from "@/components/BrowserFrame.astro";
+import ProjectLinks from "@/components/ProjectLinks.astro";
+
+const featured = siteConfig.featuredProjects
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project) => project !== undefined);
+---
+
+<section id="projects" class="scroll-mt-20">
+  <h2 class="section-title">Projects</h2>
+
+  <div class="mt-5">
+    {
+      featured.map((project, index) => {
+        const image = project.image ? localImage(project.image) : undefined;
+        return (
+          <article
+            class="card sticky mb-6 overflow-hidden p-3 sm:grid sm:grid-cols-[1.1fr_1fr] sm:gap-5 sm:p-4"
+            style={`top: calc(4.5rem + ${index * 14}px)`}
+          >
+            {image ? (
+              <BrowserFrame
+                image={image}
+                alt={`${project.title} screenshot`}
+                url={project.live?.includes("github.com") ? project.github : (project.live ?? project.github)}
+                eager={index === 0}
+                sizes="(min-width: 640px) 380px, 100vw"
+              />
+            ) : null}
+            <div class="flex flex-col px-1 pt-4 pb-1 sm:pt-1">
+              <p class="font-mono text-sm font-semibold text-accent-ink">
+                {String(index + 1).padStart(2, "0")} <span class="font-sans text-xs font-semibold tracking-wide text-ink-faint uppercase">· {project.badge}</span>
+              </p>
+              <h3 class="mt-1 text-xl font-bold tracking-tight">{project.title}</h3>
+              <p class="mt-1 text-[15px] font-semibold text-accent-ink">{project.oneLiner}</p>
+              <p class="mt-2 text-[14px] leading-relaxed text-ink-soft">{project.description}</p>
+              <p class="mt-3 text-[13px] text-ink-faint">{project.stack.join(" · ")}</p>
+              <div class="mt-4 sm:mt-auto sm:pt-4">
+                <ProjectLinks project={project} tone="card" />
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>

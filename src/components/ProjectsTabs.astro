@@ -1,0 +1,124 @@
+---
+/**
+ * Option C — tabs. Project names on the left; the selected project's
+ * screenshot and details on the right. One compact block, no long scroll.
+ * Without JS every panel is shown, one after another.
+ */
+import { projects } from "@/content/projects";
+import { siteConfig } from "@/content/site";
+import { localImage } from "@/lib/images";
+import BrowserFrame from "@/components/BrowserFrame.astro";
+import ProjectLinks from "@/components/ProjectLinks.astro";
+
+const featured = siteConfig.featuredProjects
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project) => project !== undefined);
+---
+
+<section id="projects" class="scroll-mt-20" data-tabs>
+  <h2 class="section-title">Projects</h2>
+
+  <div class="mt-5 grid gap-4 sm:grid-cols-[200px_1fr] sm:gap-6">
+    <div role="tablist" aria-label="Projects" class="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:flex-col sm:px-0">
+      {
+        featured.map((project, index) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${project.slug}`}
+            aria-controls={`panel-${project.slug}`}
+            aria-selected={index === 0 ? "true" : "false"}
+            tabindex={index === 0 ? 0 : -1}
+            class="shrink-0 cursor-pointer rounded-xl border border-line px-4 py-3 text-left transition-colors hover:bg-[var(--hover)] aria-selected:border-accent aria-selected:bg-bg-raised"
+          >
+            <span class="block font-semibold text-text">{project.title}</span>
+            <span class="mt-0.5 block text-xs text-text-soft">{project.badge}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <div>
+      {
+        featured.map((project, index) => {
+          const image = project.image ? localImage(project.image) : undefined;
+          return (
+            <article
+              role="tabpanel"
+              id={`panel-${project.slug}`}
+              aria-labelledby={`tab-${project.slug}`}
+              class:list={["card p-3 sm:p-4", index > 0 && "js-hide"]}
+            >
+              {image ? (
+                <BrowserFrame
+                  image={image}
+                  alt={`${project.title} screenshot`}
+                  url={project.live?.includes("github.com") ? project.github : (project.live ?? project.github)}
+                  eager={index === 0}
+                  sizes="(min-width: 640px) 520px, 100vw"
+                />
+              ) : null}
+              <div class="px-1 pt-4 pb-1">
+                <h3 class="text-xl font-bold tracking-tight">{project.title}</h3>
+                <p class="mt-1 text-[15px] font-semibold text-accent-ink">{project.oneLiner}</p>
+                <p class="mt-2 text-[15px] leading-relaxed text-ink-soft">{project.description}</p>
+                {project.highlights?.length ? (
+                  <ul class="mt-3 space-y-1.5">
+                    {project.highlights.slice(0, 2).map((highlight) => (
+                      <li class="flex gap-2 text-[14px] leading-snug text-ink">
+                        <span aria-hidden="true" class="mt-[7px] size-1.5 shrink-0 rounded-full bg-accent" />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                <p class="mt-3 text-[13px] text-ink-faint">{project.stack.join(" · ")}</p>
+                <div class="mt-4">
+                  <ProjectLinks project={project} tone="card" />
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(html.tabs-ready) [data-tabs] .js-hide {
+    display: none;
+  }
+  [data-tabs] [role="tabpanel"] + [role="tabpanel"] {
+    margin-top: 1.25rem;
+  }
+  :global(html.tabs-ready) [data-tabs] [role="tabpanel"] + [role="tabpanel"] {
+    margin-top: 0;
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-tabs]")) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const select = (tab: HTMLButtonElement) => {
+      for (const t of tabs) {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")!)!.classList.toggle("js-hide", !on);
+      }
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", (e) => {
+        const step = e.key === "ArrowDown" || e.key === "ArrowRight" ? 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        const next = tabs[(i + step + tabs.length) % tabs.length];
+        next.focus();
+        select(next);
+      });
+    });
+    document.documentElement.classList.add("tabs-ready");
+  }
+</script>
