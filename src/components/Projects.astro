@@ -17,12 +17,12 @@ const featured = siteConfig.featuredProjects
 <section id="projects" class="scroll-mt-20">
   <h2 class="section-title">Projects</h2>
 
-  <div class="mt-5 space-y-4">
+  <div class="mt-4 space-y-3">
     {
       featured.map((project, index) => {
         const image = project.image ? localImage(project.image) : undefined;
         return (
-          <article class="card overflow-hidden p-3 sm:grid sm:grid-cols-2 sm:items-center sm:gap-5">
+          <article class="card overflow-hidden p-2.5 sm:grid sm:grid-cols-2 sm:items-center sm:gap-4">
             {image ? (
               <div>
               <BrowserFrame
@@ -34,24 +34,32 @@ const featured = siteConfig.featuredProjects
               />
               </div>
             ) : null}
-            <div class="flex flex-col px-1 pt-3 pb-1 sm:py-1 sm:pr-2">
+            <div class="flex flex-col px-1 pt-2.5 pb-0.5 sm:py-1 sm:pr-2">
               <p class="font-mono text-sm font-semibold text-accent-ink">
                 {String(index + 1).padStart(2, "0")} <span class="font-sans text-xs font-semibold tracking-wide text-ink-faint uppercase">· {project.badge}</span>
               </p>
               <h3 class="mt-0.5 text-lg font-bold tracking-tight">{project.title}</h3>
               <p class="text-[14px] font-semibold text-accent-ink">{project.oneLiner}</p>
+              {project.metric ? (
+                <p class="mt-2 inline-flex w-fit max-w-full rounded-md bg-accent/10 px-2 py-1 text-[12px] font-semibold text-accent-ink">{project.metric}</p>
+              ) : null}
               {project.highlights?.length ? (
-                <ul class="mt-2.5 space-y-1.5">
-                  {project.highlights.slice(0, 2).map((highlight) => (
-                    <li class="flex gap-2 text-[13.5px] leading-snug text-ink">
+                <ul class="mt-2 space-y-1">
+                  {project.highlights.slice(0, 2).map((highlight, i) => (
+                    <li class={`gap-2 text-[13px] leading-snug text-ink sm:text-[13.5px] ${i > 0 ? "hidden sm:flex" : "flex"}`}>
                       <span aria-hidden="true" class="mt-[6px] size-1.5 shrink-0 rounded-full bg-accent" />
                       {highlight}
                     </li>
                   ))}
                 </ul>
               ) : null}
-              <p class="mt-2 text-[13px] text-ink-faint">{project.stack.join(" · ")}</p>
-              <div class="mt-3">
+              <ul class="mt-2 flex flex-wrap gap-1 sm:hidden">
+                {project.stack.slice(0, 4).map((tech) => (
+                  <li class="rounded-full border border-black/10 px-2 py-0.5 text-[11.5px] font-medium text-ink-faint">{tech}</li>
+                ))}
+              </ul>
+              <p class="mt-2 hidden text-[13px] text-ink-faint sm:block">{project.stack.join(" · ")}</p>
+              <div class="mt-2.5">
                 <ProjectLinks project={project} tone="card" />
               </div>
             </div>

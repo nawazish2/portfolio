@@ -52,7 +52,7 @@ export const siteConfig = {
   /** One-line education shown under the intro */
   educationShort: "B.Tech CSE at IKGPTU · Class of 2027 · CGPA 8.50",
   /** Projects shown on the page, in order */
-  featuredProjects: ["arjuna-agri", "campusforms", "parkit", "cuprim"],
+  featuredProjects: ["arjuna-agri", "campusforms", "cuprim"],
   /** Tech shown on the page — only what the projects actually use */
   featuredStack: [
     "TypeScript",

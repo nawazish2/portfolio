@@ -18,7 +18,7 @@ const address = url ? url.replace(/^https?:\/\//, "").replace(/\/$/, "") : undef
 ---
 
 <div class="browser overflow-hidden rounded-xl">
-  <div class="flex items-center gap-3 border-b border-[var(--frame-line)] px-3 py-2">
+  <div class="flex items-center gap-3 border-b border-[var(--frame-line)] px-3 py-1.5">
     <span class="flex shrink-0 gap-1.5" aria-hidden="true">
       <span class="size-2.5 rounded-full bg-[#ff5f57]"></span>
       <span class="size-2.5 rounded-full bg-[#febc2e]"></span>
@@ -40,6 +40,6 @@ const address = url ? url.replace(/^https?:\/\//, "").replace(/\/$/, "") : undef
     sizes={sizes}
     loading={eager ? "eager" : "lazy"}
     decoding="async"
-    class="aspect-[16/10] w-full object-cover object-top"
+    class="aspect-[16/8] w-full sm:aspect-[16/9] object-cover object-top"
   />
 </div>

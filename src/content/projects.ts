@@ -22,6 +22,7 @@ export const projects: Project[] = [
     slug: "arjuna-agri",
     title: "Arjuna Agri",
     oneLiner: "AI farming assistant for Indian farmers.",
+    metric: "Team of 4 · Hack-N-Win 3.0 · 2 LLMs with auto-fallback",
     description:
       "Soil analysis, crop disease detection from photos, irrigation planning and yield prediction in one web app. Built with a team of 4 at the Hack-N-Win 3.0 hackathon.",
     highlights: [

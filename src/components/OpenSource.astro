@@ -10,7 +10,7 @@ const stars = await getOssStars([...new Set(ossContributions.map((oss) => oss.re
   <h2 class="section-title">Open source</h2>
   <p class="mt-1 text-[15px] text-text-soft">Pull requests merged into other people's projects.</p>
 
-  <ul class="card mt-5 divide-y divide-card-line">
+  <ul class="card mt-4 divide-y divide-card-line">
     {
       ossContributions.map((oss) => {
         const count = stars[oss.repo];
@@ -20,7 +20,7 @@ const stars = await getOssStars([...new Set(ossContributions.map((oss) => oss.re
               href={oss.prUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="group flex flex-col-reverse items-start gap-2 px-5 py-4 transition-colors hover:bg-card-sunk/60 sm:flex-row sm:justify-between sm:gap-4"
+              class="group flex flex-col-reverse items-start gap-1.5 px-4 py-3 transition-colors sm:px-5 sm:py-3.5 hover:bg-card-sunk/60 sm:flex-row sm:justify-between sm:gap-4"
             >
               <div class="min-w-0">
                 <p class="text-[15px] leading-snug font-semibold text-ink group-hover:underline">{oss.title}</p>
