@@ -10,14 +10,14 @@ const { project, tone = "page" } = Astro.props;
 const isDownload = project.live?.includes("github.com");
 const secondary =
   tone === "page"
-    ? "btn btn-ghost h-9 px-3.5 text-[13px]"
-    : "btn h-9 border border-card-line px-3.5 text-[13px] text-ink hover:bg-card-sunk";
+    ? "btn btn-ghost h-10 px-4 text-[13px]"
+    : "btn h-10 border border-card-line px-4 text-[13px] text-ink hover:bg-card-sunk";
 ---
 
 <div class="flex flex-wrap gap-2">
   {
     project.live ? (
-      <a href={project.live} target="_blank" rel="noopener noreferrer" class="btn btn-primary h-9 px-3.5 text-[13px]">
+      <a href={project.live} target="_blank" rel="noopener noreferrer" class="btn btn-primary h-10 px-4 text-[13px]">
         {isDownload ? "Download" : "Live site"}
         <Icon name="arrow-up-right" size={14} />
       </a>
